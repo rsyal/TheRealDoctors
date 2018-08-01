@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
+const blogUserSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   image: { type: String, required: false }, 
@@ -9,6 +9,6 @@ const blogSchema = new Schema({
   created_dt: { type: Date, default: Date.now }
 });
 
-const Blog = mongoose.Models.Blog || mongoose.model("Blog", blogSchema);
+const BlogUser = mongoose.Models.BlogUser || mongoose.model("BlogUser", blogUserSchema);
 
-module.exports = Blog;
+module.exports = BlogUser;
