@@ -1,6 +1,6 @@
 module.exports = {
-  User: require("./user"),
+  Blogger: require("./blogger"),
   Blog: require("./blog"),
-  BlogUser: require("./blogUser"),
-  Thread: require("./thread")
+  Comment: require("./comment"),
+  Role: require("./role")
 }

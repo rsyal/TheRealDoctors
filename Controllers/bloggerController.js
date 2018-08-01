@@ -4,43 +4,37 @@ const db = require("../Models");
 module.exports = {
 
   findAll: (req, res) => {
-    db.Blog
+    db.Blogger
       .find(req.query)
-      .populate("comments")
       .sort({date: -1})
       .then(dbModel => res.json(dbModel)) 
       .catch(err => res.Status(422).json(err));
   }, 
   findById: function(req, res) {
-    db.Blog
+    db.Blogger
       .findById(req.params.id)
-      .populate("comments")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Blog
+    db.Blogger
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Blog
+    db.Blogger
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Blog
+    db.Blogger
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
-
-
-
-
 
 
 

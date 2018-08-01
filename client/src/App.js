@@ -1,17 +1,31 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from './Pages/Home';
+import DoctorPost from "./pages/DoctorPost";
+import Detail from './pages/Detail';
+import About from "./pages/About";
+import Signup from './pages/Signup';
+
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
+      <Router>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/doctorpost" component={DoctorPost} />
+                <Route exact path="/detail" component={Detail} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/signup" component={Signup} />
+              </Switch>
+            </div>
+          </div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }

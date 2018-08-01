@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
+import blog_api from "../../utils/Blog_api";
 import { Link } from "react-router-dom";
 import { Input, FormBtn } from "../../Components/Form";
 import { List, ListItem } from "../../Components/List";
@@ -9,11 +9,7 @@ import { Nav } from "../../Components/Nav";
 class Search extends Components {
 
   state={
-    articles: [],
-    articleSearch: "",
-    topic: "",
-    startYear: Date.now,
-    endYear: Date.now
+    blogs: []
   };
 
   handleInputChange = event => {
@@ -28,9 +24,8 @@ class Search extends Components {
   handleFormSubmit = event => {
     // When the form is submitted, prevent its default behavior, get articles update the articles state
     event.preventDefault();
-    this.setState({articleSearch: `?topic={this.state.topic}&startYear={this.state.startYear}&endYear={this.state.endYear}`});
-    API.scrapeArticles(this.state.articleSearch)
-    .then(res => this.setState({articles: res.data}))
+    blog_api.getBlogs()
+    .then(res => this.setState({blogs: res.data}))
     .catch(err => console.log(err));
   };
 
