@@ -22,7 +22,7 @@ const bloggerSchema = new Schema({
   last_name: { type: String, required: false }, 
   specialty: { type: String, required: true },
   identification_id: {type: Number, required: true },
-  role: { type: String, required: ture }, 
+  role: { type: String, required: true }, 
   created_dt: { type: Date, default: Date.now }
   // blogs: [
   //   type:  Schema.Types.ObjectId,
@@ -30,6 +30,6 @@ const bloggerSchema = new Schema({
   // ]
 });
 
-const Blogger = mongoose.Models.Blogger || mongoose.model("Blogger", bloggerSchema);
+const Blogger = mongoose.model("Blogger", bloggerSchema);
 
 module.exports = Blogger;

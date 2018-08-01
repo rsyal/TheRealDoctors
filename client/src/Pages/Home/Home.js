@@ -1,37 +1,68 @@
 import React, { Component } from "react";
-import blog_api from "../../utils/Blog_api";
+import blogApi from '../../Utils/blogApi';
 import { Link } from "react-router-dom";
 import { Input, FormBtn } from "../../Components/Form";
 import { List, ListItem } from "../../Components/List";
 import { SaveBtn } from "../../Components/SaveBtn"
+import { Col, Row, Container } from "../../Components/Grid";
 import { Nav } from "../../Components/Nav";
+import { Jumbotron } from "../../Components/Jumbotron";
+import { Card } from "../../Components/Card";
 
-class Search extends Components {
+class Home extends Component {
 
   state={
     blogs: []
   };
 
-  handleInputChange = event => {
-    // Destructure the name and value properties off of event.target
-    // Update the appropriate state
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
+  componentDidMount() {
+    this.loadBlogs();
+  }
 
-  handleFormSubmit = event => {
-    // When the form is submitted, prevent its default behavior, get articles update the articles state
-    event.preventDefault();
-    blog_api.getBlogs()
-    .then(res => this.setState({blogs: res.data}))
-    .catch(err => console.log(err));
+  loadBlogs = () => {
+    blogApi.getBlogs()
+      .then(res => this.setState({ blogs: res.data }))
+      .catch(err => console.log(err));
   };
 
   render() {
+
+    return (
+      <div>
+        {/* <Nav />  */}
+        {/* <Jumbotron /> */}
+        <Container>
+          <Row>
+            <Col size="md-12">   
+              <h2>Recent blogs</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col size="xs-12">
+              {!this.state.blogs.length ? 
+                (
+                  <h1 className="text-center">No recent blogs</h1>
+                ) : 
+                (
+                  this.state.blogs.map(blog => {
+                    return (
+                      <Card
+                        title={blog.title}
+                        content={blog.content}
+                        imageSrc={blog.imageSrc}
+                        createdDt={blog.created_dt}
+                      />
+                    );
+                  })
+                )
+              }
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
     
   }
 }
 
-export default Search;
+export default Home;

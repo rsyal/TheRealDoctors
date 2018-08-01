@@ -6,17 +6,19 @@ const blogSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Blogger"
   },
-  title: { type: String, required: true },
+  topic: { type: String, required: true },
   content: { type: String, required: true },
-  image: { type: String, required: false }, 
-  user_id: {type: String, required: true },
+  imageSrc: { type: String, required: false }, 
   created_dt: { type: Date, default: Date.now },
   comments: [
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
+    { comment: {
+        type: Schema.ObjectId,
+        ref: "Comment"
+      }
+     }
   ]
-});
+}); 
 
-const Blog = mongoose.Models.Blog || mongoose.model("Blog", blogSchema);
+const Blog = mongoose.model("Blog", blogSchema);
 
 module.exports = Blog;

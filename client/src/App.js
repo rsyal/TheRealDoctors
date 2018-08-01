@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './Pages/Home';
-import DoctorPost from "./pages/DoctorPost";
-import Detail from './pages/Detail';
-import About from "./pages/About";
-import Signup from './pages/Signup';
+import DoctorPost from "./Pages/DoctorPost";
+import Detail from './Pages/Detail';
+import About from "./Pages/About";
+import Signup from './Pages/Signup';
 
 import "./App.css";
 
