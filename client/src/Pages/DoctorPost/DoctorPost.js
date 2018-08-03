@@ -7,6 +7,7 @@ import blogApi from "../../Utils/blogApi";
 // import  Jumbotron  from "../../Components/Jumbotron";
 // import  Card  from "../../Components/Card";
 import { Col, Row, Container } from "../../Components/Grid";
+import { Input, TextArea, FormBtn } from "../../Components/Form";
 
 class DoctorPost extends Component {
   state = {
@@ -40,39 +41,39 @@ class DoctorPost extends Component {
 
   render() {
     return (
-        <Container fluid>
-          <Row>
-            <Col size="md-12">
-              <h2>Write your blog post below</h2>
-              <form>
-                <Input
-                  value={this.state.topic}
-                  onChange={this.handleInputChange}
-                  name="topic"
-                  placeholder="Title (required)"
-                />
-                <TextArea
-                  value={this.state.content}
-                  onChange={this.handleInputChange}
-                  name="content"
-                  placeholder="Content (required)"
-                />
-                <Input
-                  value={this.state.imageSrc}
-                  onChange={this.handleInputChange}
-                  name="imageSrc"
-                  placeholder="Enter image URL"
-                />
-                <FormBtn
-                  disabled={!(this.state.topic && this.state.content)}
-                  onClick={this.handleFormSubmit}
-                >
-                  Post blog
-                </FormBtn>
-              </form>
-            </Col>
-          </Row> 
-        </Container>
+      <Container fluid>
+        <Row>
+          <Col size="md-12">
+            <h2>Write your blog post below</h2>
+            <form>
+              <Input
+                value={this.state.topic}
+                onChange={this.handleInputChange}
+                name="topic"
+                placeholder="Title (required)"
+              />
+              <TextArea
+                value={this.state.content}
+                onChange={this.handleInputChange}
+                name="content"
+                placeholder="Content (required)"
+              />
+              <Input
+                value={this.state.imageSrc}
+                onChange={this.handleInputChange}
+                name="imageSrc"
+                placeholder="Enter image URL"
+              />
+              <FormBtn
+                disabled={!(this.state.topic && this.state.content)}
+                onClick={this.handleFormSubmit}
+              >
+                Post blog
+              </FormBtn>
+            </form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
