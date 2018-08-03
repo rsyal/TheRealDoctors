@@ -17,10 +17,6 @@ class About extends Component {
   // componentDidMount() {
   //   this.loadBlogs();
   // }
-
-  // loadBlogs = () => {
-  //   blogApi
-  //     .getBlogs()
   //     .then(res => this.setState({ blogs: res.data }))
   //     .catch(err => console.log(err));
   // };

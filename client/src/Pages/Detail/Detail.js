@@ -11,19 +11,18 @@ import { Card } from "../../Components/Card";
 
 class Detail extends Component {
   state = {
-    blogs: []
+    blog: {}
   };
 
   componentDidMount() {
-    this.loadBlog();
-  }
-
-  loadBlog = () => {
-    blogApi
-      .getBlog()
-      .then(res => this.setState({ blogs: res.data }))
+    blogAPI
+      .getBlog(this.props.match.params.id)
+      .then(res => {
+        this.setState({ blog: res.data });
+        console.log(res.data);
+      })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     return (
@@ -32,7 +31,8 @@ class Detail extends Component {
         <Container>
           <Row>
             <Col size="md-12">
-              <h2>Recent blogs</h2>
+              <h2>{this.state.blog.title}</h2>
+              <h3 />
             </Col>
           </Row>
           <Row>
