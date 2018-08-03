@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-import  Link  from "react-router-dom";
-import { Input, FormBtn } from "../../Components/Form";
-import { List, ListItem } from "../../Components/List";
-import  SaveBtn  from "../../Components/SaveBtn";
+// import  Link  from "react-router-dom";
+// import { Input, FormBtn } from "../../Components/Form";
+// import { List, ListItem } from "../../Components/List";
+// import  SaveBtn  from "../../Components/SaveBtn";
+// import  Jumbotron  from "../../Components/Jumbotron";
 import  {Col, Row, Container } from "../../Components/Grid";
-import  Nav  from "../../Components/Nav";
-import  Jumbotron  from "../../Components/Jumbotron";
 import  Card  from "../../Components/Card";
-import  Footer  from "../../Components/Footer";
 
 class Detail extends Component {
   state = {
@@ -27,36 +25,25 @@ class Detail extends Component {
 
   render() {
     return (
-      <div>
-        {/* <Nav /> */}
-        <Container>
+        <Container fluid>
           <Row>
             <Col size="md-12">
               <h2>{this.state.blog.title}</h2>
-              <h3 />
             </Col>
           </Row>
           <Row>
             <Col size="xs-12">
-              {!this.state.blogs.length ? (
-                <h1 className="text-center">No recent blogs</h1>
-              ) : (
-                this.state.blogs.map(blog => {
-                  return (
-                    "Hello World"
-                    // <Card
-                    //   title={blog.title}
-                    //   content={blog.content}
-                    //   imageSrc={blog.imageSrc}
-                    //   createdDt={blog.created_dt}
-                    // />
-                  );
-                })
-              )}
+                <h1 className="text-center">{this.state.blog.title}</h1>
+                    <h3>Hello World</h3>
+                    <Card
+                      title={this.state.blog.title}
+                      content={this.state.blog.content}
+                      imageSrc={this.state.blog.imageSrc}
+                      createdDt={this.state.blog.created_dt}
+                    />
             </Col>
           </Row>
         </Container>
-      </div>
     );
   }
 }
