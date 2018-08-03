@@ -25,7 +25,7 @@ class About extends Component {
         <Container fluid>
           <Row>
             <Col size="md-12">
-              <h2>ABout us</h2>
+              <h2>About us</h2>
             </Col>
           </Row>
           <Row>
