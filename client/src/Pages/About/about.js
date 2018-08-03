@@ -8,6 +8,7 @@ import { Col, Row, Container } from "../../Components/Grid";
 import { Nav } from "../../Components/Nav";
 import { Jumbotron } from "../../Components/Jumbotron";
 import { Card } from "../../Components/Card";
+import { Footer } from "../../Components/Footer";
 
 class About extends Component {
   // state = {

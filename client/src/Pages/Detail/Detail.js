@@ -8,6 +8,7 @@ import { Col, Row, Container } from "../../Components/Grid";
 import { Nav } from "../../Components/Nav";
 import { Jumbotron } from "../../Components/Jumbotron";
 import { Card } from "../../Components/Card";
+import { Footer } from "../../Components/Footer";
 
 class Detail extends Component {
   state = {
@@ -15,7 +16,7 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    blogAPI
+    blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
         this.setState({ blog: res.data });
