@@ -10,18 +10,32 @@ import { Col, Row, Container } from "../../Components/Grid";
 
 class DoctorPost extends Component {
   state = {
-    blogs: []
+    topic: "",
+    content: "",
+    imageSrc: "",
+    created_dt: ""
   };
 
-  componentDidMount() {
-    this.loadBlogs();
-  }
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-  loadBlogs = () => {
-    blogApi
-      .getBlogs()
-      .then(res => this.setState({ blogs: res.data }))
-      .catch(err => console.log(err));
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.topic && this.state.content) {
+      blogApi
+        .saveBlog({
+          topic: this.state.topic,
+          content: this.state.content,
+          imageSrc: this.state.imageSrc,
+          created_at: this.state.created_at
+        })
+        .then(blogData => console.log(blogData))
+        .catch(err => console.log(err));
+    }
   };
 
   render() {
@@ -29,26 +43,33 @@ class DoctorPost extends Component {
         <Container fluid>
           <Row>
             <Col size="md-12">
-              <h2>Recent blogs</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col size="xs-12">
-              {!this.state.blogs.length ? (
-                <h1 className="text-center">No recent blogs</h1>
-              ) : (
-                this.state.blogs.map(blog => {
-                  return (
-                    "Hello World"
-                    // <Card
-                    //   title={blog.title}
-                    //   content={blog.content}
-                    //   imageSrc={blog.imageSrc}
-                    //   createdDt={blog.created_dt}
-                    // />
-                  );
-                })
-              )}
+              <h2>Write your blog post below</h2>
+              <form>
+                <Input
+                  value={this.state.topic}
+                  onChange={this.handleInputChange}
+                  name="topic"
+                  placeholder="Title (required)"
+                />
+                <TextArea
+                  value={this.state.content}
+                  onChange={this.handleInputChange}
+                  name="content"
+                  placeholder="Content (required)"
+                />
+                <Input
+                  value={this.state.imageSrc}
+                  onChange={this.handleInputChange}
+                  name="imageSrc"
+                  placeholder="Enter image URL"
+                />
+                <FormBtn
+                  disabled={!(this.state.topic && this.state.content)}
+                  onClick={this.handleFormSubmit}
+                >
+                  Post blog
+                </FormBtn>
+              </form>
             </Col>
           </Row> 
         </Container>
