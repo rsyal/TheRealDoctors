@@ -43,12 +43,13 @@ class Detail extends Component {
               ) : (
                 this.state.blogs.map(blog => {
                   return (
-                    <Card
-                      title={blog.title}
-                      content={blog.content}
-                      imageSrc={blog.imageSrc}
-                      createdDt={blog.created_dt}
-                    />
+                    "Hello World"
+                    // <Card
+                    //   title={blog.title}
+                    //   content={blog.content}
+                    //   imageSrc={blog.imageSrc}
+                    //   createdDt={blog.created_dt}
+                    // />
                   );
                 })
               )}
