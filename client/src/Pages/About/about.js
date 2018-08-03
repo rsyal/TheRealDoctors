@@ -33,7 +33,7 @@ class About extends Component {
             </Col>
           </Row>
           <Row>
-            <Col size="xs-12 md-5">IMAGE GOES HERE</Col>
+            <img src="/assests/images/doctorandpatient.jpg"/>
             <Col size="xs-12 md-7">
               “Just Google it!" is becoming our standard response to unanswered
               questions in life. However, when we enter key words in a search
