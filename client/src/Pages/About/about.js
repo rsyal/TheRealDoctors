@@ -25,7 +25,7 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Container>
           <Row>
             <Col size="md-12">
@@ -59,7 +59,7 @@ class About extends Component {
             </Col>
           </Row>
         </Container>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

@@ -28,7 +28,7 @@ class Detail extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Container>
           <Row>
             <Col size="md-12">
