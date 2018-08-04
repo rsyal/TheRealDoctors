@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-import Link from "react-router-dom";
+import  Link  from "react-router-dom";
 import { Input, FormBtn } from "../../Components/Form";
 import { List, ListItem } from "../../Components/List";
-import SaveBtn from "../../Components/SaveBtn";
+import  SaveBtn  from "../../Components/SaveBtn";
 import { Col, Row, Container } from "../../Components/Grid";
-import Nav from "../../Components/Nav";
-import Jumbotron from "../../Components/Jumbotron";
-import Card from "../../Components/Card";
-import Footer from "../../Components/Footer";
+import  Nav  from "../../Components/Nav";
+import  Jumbotron  from "../../Components/Jumbotron";
+import  Card  from "../../Components/Card";
+import  Footer  from "../../Components/Footer";
 
 class Home extends Component {
   state = {
@@ -44,12 +44,13 @@ class Home extends Component {
               ) : (
                 this.state.blogs.map(blog => {
                   return (
-                    <Card
-                      title={blog.title}
-                      content={blog.content}
-                      imageSrc={blog.imageSrc}
-                      createdDt={blog.created_dt}
-                    />
+                    "Hello World"
+                    // <Card
+                    //   title={blog.title}
+                    //   content={blog.content}
+                    //   imageSrc={blog.imageSrc}
+                    //   createdDt={blog.created_dt}
+                    // />
                   );
                 })
               )}
