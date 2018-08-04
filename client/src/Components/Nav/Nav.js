@@ -28,15 +28,11 @@ const Nav = () => (
       <ul className="navbar-nav mr-auto">
 
         <li className="nav-item">
-        {/* <li className="nav-item active"> */}
 
+          {/* need to figure out a way to have 'active' class added for nav of current page */}
           <Link className="nav-link" to="/DoctorsPost">
             Blog
           </Link>
-          {/* <a className="nav-link" href="/doctorspost">
-            Blog 
-            <span className="sr-only">(current)</span>
-          </a> */}
 
         </li>
         <li className="nav-item">
@@ -44,9 +40,6 @@ const Nav = () => (
           <Link className="nav-link" to="/Detail">
             Detail
           </Link>
-          {/* <a className="nav-link" href="/detail">
-            Detail
-          </a> */}
 
         </li>
         <li className="nav-item">
@@ -54,9 +47,6 @@ const Nav = () => (
           <Link className="nav-link" to="/About">
             About
           </Link>          
-          {/* <a className="nav-link" href="/about">
-            About
-          </a> */}
 
         </li>
         <li className="nav-item">
@@ -64,9 +54,6 @@ const Nav = () => (
           <Link className="nav-link" to="/Signup">
             Signup
           </Link>          
-          {/* <a className="nav-link" href="/signup">
-            Signup
-          </a> */}
 
         </li>
       </ul>
