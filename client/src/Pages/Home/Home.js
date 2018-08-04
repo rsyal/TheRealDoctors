@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-import  Link  from "react-router-dom";
-import { Input, FormBtn } from "../../Components/Form";
-import { List, ListItem } from "../../Components/List";
-import  SaveBtn  from "../../Components/SaveBtn";
+// import  Link  from "react-router-dom";
+// import { Input, FormBtn } from "../../Components/Form";
+// import { List, ListItem } from "../../Components/List";
+// import  SaveBtn  from "../../Components/SaveBtn";
+// import  Jumbotron  from "../../Components/Jumbotron";
+// import  Card  from "../../Components/Card";
 import { Col, Row, Container } from "../../Components/Grid";
-import  Nav  from "../../Components/Nav";
-import  Jumbotron  from "../../Components/Jumbotron";
-import  Card  from "../../Components/Card";
-import  Footer  from "../../Components/Footer";
 
 class Home extends Component {
   state = {
@@ -28,10 +26,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        {/* <Nav />  */}
-        {/* <Jumbotron /> */}
-        <Container>
+        <Container fluid>
           <Row>
             <Col size="md-12">
               <h2>Recent blogs</h2>
@@ -55,9 +50,8 @@ class Home extends Component {
                 })
               )}
             </Col>
-          </Row>
+          </Row> 
         </Container>
-      </div>
     );
   }
 }

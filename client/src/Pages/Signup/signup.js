@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-import  Link  from "react-router-dom";
-import { Input, FormBtn } from "../../Components/Form";
-import { List, ListItem } from "../../Components/List";
-import  SaveBtn  from "../../Components/SaveBtn";
+// import  Link  from "react-router-dom";
+// import { Input, FormBtn } from "../../Components/Form";
+// import { List, ListItem } from "../../Components/List";
+// import  SaveBtn  from "../../Components/SaveBtn";
+// import  Jumbotron  from "../../Components/Jumbotron";
+// import  Card  from "../../Components/Card";
 import { Col, Row, Container } from "../../Components/Grid";
-import  Nav  from "../../Components/Nav";
-import  Jumbotron  from "../../Components/Jumbotron";
-import  Card  from "../../Components/Card";
-import  Footer from "../../Components/Footer";
 
 class Signup extends Component {
   state = {

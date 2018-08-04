@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
 import Home from './Pages/Home';
 import DoctorPost from "./Pages/DoctorPost";
 import Detail from './Pages/Detail';
@@ -12,9 +14,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
+        <div>
+          <Nav />
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/doctorpost" component={DoctorPost} />
@@ -22,9 +23,8 @@ class App extends Component {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/signup" component={Signup} />
               </Switch>
+              <Footer />
             </div>
-          </div>
-        </div>
       </Router>
     );
   }
