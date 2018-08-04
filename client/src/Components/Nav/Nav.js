@@ -48,7 +48,7 @@ const Nav = () => (
           placeholder="email"
         />
         <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-          sign in with <i class="fa fa-google" aria-hidden="true" />
+          sign in with <i className="fa fa-google" aria-hidden="true" />
         </button>
       </form>
     </div>
