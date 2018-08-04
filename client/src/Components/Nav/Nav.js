@@ -3,16 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 const Nav = () => (
 
-  // // only consider an event active if its event id is an odd number
-  // oddEvent = (match, location) => {
-  //   if (!match) {
-  //     return false
-  //   }
-  //   const eventID = parseInt(match.params.eventID)
-  //   return !isNaN(eventID) && eventID % 2 === 1
-  // }
-
-  
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <a className="navbar-brand text-light" href="/">
       The Real Doctors
