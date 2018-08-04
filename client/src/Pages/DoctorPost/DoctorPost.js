@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
 // import  Link  from "react-router-dom";
-import { Input, FormBtn, TextArea } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
@@ -34,7 +33,7 @@ class DoctorPost extends Component {
           imageSrc: this.state.imageSrc,
           created_at: this.state.created_at
         })
-        .then(blogData => console.log(blogData))
+        .then(blogData => console.log(blogData.data))
         .catch(err => console.log(err));
     }
   };
