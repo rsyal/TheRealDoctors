@@ -5,8 +5,8 @@ import blogApi from "../../Utils/blogApi";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
-import  {Col, Row, Container } from "../../Components/Grid";
-import  Card  from "../../Components/Card";
+import { Col, Row, Container } from "../../Components/Grid";
+import Card from "../../Components/Card";
 
 class Detail extends Component {
   state = {
@@ -25,25 +25,25 @@ class Detail extends Component {
 
   render() {
     return (
-        <Container fluid>
-          <Row>
-            <Col size="md-12">
-              <h2>{this.state.blog.title}</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col size="xs-12">
-                <h1 className="text-center">{this.state.blog.title}</h1>
-                    <h3>Hello World</h3>
-                    <Card
-                      title={this.state.blog.title}
-                      content={this.state.blog.content}
-                      imageSrc={this.state.blog.imageSrc}
-                      createdDt={this.state.blog.created_dt}
-                    />
-            </Col>
-          </Row>
-        </Container>
+      <Container fluid>
+        <Row>
+          <Col size="md-12">
+            <h2>{this.state.blog.title}</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="xs-12">
+            <h1 className="text-center">{this.state.blog.title}</h1>
+            <h3>Hello World</h3>
+            <Card
+              title={this.state.blog.title}
+              content={this.state.blog.content}
+              imageSrc={this.state.blog.imageSrc}
+              createdDt={this.state.blog.created_dt}
+            />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

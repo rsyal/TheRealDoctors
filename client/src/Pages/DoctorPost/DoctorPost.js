@@ -33,7 +33,7 @@ class DoctorPost extends Component {
           imageSrc: this.state.imageSrc,
           created_at: this.state.created_at
         })
-        .then(blogData => console.log(blogData))
+        .then(blogData => console.log(blogData.data))
         .catch(err => console.log(err));
     }
   };

@@ -8,16 +8,17 @@ const blogSchema = new Schema({
   },
   topic: { type: String, required: true },
   content: { type: String, required: true },
-  imageSrc: { type: String, required: false }, 
+  imageSrc: { type: String, required: false },
   created_dt: { type: Date, default: Date.now },
   comments: [
-    { comment: {
+    {
+      comment: {
         type: Schema.ObjectId,
         ref: "Comment"
       }
-     }
+    }
   ]
-}); 
+});
 
 const Blog = mongoose.model("Blog", blogSchema);
 
