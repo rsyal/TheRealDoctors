@@ -30,6 +30,6 @@ const bloggerSchema = new Schema({
   // ]
 });
 
-const Blogger = mongoose.model("Blogger", bloggerSchema);
+const Blogger = mongoose.models.Blogger || mongoose.model("Blogger", bloggerSchema);
 
 module.exports = Blogger;
