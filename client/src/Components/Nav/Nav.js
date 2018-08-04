@@ -26,11 +26,12 @@ const Nav = () => (
 
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item active">
+
+        <li className="nav-item">
+        {/* <li className="nav-item active"> */}
 
           <Link className="nav-link" to="/DoctorsPost">
             Blog
-            <span className="sr-only">(current)</span>
           </Link>
           {/* <a className="nav-link" href="/doctorspost">
             Blog 
