@@ -23,53 +23,30 @@ const Nav = () => (
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
 
-<<<<<<< HEAD
-          {/* need to figure out a way to have 'active' class added for nav of current page */}
-          <Link className="nav-link" to="/DoctorsPost">
-            Blog
-          </Link>
-=======
           <NavLink className="nav-link" to="/DoctorsPost">
             Blog
           </NavLink>
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
 
         </li>
         <li className="nav-item">
 
-<<<<<<< HEAD
-          <Link className="nav-link" to="/Detail">
-            Detail
-          </Link>
-=======
           <NavLink className="nav-link" to="/Detail">
             Detail
           </NavLink>
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
 
         </li>
         <li className="nav-item">
 
           <NavLink className="nav-link" to="/About">
             About
-<<<<<<< HEAD
-          </Link>          
-=======
           </NavLink>          
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
 
         </li>
         <li className="nav-item">
 
-<<<<<<< HEAD
-          <Link className="nav-link" to="/Signup">
-            Signup
-          </Link>          
-=======
           <NavLink className="nav-link" to="/Signup">
             Signup
           </NavLink>          
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
 
         </li>
       </ul>
