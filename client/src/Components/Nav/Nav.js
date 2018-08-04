@@ -1,13 +1,18 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 const Nav = () => (
-  // <nav className="navbar navbar-expand-lg navbar-light text-light bg-dark ">
-  //   <a className="navbar-brand">
-  //     The Real Doctors - this is navbar
-  //   </a>
-  // </nav>
 
+  // // only consider an event active if its event id is an odd number
+  // oddEvent = (match, location) => {
+  //   if (!match) {
+  //     return false
+  //   }
+  //   const eventID = parseInt(match.params.eventID)
+  //   return !isNaN(eventID) && eventID % 2 === 1
+  // }
+
+  
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <a className="navbar-brand text-light" href="/">
       The Real Doctors
@@ -26,46 +31,32 @@ const Nav = () => (
 
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item active">
+        <li className="nav-item">
 
-          <Link className="nav-link" to="/DoctorsPost">
+          <NavLink className="nav-link" to="/DoctorsPost">
             Blog
-            <span className="sr-only">(current)</span>
-          </Link>
-          {/* <a className="nav-link" href="/doctorspost">
-            Blog 
-            <span className="sr-only">(current)</span>
-          </a> */}
+          </NavLink>
 
         </li>
         <li className="nav-item">
 
-          <Link className="nav-link" to="/Detail">
+          <NavLink className="nav-link" to="/Detail">
             Detail
-          </Link>
-          {/* <a className="nav-link" href="/detail">
-            Detail
-          </a> */}
+          </NavLink>
 
         </li>
         <li className="nav-item">
 
-          <Link className="nav-link" to="/About">
+          <NavLink className="nav-link" to="/About">
             About
-          </Link>          
-          {/* <a className="nav-link" href="/about">
-            About
-          </a> */}
+          </NavLink>          
 
         </li>
         <li className="nav-item">
 
-          <Link className="nav-link" to="/Signup">
+          <NavLink className="nav-link" to="/Signup">
             Signup
-          </Link>          
-          {/* <a className="nav-link" href="/signup">
-            Signup
-          </a> */}
+          </NavLink>          
 
         </li>
       </ul>
