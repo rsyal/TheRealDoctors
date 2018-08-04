@@ -1,8 +1,7 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 const Nav = () => (
-
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <a className="navbar-brand text-light" href="/">
       The Real Doctors
@@ -22,32 +21,24 @@ const Nav = () => (
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-
           <NavLink className="nav-link" to="/DoctorsPost">
             Blog
           </NavLink>
-
         </li>
         <li className="nav-item">
-
           <NavLink className="nav-link" to="/Detail">
             Detail
           </NavLink>
-
         </li>
         <li className="nav-item">
-
           <NavLink className="nav-link" to="/About">
             About
-          </NavLink>          
-
+          </NavLink>
         </li>
         <li className="nav-item">
-
           <NavLink className="nav-link" to="/Signup">
             Signup
-          </NavLink>          
-
+          </NavLink>
         </li>
       </ul>
       <form className="form-inline my-2 my-lg-0">
