@@ -73,6 +73,12 @@ class Signup extends Component {
                   placeholder="Last name"
                 />
                 <Input
+                  value={this.state.identification_id}
+                  onChange={this.handleInputChange}
+                  name="identification_id"
+                  placeholder="Identification ID"
+                />
+                <Input
                   value={this.state.specialty}
                   onChange={this.handleInputChange}
                   name="specialty"
