@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const Nav = () => (
   // <nav className="navbar navbar-expand-lg navbar-light text-light bg-dark ">
@@ -26,24 +27,46 @@ const Nav = () => (
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <a className="nav-link" href="/doctorspost">
-            Blog <span className="sr-only">(current)</span>
-          </a>
+
+          <Link className="nav-link" to="/DoctorsPost">
+            Blog
+            <span className="sr-only">(current)</span>
+          </Link>
+          {/* <a className="nav-link" href="/doctorspost">
+            Blog 
+            <span className="sr-only">(current)</span>
+          </a> */}
+
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/detail">
+
+          <Link className="nav-link" to="/Detail">
             Detail
-          </a>
+          </Link>
+          {/* <a className="nav-link" href="/detail">
+            Detail
+          </a> */}
+
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/about">
+
+          <Link className="nav-link" to="/About">
             About
-          </a>
+          </Link>          
+          {/* <a className="nav-link" href="/about">
+            About
+          </a> */}
+
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/signup">
+
+          <Link className="nav-link" to="/Signup">
             Signup
-          </a>
+          </Link>          
+          {/* <a className="nav-link" href="/signup">
+            Signup
+          </a> */}
+
         </li>
       </ul>
       <form className="form-inline my-2 my-lg-0">
