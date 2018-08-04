@@ -1,8 +1,7 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 const Nav = () => (
-
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <a className="navbar-brand text-light" href="/">
       The Real Doctors
@@ -22,55 +21,24 @@ const Nav = () => (
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-
-<<<<<<< HEAD
-          {/* need to figure out a way to have 'active' class added for nav of current page */}
-          <Link className="nav-link" to="/DoctorsPost">
-            Blog
-          </Link>
-=======
           <NavLink className="nav-link" to="/DoctorsPost">
             Blog
           </NavLink>
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
-
         </li>
         <li className="nav-item">
-
-<<<<<<< HEAD
-          <Link className="nav-link" to="/Detail">
-            Detail
-          </Link>
-=======
           <NavLink className="nav-link" to="/Detail">
             Detail
           </NavLink>
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
-
         </li>
         <li className="nav-item">
-
           <NavLink className="nav-link" to="/About">
             About
-<<<<<<< HEAD
-          </Link>          
-=======
-          </NavLink>          
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
-
+          </NavLink>
         </li>
         <li className="nav-item">
-
-<<<<<<< HEAD
-          <Link className="nav-link" to="/Signup">
-            Signup
-          </Link>          
-=======
           <NavLink className="nav-link" to="/Signup">
             Signup
-          </NavLink>          
->>>>>>> 0f518a02c9dc5e65c303154617624b2276016d81
-
+          </NavLink>
         </li>
       </ul>
       <form className="form-inline my-2 my-lg-0">

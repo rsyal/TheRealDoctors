@@ -15,8 +15,7 @@ class Signup extends Component {
     first_name: "",
     last_name: "",
     specialty: "",
-    identification_id: "",
-    created_dt: ""
+    identification_id: ""
   };
 
   handleInputChange = event => {
@@ -42,8 +41,7 @@ class Signup extends Component {
           first_name: this.state.first_name,
           last_name: this.state.last_name,
           specialty: this.state.specialty,
-          identification_id: this.state.identification_id,
-          created_dt: this.state.created_dt
+          identification_id: this.state.identification_id
         })
         .then(bloggerData => console.log(bloggerData.data))
         .catch(err => console.log(err));
