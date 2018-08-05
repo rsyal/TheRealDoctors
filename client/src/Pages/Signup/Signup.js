@@ -54,7 +54,7 @@ class Signup extends Component {
         <Container>
           <Row>
             <Col size="md-12">
-              <h2>Sign up to write for us</h2>
+              <h2 className="mt-3">Sign up to write for us</h2>
             </Col>
           </Row>
           <Row>
