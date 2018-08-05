@@ -6,7 +6,7 @@ html {
   }
   body {
     margin-bottom: 60px; /* Margin bottom by footer height */
-    padding-top: 60px; /* space for fixed nav */
+    padding-top: 56px; /* space for fixed nav */
   }
   .footer {
     position: absolute;
