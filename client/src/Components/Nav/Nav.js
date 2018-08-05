@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <a className="navbar-brand text-light" href="/">
       The Real Doctors
     </a>
