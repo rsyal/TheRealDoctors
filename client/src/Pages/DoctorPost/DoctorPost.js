@@ -43,7 +43,7 @@ class DoctorPost extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h2>Write your blog post below</h2>
+            <h2 className="mt-3">Write your blog post below</h2>
             <form>
               <Input
                 value={this.state.topic}

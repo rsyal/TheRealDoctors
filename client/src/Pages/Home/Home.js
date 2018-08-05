@@ -57,23 +57,25 @@ class Home extends Component {
 
         <Row>
           <Col size="xs-12">
-            {!this.state.blogs.length ? (
-              <h1 className="text-center">No recent blogs</h1>
-            ) : (
-              this.state.blogs.map(blog => {
-                console.log(blog);
-                return (
-                  <Card
-                    key={blog._id}
-                    topic={blog.topic}
-                    content={blog.content}
-                    src={blog.imageSrc}
-                    alt={blog.topic}
-                    created_dt={blog.created_dt}
-                  />
-                );
-              })
-            )}
+            <div className="card-deck">
+              {!this.state.blogs.length ? (
+                <h1 className="text-center">No recent blogs</h1>
+              ) : (
+                this.state.blogs.map(blog => {
+                  console.log(blog);
+                  return (
+                    <Card
+                      key={blog._id}
+                      topic={blog.topic}
+                      content={blog.content}
+                      src={blog.imageSrc}
+                      alt={blog.topic}
+                      created_dt={blog.created_dt}
+                    />
+                  );
+                })
+              )}
+            </div>
           </Col>
         </Row>
       </Container>

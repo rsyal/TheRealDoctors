@@ -25,7 +25,6 @@ html {
   body {
     
     margin-top: 56px; /* space for fixed nav */
-    padding-top: 2rem; /* space between nav and content */
     padding-bottom: 2rem; /* space between footer and content */
     margin-bottom: 60px; /* Margin bottom by footer height */
   }
