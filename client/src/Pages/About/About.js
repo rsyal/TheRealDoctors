@@ -22,15 +22,18 @@ class About extends Component {
 
   render() {
     return (
-        <Container fluid>
+        <Container>
           <Row>
             <Col size="md-12">
               <h2>About us</h2>
             </Col>
           </Row>
           <Row>
-            <img src="/assests/images/doctorandpatient.jpg" alt="I mean it really"/>
-            <Col size="xs-12 md-7">
+            
+            <Col size="xs-12">
+            {/* <img src="/assests/images/doctorandpatient.jpg" alt="I mean it really" className="img-responsive" /> */}
+            
+            <img src="/assests/images/doctorandpatient-sm.jpg" alt="I mean it really" className="rounded float-right ml-3 mb-3" />
               “Just Google it!" is becoming our standard response to unanswered
               questions in life. However, when we enter key words in a search
               engine such as Google, we end up with thousands of websites - many
