@@ -49,17 +49,13 @@ class Home extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron />
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
-            <h2>Recent blogs</h2>
-          </Col>
-        </Row>
+
+    <div>
+      
+      <Jumbotron />
+
+      <Container>
+
         <Row>
           <Col size="xs-12">
             {!this.state.blogs.length ? (
@@ -82,6 +78,7 @@ class Home extends Component {
           </Col>
         </Row>
       </Container>
+      </div>
     );
   }
 }
