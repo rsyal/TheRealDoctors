@@ -1,9 +1,15 @@
 import React from "react";
 
 const Footer = () => (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand">The Real Doctors - this is footer</a>
-    </nav>
+
+    <footer className="footer text-center">
+      <div className="container">
+        <span className="text-muted">
+          Copyright &copy; {(new Date().getFullYear())}
+          </span>
+      </div>
+    </footer>
+
 );
 
 export default Footer;
