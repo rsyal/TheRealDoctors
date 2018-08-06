@@ -1,5 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+
+// console log google auth response
+// const responseGoogle = response => {
+//   console.log(response);
+// };
 
 const Nav = () => (
   <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -42,6 +48,12 @@ const Nav = () => (
           </NavLink>
         </li>
       </ul>
+      {/* <GoogleLogin
+        clientId="779231878096-k23dj1tdlplrdhbvrlq4uel3c89am084.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      /> */}
       <form className="form-inline my-2 my-lg-0">
         <input
           className="form-control mr-sm-2"
