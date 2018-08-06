@@ -15,6 +15,26 @@ img {
   clear: both;
 }
 
+/* Nav
+-------------------------------------------------- */
+.blog-name {
+  display: flex;
+  align-items: center;
+}
+.logo-nav {
+  height: 1.25rem;
+  margin:0 .5rem 0 0;
+  width: auto;
+}
+
+/* Jumbotron
+-------------------------------------------------- */
+.jumbotron {
+  /* replace url below with local url if group likes this image. I would like to get an image with a female doctor.*/ 
+  background-image: url("http://thedoctorsgonzalez.com/wp-content/uploads/2015/06/Dollarphotoclub_69013197.jpg");
+  background-size: cover;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */

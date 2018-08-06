@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 
 const Nav = () => (
   <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <a className="navbar-brand text-light" href="/">
+    <a className="navbar-brand text-light blog-name" href="/">
+      <img className="logo-nav float-left" src="/assests/images/logo.svg" />
       The Real Doctors
     </a>
     <button
