@@ -37,9 +37,9 @@ class Detail extends Component {
             <h3>Hello World</h3>
             <Card
               title={this.state.blog.title}
-              content={this.state.blog.content}
               imageSrc={this.state.blog.imageSrc}
               createdDt={this.state.blog.created_dt}
+              content={this.state.blog.content}
             />
           </Col>
         </Row>
