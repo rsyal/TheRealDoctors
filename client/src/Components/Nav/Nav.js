@@ -27,7 +27,7 @@ const Nav = () => (
     <div className="collapse navbar-collapse" id="navbarColor02">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-          <NavLink className="nav-link" to="/DoctorsPost">
+          <NavLink className="nav-link" to="/DoctorPost">
             Blog
           </NavLink>
         </li>
