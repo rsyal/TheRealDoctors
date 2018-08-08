@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import GoogleLogin from "react-google-login";
+//import GoogleLogin from "react-google-login";
 
 // console log google auth response
 // const responseGoogle = response => {
