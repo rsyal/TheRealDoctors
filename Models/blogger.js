@@ -21,7 +21,7 @@ const bloggerSchema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: false },
   specialty: { type: String, required: true },
-  identification_id: { type: Number, required: true },
+  identification_id: { type: Number, required: false },
   created_dt: { type: Date, default: Date.now() }
   // blogs: [
   //   type:  Schema.Types.ObjectId,
