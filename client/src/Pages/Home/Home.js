@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
 // import bloggerApi from "../../Utils/bloggerApi";
-<<<<<<< HEAD
-//import Link from "react-router-dom";
-=======
 import { Link } from "react-router-dom";
->>>>>>> 4873cc3c1e6512bd7aed1581e0c3a0241ad83e21
 // import { Input, FormBtn } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
