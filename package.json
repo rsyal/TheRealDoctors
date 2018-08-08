@@ -25,6 +25,7 @@
     "mongoose": "^5.2.6",
     "npm": "^6.3.0",
     "path": "^0.12.7",
+    "react-google-login": "^3.2.1",
     "react-router-dom": "^4.3.1"
   }
 }

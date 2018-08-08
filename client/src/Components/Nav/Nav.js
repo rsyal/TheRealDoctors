@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-//import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 // console log google auth response
 const responseGoogle = response => {
@@ -10,7 +10,7 @@ const responseGoogle = response => {
 const Nav = () => (
   <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <a className="navbar-brand text-light blog-name" href="/">
-      <img className="logo-nav float-left" src="/assests/images/logo.svg" />
+      <img className="logo-nav float-left" alt="medical symbol" src="/assests/images/logo.svg" />
       The Real Doctors
     </a>
     <button
@@ -30,11 +30,6 @@ const Nav = () => (
         <li className="nav-item">
           <NavLink className="nav-link" to="/DoctorPost">
             Blog
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/Detail">
-            Detail
           </NavLink>
         </li>
         <li className="nav-item">

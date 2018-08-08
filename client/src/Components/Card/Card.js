@@ -1,6 +1,6 @@
 import React from "react";
 import "./Card.css";
-import { PromiseProvider } from "mongoose";
+//import { PromiseProvider } from "mongoose";
 
 const Card = props => (
   <div className="card">
