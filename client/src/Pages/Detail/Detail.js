@@ -25,7 +25,7 @@ class Detail extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Row>
           <Col size="md-12">
             <h2>{this.state.blog.title}</h2>
@@ -37,9 +37,9 @@ class Detail extends Component {
             <h3>Hello World</h3>
             <Card
               title={this.state.blog.title}
-              content={this.state.blog.content}
               imageSrc={this.state.blog.imageSrc}
               createdDt={this.state.blog.created_dt}
+              content={this.state.blog.content}
             />
           </Col>
         </Row>

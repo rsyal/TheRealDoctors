@@ -54,7 +54,7 @@ class Signup extends Component {
         <Container>
           <Row>
             <Col size="md-12">
-              <h2>Sign up to write for us</h2>
+              <h2 className="mt-3">Sign up to write for us</h2>
             </Col>
           </Row>
           <Row>
@@ -71,6 +71,12 @@ class Signup extends Component {
                   onChange={this.handleInputChange}
                   name="last_name"
                   placeholder="Last name"
+                />
+                <Input
+                  value={this.state.identification_id}
+                  onChange={this.handleInputChange}
+                  name="identification_id"
+                  placeholder="Identification ID"
                 />
                 <Input
                   value={this.state.specialty}
