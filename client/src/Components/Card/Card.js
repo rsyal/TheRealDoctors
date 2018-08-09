@@ -3,11 +3,14 @@ import "./Card.css";
 //import { PromiseProvider } from "mongoose";
 
 const Card = props => (
-  <div className="card">
-
+  <div className="card mb-4">
     {/* <img className="card-img-top" src={props.imageSrc} alt={props.topic} /> */}
     {/* NOTE: THE HARD CODED URL BELOW IS ONLY USED BECAUSE THE TAG THAT IS COMMENTED OUT ABOVE WAS NOT GETTING AN IMAGE TO SHOW UP. FEEL FREE TO GET RID OF THE HARD CODED URL IF YOU CAN GET THE props.imageSrc TO WORK */}
-    <img className="card-img-top" src={ props.src || "/assests/images/card-default.jpg"} alt={props.topic} />
+    <img
+      className="card-img-top"
+      src={props.src || "/assests/images/card-default.jpg"}
+      alt={props.topic}
+    />
 
     <div className="card-body">
       <h5 className="card-title">{props.topic}</h5>

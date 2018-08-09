@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Jumbotron from "../../Components/Jumbotron/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Card from "../../Components/Card";
+import "./Home.css";
 
 class Home extends Component {
   state = {
