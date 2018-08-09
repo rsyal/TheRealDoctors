@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-// import  Link  from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { Input, FormBtn } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
@@ -17,8 +17,8 @@ class Detail extends Component {
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
-        this.setState({ blog: res.data });
-        console.log(res.data);
+        this.setState({ blog: res });
+        console.log(res);
       })
       .catch(err => console.log(err));
   }
@@ -41,6 +41,11 @@ class Detail extends Component {
               createdDt={this.state.blog.created_dt}
               content={this.state.blog.content}
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-2">
+            <Link to="/">← Back to Blogs</Link>
           </Col>
         </Row>
       </Container>

@@ -7,26 +7,28 @@ const bloggerSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
   },
-  password: {
-    type: String,
-    trim: true,
-    required: "Password is Required",
-    validate: [
-      function(input) {
-        return input.length >= 6;
-      },
-      "Password should be longer."
-    ]
-  },
-  first_name: { type: String, required: true },
-  last_name: { type: String, required: false },
+  // password: {
+  //   type: String,
+  //   trim: true,
+  //   required: "Password is Required",
+  //   validate: [
+  //     function(input) {
+  //       return input.length >= 6;
+  //     },
+  //     "Password should be longer."
+  //   ]
+  // },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: false },
   specialty: { type: String, required: true },
-  identification_id: { type: Number, required: true },
-  created_dt: { type: Date, default: Date.now() }
-  // blogs: [
-  //   type:  Schema.Types.ObjectId,
-  //   ref: "Blog"
-  // ]
+  npmNumber: { type: String, required: false },
+  created_dt: { type: Date, default: Date.now() },
+  blogs: [
+    { 
+      type:  Schema.Types.ObjectId,
+      ref: "Blog"
+    }
+  ]
 });
 
 const Blogger = mongoose.models.Blogger || mongoose.model("Blogger", bloggerSchema);

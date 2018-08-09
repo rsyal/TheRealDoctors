@@ -1,16 +1,28 @@
 import React from "react";
+import "./Nav.css";
 import { NavLink } from "react-router-dom";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 // console log google auth response
-// const responseGoogle = response => {
-//   console.log(response);
-// };
+const responseGoogle = response => {
+  console.log(response);
+
+  // email = response.profileObj.email
+  //registeredBlogger(response.profileObj.email) ? this.props.history.push('/') : 
+};
+
+const logout = () => {
+  console.log("logout");
+};
 
 const Nav = () => (
   <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <a className="navbar-brand text-light blog-name" href="/">
-      <img className="logo-nav float-left" src="/assests/images/logo.svg" />
+      <img
+        className="logo-nav float-left"
+        alt="medical symbol"
+        src="/assests/images/logo.svg"
+      />
       The Real Doctors
     </a>
     <button
@@ -33,11 +45,6 @@ const Nav = () => (
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/Detail">
-            Detail
-          </NavLink>
-        </li>
-        <li className="nav-item">
           <NavLink className="nav-link" to="/About">
             About
           </NavLink>
@@ -47,14 +54,20 @@ const Nav = () => (
             Signup
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/Login">
+            Login
+          </NavLink>
+        </li>
       </ul>
-      {/* <GoogleLogin
+      <GoogleLogin
+        className="google-signin"
         clientId="779231878096-k23dj1tdlplrdhbvrlq4uel3c89am084.apps.googleusercontent.com"
-        buttonText="Login"
+        buttonText={"Google sign in"}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
-      /> */}
-      <form className="form-inline my-2 my-lg-0">
+      />
+      {/* <form className="form-inline my-2 my-lg-0">
         <input
           className="form-control mr-sm-2"
           type="text"
@@ -63,7 +76,12 @@ const Nav = () => (
         <button className="btn btn-secondary my-2 my-sm-0" type="submit">
           sign in with <i className="fa fa-google" aria-hidden="true" />
         </button>
-      </form>
+      </form> */}
+      <GoogleLogout
+        className="google-logout"
+        buttonText="Logout"
+        onLogoutSuccess={logout}
+      />
     </div>
   </nav>
 );
