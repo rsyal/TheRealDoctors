@@ -5,6 +5,9 @@ import { GoogleLogin } from "react-google-login";
 // console log google auth response
 const responseGoogle = response => {
   console.log(response);
+
+  // email = response.profileObj.email
+  //registeredBlogger(response.profileObj.email) ? this.props.history.push('/') : 
 };
 
 const Nav = () => (

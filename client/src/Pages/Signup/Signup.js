@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import bloggerApi from "../../Utils/bloggerApi";
+import verificationApi from "../../Utils/verificationApi";
 // import  Link  from "react-router-dom";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
@@ -8,14 +9,17 @@ import bloggerApi from "../../Utils/bloggerApi";
 import { Col, Row, Container } from "../../Components/Grid";
 import { Input, FormBtn } from "../../Components/Form";
 
+
 class Signup extends Component {
   state = {
     email: "",
-    password: "",
-    first_name: "",
-    last_name: "",
+    //password: "",
+    firstName: "",
+    lastName: "",
     specialty: "",
-    identification_id: ""
+    npmNumber: "",
+    verificationCompleted: false,
+    verificationMessage: ""
   };
 
   handleInputChange = event => {
@@ -28,24 +32,65 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (
-      this.state.first_name &&
-      this.state.last_name &&
+      this.state.firstName &&
+      this.state.lastName &&
       this.state.specialty &&
       this.state.email &&
-      this.state.password
+      this.state.npmNumber
     ) {
-      bloggerApi
-        .saveBlogger({
-          email: this.state.email,
-          password: this.state.password,
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          specialty: this.state.specialty,
-          identification_id: this.state.identification_id
-        })
-        .then(bloggerData => console.log(bloggerData.data))
-        .catch(err => console.log(err));
-    }
+      verificationApi.verifyBlogger(this.state.npmNumber)
+      .then(res => {
+        console.log(res);
+        if (res.length===1) {
+          this.setState({verificationCompleted: true});
+          this.setState({verificationMessage: "Verification completed"})
+          bloggerApi
+            .saveBlogger({
+              email: this.state.email,
+              // password: this.state.password,
+              firstName: this.state.firstName,
+              lastName: this.state.lastName,
+              specialty: this.state.specialty,
+              npmNumber: this.state.npmNumber
+            })
+            .then(bloggerData => {
+              console.log(bloggerData.data);
+              this.props.history.push('/');
+            })
+            .catch(err => console.log(err));
+        }
+        else {
+          this.setState({verificationCompleted: true});
+          this.setState({verificationMessage: "Verification is pending"});
+        }
+
+    })
+  }};
+
+  handleFormSubmitWithoutVerification = event => {
+    event.preventDefault();
+    if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.specialty &&
+      this.state.email &&
+      this.state.npmNumber
+    ) {
+        bloggerApi
+          .saveBlogger({
+            email: this.state.email,
+            // password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            specialty: this.state.specialty,
+            npmNumber: this.state.npmNumber
+          })
+          .then(bloggerData => {
+            console.log(bloggerData.data);
+            this.props.history.push('/');
+          })
+          .catch(err => console.log(err));
+        }
   };
 
   render() {
@@ -61,22 +106,22 @@ class Signup extends Component {
             <Col size="md-12">
               <form>
                 <Input
-                  value={this.state.first_name}
+                  value={this.state.firstName}
                   onChange={this.handleInputChange}
-                  name="first_name"
+                  name="firstName"
                   placeholder="First name"
                 />
                 <Input
-                  value={this.state.last_name}
+                  value={this.state.lastName}
                   onChange={this.handleInputChange}
-                  name="last_name"
+                  name="lastName"
                   placeholder="Last name"
                 />
                 <Input
-                  value={this.state.identification_id}
+                  value={this.state.npmNumber}
                   onChange={this.handleInputChange}
-                  name="identification_id"
-                  placeholder="Identification ID"
+                  name="npmNumber"
+                  placeholder="npmNumber"
                 />
                 <Input
                   value={this.state.specialty}
@@ -90,30 +135,41 @@ class Signup extends Component {
                   name="email"
                   placeholder="Google email"
                 />
-                <Input
+                {/* <Input
                   value={this.state.password}
                   onChange={this.handleInputChange}
                   name="password"
                   type="password"
                   placeholder="Google password"
-                />
+                /> */}
                 <FormBtn
                   disabled={
                     !(
-                      this.state.first_name &&
-                      this.state.last_name &&
+                      this.state.firstName &&
+                      this.state.lastName &&
                       this.state.specialty &&
                       this.state.email &&
-                      this.state.password
+                      this.state.npmNumber
                     )
                   }
-                  onClick={this.handleFormSubmit}
+                  onClick={this.handleFormSubmitWithoutVerification}
                 >
                   Submit
                 </FormBtn>
               </form>
             </Col>
-          </Row>
+          </Row> 
+          <div className="container">        
+            <Row>
+              <Col size="md-12">
+              {this.state.verificationCompleted ? (
+                <p>{this.state.verificationMessage}</p>
+              ) : (
+                  <p> </p>
+              )}
+              </Col>
+            </Row>
+          </div>
         </Container>
       </div>
     );
