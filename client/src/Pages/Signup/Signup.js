@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import bloggerApi from "../../Utils/bloggerApi";
 import verificationApi from "../../Utils/verificationApi";
-// import  Link  from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
@@ -18,8 +18,8 @@ class Signup extends Component {
     lastName: "",
     specialty: "",
     npmNumber: "",
-    verificationCompleted: false,
-    verificationMessage: ""
+    verificationMessage: false,
+    errorMessage: ""
   };
 
   handleInputChange = event => {
@@ -31,6 +31,8 @@ class Signup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    this.setState({verificationMessage: false});
+    this.setState({errorMessage: ''});
     if (
       this.state.firstName &&
       this.state.lastName &&
@@ -41,9 +43,9 @@ class Signup extends Component {
       verificationApi.verifyBlogger(this.state.npmNumber)
       .then(res => {
         console.log(res);
-        if (res.length===1) {
-          this.setState({verificationCompleted: true});
-          this.setState({verificationMessage: "Verification completed"})
+        console.log('verification results: ', res.data.data);
+        if (res.data.data) {
+          this.setState({verificationMessage: "Verification completed and verified"});
           bloggerApi
             .saveBlogger({
               email: this.state.email,
@@ -57,14 +59,20 @@ class Signup extends Component {
               console.log(bloggerData.data);
               this.props.history.push('/');
             })
-            .catch(err => console.log(err));
+            .catch(error => {
+              console.log(error);
+              console.log(error.message, error.statusCode);
+              this.setState({errorMessage: error.message});
+            });
         }
         else {
-          this.setState({verificationCompleted: true});
           this.setState({verificationMessage: "Verification is pending"});
         }
-
-    })
+      }).catch(error => {
+        console.log(error);
+        console.log(error.message, error.statusCode);
+        this.setState({errorMessage: error.message});
+      });
   }};
 
   handleFormSubmitWithoutVerification = event => {
@@ -152,7 +160,7 @@ class Signup extends Component {
                       this.state.npmNumber
                     )
                   }
-                  onClick={this.handleFormSubmitWithoutVerification}
+                  onClick={this.handleFormSubmit}
                 >
                   Submit
                 </FormBtn>
@@ -162,10 +170,16 @@ class Signup extends Component {
           <div className="container">        
             <Row>
               <Col size="md-12">
-              {this.state.verificationCompleted ? (
+              {this.state.verificationMessage && !this.state.errorMessage ? (
                 <p>{this.state.verificationMessage}</p>
               ) : (
-                  <p> </p>
+                  this.state.errorMessage ? (
+                  <p>Verification pending...{this.state.errorMessage}<br />
+                  <strong>Please check values that you entered before submission</strong><br />
+                   Or return to <Link to={"/"}>main page</Link></p>
+                  ) : (
+                    <p>Verification pending...</p>
+                  )
               )}
               </Col>
             </Row>
