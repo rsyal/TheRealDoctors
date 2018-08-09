@@ -8,6 +8,7 @@ import DoctorPost from "./Pages/DoctorPost";
 import Detail from "./Pages/Detail";
 import About from "./Pages/About";
 import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
 import Summary from "./Pages/Summary";
 
 import "./App.css";
@@ -25,6 +26,7 @@ class App extends Component {
             <Route exact path="/doctorpost" component={DoctorPost} />
             <Route exact path="/about" component={About} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/summary" component={Summary} />
             {/* <Route component={NoMatch} /> */}
           </Switch>

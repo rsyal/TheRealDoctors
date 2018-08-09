@@ -1,15 +1,13 @@
 require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
+const app = require('./app');
+//const express = require("express");
+//const path = require("path");
+//const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./Routes");
 const PORT = process.env.PORT || 3002;
-const app = express();
-
-// Define middleware here
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const http = require('http');
+app.set('port', PORT);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -23,6 +21,7 @@ app.use(routes);
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/realdoctors");
 
-app.listen(PORT, function() {
+const server = http.createServer(app);
+server.listen(PORT, function() {
   console.log(`🌎 ==> API Server now listening on port ${PORT}!`);
 });

@@ -5,13 +5,15 @@
   "proxy": "http://localhost:3002/",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-google-login": "^3.2.1",
-    "react-router-dom": "^4.3.1",
-    "@material-ui/core": "latest",
-    "prop-types": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
