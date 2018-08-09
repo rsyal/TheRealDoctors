@@ -19,7 +19,6 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.15.4",
