@@ -17,8 +17,8 @@ class Detail extends Component {
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
-        this.setState({ blog: res });
-        console.log(res);
+        this.setState({ blog: res.data });
+        console.log(res.data);
       })
       .catch(err => console.log(err));
   }
@@ -28,19 +28,18 @@ class Detail extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h2>{this.state.blog.title}</h2>
+            <h1>{this.state.blog.topic}</h1>
           </Col>
         </Row>
         <Row>
           <Col size="xs-12">
-            <h1 className="text-center">{this.state.blog.title}</h1>
-            <h3>Hello World</h3>
-            <Card
-              title={this.state.blog.title}
+            <p>{this.state.blog.content}</p>
+            {/* <Card
+              title={this.state.blog.topic}
               imageSrc={this.state.blog.imageSrc}
               createdDt={this.state.blog.created_dt}
               content={this.state.blog.content}
-            />
+            /> */}
           </Col>
         </Row>
         <Row>
