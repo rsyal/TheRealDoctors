@@ -21,7 +21,7 @@ const bloggerSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: false },
   specialty: { type: String, required: true },
-  npmNumber: { type: String, required: false },
+  npiNumber: { type: String, required: false },
   created_dt: { type: Date, default: Date.now() },
   blogs: [
     { 

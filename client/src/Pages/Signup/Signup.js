@@ -17,7 +17,7 @@ class Signup extends Component {
     firstName: "",
     lastName: "",
     specialty: "",
-    npmNumber: "",
+    npiNumber: "",
     verificationMessage: false,
     errorMessage: ""
   };
@@ -38,9 +38,9 @@ class Signup extends Component {
       this.state.lastName &&
       this.state.specialty &&
       this.state.email &&
-      this.state.npmNumber
+      this.state.npiNumber
     ) {
-      verificationApi.verifyBlogger(this.state.npmNumber)
+      verificationApi.verifyBlogger(this.state.npiNumber)
       .then(res => {
         console.log(res);
         console.log('verification results: ', res.data.data);
@@ -53,7 +53,7 @@ class Signup extends Component {
               firstName: this.state.firstName,
               lastName: this.state.lastName,
               specialty: this.state.specialty,
-              npmNumber: this.state.npmNumber
+              npiNumber: this.state.npiNumber
             })
             .then(bloggerData => {
               console.log(bloggerData.data);
@@ -82,7 +82,7 @@ class Signup extends Component {
       this.state.lastName &&
       this.state.specialty &&
       this.state.email &&
-      this.state.npmNumber
+      this.state.npiNumber
     ) {
         bloggerApi
           .saveBlogger({
@@ -91,7 +91,7 @@ class Signup extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             specialty: this.state.specialty,
-            npmNumber: this.state.npmNumber
+            npiNumber: this.state.npiNumber
           })
           .then(bloggerData => {
             console.log(bloggerData.data);
@@ -126,10 +126,10 @@ class Signup extends Component {
                   placeholder="Last name"
                 />
                 <Input
-                  value={this.state.npmNumber}
+                  value={this.state.npiNumber}
                   onChange={this.handleInputChange}
-                  name="npmNumber"
-                  placeholder="npmNumber"
+                  name="npiNumber"
+                  placeholder="npiNumber"
                 />
                 <Input
                   value={this.state.specialty}
@@ -157,7 +157,7 @@ class Signup extends Component {
                       this.state.lastName &&
                       this.state.specialty &&
                       this.state.email &&
-                      this.state.npmNumber
+                      this.state.npiNumber
                     )
                   }
                   onClick={this.handleFormSubmit}
