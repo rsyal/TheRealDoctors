@@ -1,20 +1,20 @@
 import axios from "axios";
 
 export default {
-  // Gets all Blogs
-  getBlogs: function() {
-    return axios.get("/api/blogs");
+  // Gets all Comments
+  getComments: function() {
+    return axios.get("/api/comments");
   },
-  // Gets the Blog with the given id
-  getBlog: function(id) {
-    return axios.get("/api/blogs/" + id);
+  // Gets the Comment with the given id
+  getComments: function(id) {
+    return axios.get("/api/comments/" + id);
   },
   // Deletes the Blog with the given id
-  deleteBlog: function(id) {
-    return axios.delete("/api/blogs/" + id);
+  deleteComment: function(id) {
+    return axios.delete("/api/comments/" + id);
   },
   // Saves a Blog to the database
-  saveBlog: function(blogData) {
-    return axios.post("/api/blogs", blogData);
+  saveComment: function(commentData) {
+    return axios.post("/api/comments", commentData);
   }
 };
