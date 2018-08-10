@@ -44,31 +44,22 @@ class Login extends Component {
         let content = !!this.state.isAuthenticated ?
                 (
                     <div>
-                        <p>Authenticated!</p>
-                        <div>
-                            {this.state.user.email}
-                        </div>
-                        <div>
-                            {/* <button onClick={this.logout} className="button">
-                                Log out
-                            </button> */}
+                        <span>Authenticated!
+                            {this.state.user.email} </span>                  
                             <GoogleLogout
                                 className="google-logout"
                                 buttonText="Logout"
                                 onLogoutSuccess={this.logout}
-                            />
-                        </div>                
+                            />            
                     </div>
                 ) :
                 (
-                    <div>
                     <GoogleLogin
                             clientId={config.GOOGLE_CLIENT_ID}
                             buttonText="Login"
                             onSuccess={this.googleResponse}
                             onFailure={this.onFailure}
                         />
-                    </div>
                 );
 
         return (
