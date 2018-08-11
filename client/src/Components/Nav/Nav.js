@@ -1,19 +1,20 @@
 import React from "react";
 import "./Nav.css";
 import { NavLink } from "react-router-dom";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+//import { GoogleLogin, GoogleLogout } from "react-google-login";
+import Login from "../../Pages/Login";
 
 // console log google auth response
-const responseGoogle = response => {
-  console.log(response);
+// const responseGoogle = response => {
+//   console.log(response);
 
-  // email = response.profileObj.email
-  //registeredBlogger(response.profileObj.email) ? this.props.history.push('/') : 
-};
+// email = response.profileObj.email
+//registeredBlogger(response.profileObj.email) ? this.props.history.push('/') :
+//};
 
-const logout = () => {
-  console.log("logout");
-};
+// const logout = () => {
+//   console.log("logout");
+// };
 
 const Nav = () => (
   <nav className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -38,50 +39,30 @@ const Nav = () => (
     </button>
 
     <div className="collapse navbar-collapse" id="navbarColor02">
-      <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/DoctorPost">
-            Blog
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/About">
-            About
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/Signup">
-            Signup
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/Login">
-            Login
-          </NavLink>
-        </li>
-      </ul>
-      <GoogleLogin
-        className="google-signin"
-        clientId="779231878096-k23dj1tdlplrdhbvrlq4uel3c89am084.apps.googleusercontent.com"
-        buttonText={"Google sign in"}
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      />
-      {/* <form className="form-inline my-2 my-lg-0">
-        <input
-          className="form-control mr-sm-2"
-          type="text"
-          placeholder="email"
-        />
-        <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-          sign in with <i className="fa fa-google" aria-hidden="true" />
-        </button>
-      </form> */}
-      <GoogleLogout
-        className="google-logout"
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-      />
+      <div className="row">
+        <div className="col-md-10">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/DoctorPost">
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/About">
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/Signup">
+                Signup
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <div className="col-md-2 nav-login">
+          <Login />
+        </div>
+      </div>
     </div>
   </nav>
 );

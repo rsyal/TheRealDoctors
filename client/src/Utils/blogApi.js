@@ -13,6 +13,10 @@ export default {
   deleteBlog: function(id) {
     return axios.delete("/api/blogs/" + id);
   },
+  // update the Blog with the given id and 
+  updateBlog: function(id, blogData) {
+    return axios.put("/api/blogs/" + id, blogData);
+  },
   // Saves a Blog to the database
   saveBlog: function(blogData) {
     return axios.post("/api/blogs", blogData);
