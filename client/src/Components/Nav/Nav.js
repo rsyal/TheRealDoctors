@@ -41,44 +41,27 @@ const Nav = () => (
     <div className="collapse navbar-collapse" id="navbarColor02">w
       <div className="row">
         <div className="col-md-10">
-      <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/DoctorPost">
-            Blog
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/About">
-            About
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/Signup">
-            Signup
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/Login">
-            Login
-          </NavLink>
-        </li>
-      </ul>
-      </div>
-      <div className="col-md-2">
-      {/* <GoogleLogin
-        className="google-signin"
-        clientId="779231878096-k23dj1tdlplrdhbvrlq4uel3c89am084.apps.googleusercontent.com"
-        buttonText={"Google sign in"}
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      /> */}
-      {/* <GoogleLogout
-        className="google-logout"
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-      /> */}
-      <Login />
-      </div>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/DoctorPost">
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/About">
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/Signup">
+                Signup
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <div className="col-md-2">
+          <Login />
+        </div>
     </div>
     </div>
   </nav>

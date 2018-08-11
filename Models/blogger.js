@@ -3,25 +3,26 @@ const Schema = mongoose.Schema;
 
 const bloggerSchema = new Schema({
   email: {
-    type: String,
-    unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+    type: String, default: null,//required: true,
+    //unique: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please enter a valid e-mail address"]
   },
-  // password: {
-  //   type: String,
-  //   trim: true,
-  //   required: "Password is Required",
-  //   validate: [
-  //     function(input) {
-  //       return input.length >= 6;
-  //     },
-  //     "Password should be longer."
-  //   ]
-  // },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: false },
-  specialty: { type: String, required: true },
-  npiNumber: { type: String, required: false },
+  fullName: {
+    type: String, default: null,//required: true,
+    trim: true
+  },
+  googleProvider: {
+      type: {
+          id: String,
+          token: String
+      },
+      select: false,
+      default: null
+  },
+  firstName: { type: String },
+  lastName: { type: String },
+  specialty: { type: String },
+  npiNumber: { type: String },
   created_dt: { type: Date, default: Date.now() },
   blogs: [
     { 
@@ -30,6 +31,57 @@ const bloggerSchema = new Schema({
     }
   ]
 });
+
+bloggerSchema.set('toJSON', {getters: true, virtuals: true});
+
+bloggerSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
+    const that = this;
+    const updated = {
+      fullName: profile.displayName,
+      //email: profile.emails[0].value,
+      googleProvider: {
+          id: profile.id,
+          token: accessToken
+      }
+    };
+    return this.findOneAndUpdate({
+      'googleProvider': null,
+      'email': profile.emails[0].value
+    }, updated, function(error, updatedBlogger) {
+
+        if (error) {
+          console.log(error);
+        }
+        return cb(error, updatedBlogger);
+        })
+    };
+
+
+//       if (blogger) {
+
+//         const updated = {
+//           fullName: profile.displayName,
+//           //email: profile.emails[0].value,
+//           googleProvider: {
+//               id: profile.id,
+//               token: accessToken
+//           }
+//         };
+
+//         console.log('updated ', updated);
+//         blogger.findOneAndUpdate({ email: profile.emails[0].value }, updated, function(error, updatedBlogger) {
+//               if (error) {
+//                   console.log(error);
+//               }
+//               return cb(error, updatedBlogger);
+//               })
+//       } 
+//       else {
+//           return cb(error, blogger);
+//       }
+//     })
+// };
+
 
 const Blogger = mongoose.models.Blogger || mongoose.model("Blogger", bloggerSchema);
 

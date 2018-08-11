@@ -20,6 +20,7 @@ module.exports = {
   create: function(req, res) {
     db.Blog.create(req.body)
       .then(dbBlog => db.Blogger.findOneAndUpdate({}, { $push: {blogs: dbBlog._id} }, { new: true }))
+      // .then(dbBlogger => db.Blog.findOneAndUpdate({ _id: dbBlogger.blogs.sort(created_dt)}))
       .then(dbBlogger => res.json(dbBlogger))
       .catch(err => res.status(422).json(err));
   },

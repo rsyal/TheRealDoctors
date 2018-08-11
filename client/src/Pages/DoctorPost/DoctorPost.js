@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import blogApi from "../../Utils/blogApi";
 // import  Link  from "react-router-dom";
 // import { List, ListItem } from "../../Components/List";
@@ -33,7 +34,18 @@ class DoctorPost extends Component {
           imageSrc: this.state.imageSrc,
           created_at: this.state.created_at
         })
-        .then(blogData => console.log(blogData.data))
+        .then(dbBlogger => {
+          console.log(dbBlogger.data);
+          // update Blog with Blogger._id
+          const blogId = dbBlogger.data.blogs[dbBlogger.data.blogs.length-1];
+          console.log('blog id ', blogId);
+          blogApi
+            .updateBlog(blogId, {blogger: dbBlogger.data._id})
+            .then(dbBlog => console.log(dbBlog))
+            .catch(err => console.log(err));
+
+          this.props.history.push('/');
+        })
         .catch(err => console.log(err));
     }
   };
@@ -49,7 +61,7 @@ class DoctorPost extends Component {
                 value={this.state.topic}
                 onChange={this.handleInputChange}
                 name="topic"
-                placeholder="Title (required)"
+                placeholder="Topic (required)"
               />
               <TextArea
                 value={this.state.content}
@@ -77,4 +89,4 @@ class DoctorPost extends Component {
   }
 }
 
-export default DoctorPost;
+export default withRouter(DoctorPost);
