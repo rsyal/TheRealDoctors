@@ -6,7 +6,7 @@ export default {
     return axios.get("/api/comments");
   },
   // Gets the Comment with the given id
-  getComments: function(id) {
+  getComment: function(id) {
     return axios.get("/api/comments/" + id);
   },
   // Deletes the Blog with the given id

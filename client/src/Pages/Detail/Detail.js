@@ -7,7 +7,6 @@ import { Input, FormBtn } from "../../Components/Form";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
-import Card from "../../Components/Card";
 // import Comment from "../../Components/Comment";
 
 class Detail extends Component {
@@ -15,27 +14,16 @@ class Detail extends Component {
     blog: {}
   };
 
-  // Retrieve all blogs
+  // Retrieve a blog with all comments
   componentDidMount() {
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
-        this.setState({ blog: res.data });
         console.log(res.data);
+        return this.setState({ blog: res.data });     
       })
       .catch(err => console.log(err));
   }
-
-  // Retrieve all comments
-  // componentDidMount() {
-  //   commentApi
-  //     .getComments(this.props.match.params.id)
-  //     .then(res => {
-  //       this.setState({ comment: res.data });
-  //       console.log(res.data);
-  //     })
-  //     .catch(err => console.log(err));
-  // }
 
   render() {
     return (
@@ -43,6 +31,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1>{this.state.blog.topic}</h1>
+            {/* <h2>By {this.state.blog.blogger.fullName}</h2> */}
           </Col>
         </Row>
         <Row>
@@ -53,12 +42,6 @@ class Detail extends Component {
         <Row>
           <Col size="xs-12">
             <p>{this.state.blog.content}</p>
-            {/* <Card
-              title={this.state.blog.topic}
-              imageSrc={this.state.blog.imageSrc}
-              createdDt={this.state.blog.created_dt}
-              content={this.state.blog.content}
-            /> */}
           </Col>
         </Row>
         <Row>

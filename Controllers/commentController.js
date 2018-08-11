@@ -6,6 +6,7 @@ module.exports = {
   findAll: (req, res) => {
     db.Comment
       .find(req.query)
+      .populate('blog')
       .sort({date: -1})
       .then(dbModel => res.json(dbModel)) 
       .catch(err => res.Status(422).json(err));
@@ -13,6 +14,7 @@ module.exports = {
   findById: function(req, res) {
     db.Comment
       .findById(req.params.id)
+      .populate('blog')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -20,7 +22,7 @@ module.exports = {
     db.Comment
       .create(req.body)
       .then(dbComment => {
-        return db.Blog.findOneAndUpdate({}, {$push: { comments: dbComment._id }},  { new: true } );
+        return db.Blog.findOneAndUpdate({}, { $push: { comments: dbComment._id }},  { new: true } );
        })
       .then(dbBlog => res.json(dbBlog))
       .catch(err => res.status(422).json(err));
