@@ -8,6 +8,7 @@ import { Input, FormBtn, TextArea } from "../../Components/Form";
 // import  Jumbotron  from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Comment from "../../Components/Comment/Comment";
+import "./Detail.css";
 
 class Detail extends Component {
   state = {
@@ -30,20 +31,26 @@ class Detail extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h1>{this.state.blog.topic}</h1>
+            <h1 className="topic-style">{this.state.blog.topic}</h1>
+            <h5 className="author-style">Written by: </h5>
             {/* <h2>By {this.state.blog.blogger.fullName}</h2> */}
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
-            <img src={this.state.blog.imageSrc} />
-          </Col>
-        </Row>
-        <Row>
-          <Col size="xs-12">
+            <img
+              className="float-left mr-3 mb-3 image-style"
+              src={this.state.blog.imageSrc}
+              alt={this.state.blog.topic}
+            />
             <p>{this.state.blog.content}</p>
           </Col>
         </Row>
+        {/* <Row>
+          <Col size="xs-12">
+            <p>{this.state.blog.content}</p>
+          </Col>
+        </Row> */}
         <Row>
           <Col size="md-12">
             <Link to="/">← Back to Blogs</Link>
