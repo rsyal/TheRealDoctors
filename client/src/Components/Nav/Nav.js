@@ -2,14 +2,14 @@ import React from "react";
 import "./Nav.css";
 import { NavLink } from "react-router-dom";
 //import { GoogleLogin, GoogleLogout } from "react-google-login";
-import Login from '../../Pages/Login';
+import Login from "../../Pages/Login";
 
 // console log google auth response
 // const responseGoogle = response => {
 //   console.log(response);
 
-  // email = response.profileObj.email
-  //registeredBlogger(response.profileObj.email) ? this.props.history.push('/') : 
+// email = response.profileObj.email
+//registeredBlogger(response.profileObj.email) ? this.props.history.push('/') :
 //};
 
 // const logout = () => {
@@ -38,7 +38,7 @@ const Nav = () => (
       <span className="navbar-toggler-icon" />
     </button>
 
-    <div className="collapse navbar-collapse" id="navbarColor02">w
+    <div className="collapse navbar-collapse" id="navbarColor02">
       <div className="row">
         <div className="col-md-10">
           <ul className="navbar-nav mr-auto">
@@ -59,10 +59,10 @@ const Nav = () => (
             </li>
           </ul>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 nav-login">
           <Login />
         </div>
-    </div>
+      </div>
     </div>
   </nav>
 );

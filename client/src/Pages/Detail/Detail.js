@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
 import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
-import { Input, FormBtn } from "../../Components/Form";
+import { Input, FormBtn, TextArea } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
-// import Comment from "../../Components/Comment";
+import Comment from "../../Components/Comment/Comment";
 
 class Detail extends Component {
   state = {
@@ -20,7 +20,7 @@ class Detail extends Component {
       .getBlog(this.props.match.params.id)
       .then(res => {
         console.log(res.data);
-        return this.setState({ blog: res.data });     
+        return this.setState({ blog: res.data });
       })
       .catch(err => console.log(err));
   }
@@ -50,10 +50,56 @@ class Detail extends Component {
           </Col>
         </Row>
         <Row>
-          <h3>Comment below:</h3>
+          <Col size="md-12">
+            <h3>Comment below:</h3>
+          </Col>
         </Row>
         <Row>
-          <Col size="md-12" />
+          <Col size="md-12">
+            <form>
+              <Input
+                value={this.state.title}
+                onChange={this.handleInputChange}
+                name="title"
+                placeholder="Subject (required)"
+              />
+              <TextArea
+                value={this.state.content}
+                onChange={this.handleInputChange}
+                name="content"
+                placeholder="Comment (required)"
+              />
+              <FormBtn
+                disabled={!(this.state.title && this.state.content)}
+                onClick={this.handleFormSubmit}
+              >
+                Post Comment
+              </FormBtn>
+            </form>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            {/* <div className="comment-deck">
+              {!this.state.blogs.length ? (
+                <h1 className="text-center">
+                  There are no comments to this post yet.
+                </h1>
+              ) : (
+                this.state.comments.map(comment => {
+                  console.log(comment);
+                  return (
+                    <Comment
+                      key={comment._id}
+                      title={comment.title}
+                      content={comment.content}
+                      created_dt={comment.created_dt}
+                    />
+                  );
+                })
+              )}
+            </div> */}
+          </Col>
         </Row>
       </Container>
     );
