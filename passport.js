@@ -1,7 +1,7 @@
 'use strict';
 
 const db = require('./Models');
-const User = require('mongoose').model('User');
+// const User = require('mongoose').model('User');
 const Blogger = require('mongoose').model('Blogger');
 const passport = require('passport');
 //const TwitterTokenStrategy = require('passport-twitter-token');

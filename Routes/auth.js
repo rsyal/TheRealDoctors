@@ -18,10 +18,5 @@ router.route('/auth/google')
 
         next();
     }, generateToken, sendToken);
-
-// router.route('/auth/google/callback')
-//         .get(passport.authenticate('google-token', {failureRedirect: '/'}), (req, res) => {
-//             res.redirect('/doctorpost')
-//         });
     
 module.exports = router;

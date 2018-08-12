@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-import commentApi from "../../Utils/commentApi";
+// import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
-import { Input, FormBtn } from "../../Components/Form";
+// import { Input, FormBtn } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
@@ -11,7 +11,9 @@ import { Col, Row, Container } from "../../Components/Grid";
 
 class Detail extends Component {
   state = {
-    blog: {}
+    blog: {
+      blogger: {}
+    }
   };
 
   // Retrieve a blog with all comments
@@ -31,12 +33,12 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1>{this.state.blog.topic}</h1>
-            {/* <h2>By {this.state.blog.blogger.fullName}</h2> */}
+            <h2>By {this.state.blog.blogger.fullName}</h2>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
-            <img src={this.state.blog.imageSrc} />
+            <img src={this.state.blog.imageSrc} alt="yah, we need alt text here" />
           </Col>
         </Row>
         <Row>

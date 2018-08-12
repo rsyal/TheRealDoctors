@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 // import blogApi from "../../Utils/blogApi";
 import { withRouter } from "react-router-dom";
-// import { Input, FormBtn } from "../../Components/Form";
-// import { List, ListItem } from "../../Components/List";
-// import  SaveBtn  from "../../Components/SaveBtn";
-// import  Jumbotron  from "../../Components/Jumbotron";
-// import  Card  from "../../Components/Card";
-import { Col, Row, Container } from "../../Components/Grid";
+// import { Col, Row, Container } from "../../Components/Grid";
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import config from './config.json';
-import { fromPrefixLen } from "ip";
+// import { fromPrefixLen } from "ip";
 
 class Login extends Component {
   state =  { isAuthenticated: false, user: null, token: ''};
 
   logout = () => {
 		this.setState({isAuthenticated: false, token: '', user: null});
+		this.props.history.push('/')
   };
 
   onFailure = (error) => {
@@ -68,9 +64,9 @@ class Login extends Component {
 			);
 
 	return (
-			<div>
-							{content}
-			</div>);
+		<div>
+			{content}
+		</div>);
   }
 };
 
