@@ -55,7 +55,7 @@ class Home extends Component {
         <Container>
           <Row>
             <Col size="xs-12">
-              <div className="card-deck">
+              <div className="card-deck d-flex justify-content-center align-items-stretch">
                 {!this.state.blogs.length ? (
                   <h1 className="text-center">No recent blogs</h1>
                 ) : (

@@ -10,6 +10,7 @@ const Card = props => (
       className="card-img-top"
       src={props.src || "/assests/images/card-default.jpg"}
       alt={props.topic}
+      height="190px"
     />
 
     <div className="card-body">
