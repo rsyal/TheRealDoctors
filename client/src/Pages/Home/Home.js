@@ -51,7 +51,6 @@ class Home extends Component {
     return (
       <div>
         <Jumbotron />
-
         <Container>
           <Row>
             <Col size="xs-12">

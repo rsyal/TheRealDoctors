@@ -20,8 +20,9 @@ class Detail extends Component {
           content: "",
           created_dt: ""
         }
-      ]
-    }
+      ] 
+    },
+    newComment: {}
   };
 
   // Retrieve a blog with all comments
@@ -44,7 +45,7 @@ class Detail extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.blog.comments.title && this.state.blog.comments.content) {
+    if (this.state.newComment.title && this.state.newComment.content) {
       blogApi
         .updateBlog({
           comments: [
@@ -57,8 +58,8 @@ class Detail extends Component {
         .then(dbComments => {
           console.log(dbComments.data);
           // update Blog with Blogger._id
-          const commentId =
-            dbComments.data.blogs.comments[
+          const commentId =   
+          dbComments.data.blogs.comments[
               dbComments.data.blogs.comments.length - 1
             ];
           console.log("comment id ", commentId);
