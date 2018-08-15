@@ -13,7 +13,14 @@ import "./Detail.css";
 class Detail extends Component {
   state = {
     blog: {
-      blogger: {}
+      blogger: {},
+      comments: [
+        {
+          title: "",
+          content: "",
+          created_dt: ""
+        }
+      ]
     }
   };
 
@@ -27,6 +34,44 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.blog.comments.title && this.state.blog.comments.content) {
+      blogApi
+        .updateBlog({
+          comments: [
+            {
+              title: this.state.blog.comments.title,
+              content: this.state.blog.comments.content
+            }
+          ]
+        })
+        .then(dbComments => {
+          console.log(dbComments.data);
+          // update Blog with Blogger._id
+          const commentId =
+            dbComments.data.blogs.comments[
+              dbComments.data.blogs.comments.length - 1
+            ];
+          console.log("comment id ", commentId);
+          blogApi
+            .updateBlog(commentId, { comments: dbComments.data._id })
+            .then(dbComments => console.log(dbComments))
+            .catch(err => console.log(err));
+
+          this.props.history.push("/");
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
   render() {
     return (
@@ -79,7 +124,7 @@ class Detail extends Component {
                 placeholder="Comment (required)"
               />
               <FormBtn
-                disabled={!(this.state.title && this.state.content)}
+                // disabled={!(this.state.title && this.state.content)}
                 onClick={this.handleFormSubmit}
               >
                 Post Comment
@@ -89,25 +134,25 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-12">
-            {/* <div className="comment-deck">
-              {!this.state.blogs.length ? (
+            <div className="comment-deck">
+              {!this.state.blog.comments.length ? (
                 <h1 className="text-center">
                   There are no comments to this post yet.
                 </h1>
               ) : (
-                this.state.comments.map(comment => {
+                this.state.blog.comments.map(comment => {
                   console.log(comment);
                   return (
                     <Comment
                       key={comment._id}
                       title={comment.title}
                       content={comment.content}
-                      created_dt={comment.created_dt}
+                      date={comment.created_dt}
                     />
                   );
                 })
               )}
-            </div> */}
+            </div>
           </Col>
         </Row>
       </Container>

@@ -3,11 +3,12 @@ import React from "react";
 //import { PromiseProvider } from "mongoose";
 
 const Comment = props => (
-  <div class="card" style={{ width: 100 }}>
-    <div class="card-body">
-      <h5 class="card-title">{props.title}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Name?</h6>
-      <p class="card-text">{props.content}</p>
+  <div className="card" style={{ width: 100 }}>
+    <div className="card-body">
+      <h5 className="card-title">{props.title}</h5>
+      <h6 className="card-subtitle mb-2 text-muted">Name?</h6>
+      <p className="card-text text-muted">{props.date}</p>
+      <p className="card-text">{props.content}</p>
     </div>
   </div>
   //   <div className="card mb-4 h-100">
