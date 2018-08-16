@@ -37,7 +37,7 @@ class Login extends Component {
           this.setState({ isAuthenticated: true, user, token });
         }
 
-        this.props.history.push("/DoctorPost");
+        this.props.history.push("/Summary");
       });
     });
   };
