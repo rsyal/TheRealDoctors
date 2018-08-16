@@ -4,7 +4,7 @@ const app = require('./app');
 //const path = require("path");
 //const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const routes = require("./Routes");
+const index = require("./Routes/index");
 const PORT = process.env.PORT || 3002;
 const http = require('http');
 app.set('port', PORT);
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
-app.use(routes);
+app.use(index);
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;

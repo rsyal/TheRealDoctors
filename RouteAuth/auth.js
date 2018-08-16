@@ -7,6 +7,7 @@ const passport = require('passport');
 
 require('../passport')();
 
+// routes to "/api/v1/auth/google"
 router.route('/auth/google')
     .post(passport.authenticate('google-token', {session: false}), function(req, res, next) {
         if (!req.user) {
