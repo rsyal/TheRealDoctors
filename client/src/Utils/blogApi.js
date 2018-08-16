@@ -5,6 +5,10 @@ export default {
   getBlogs: function() {
     return axios.get("/api/blogs");
   },
+  // Gets all Blogs by query
+  getBlogsByQuery: function(query) {
+    return axios.get("/api/blogs/" + query);
+  },
   // Gets the Blog with the given id
   getBlog: function(id) {
     return axios.get("/api/blogs/" + id);

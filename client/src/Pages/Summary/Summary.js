@@ -17,26 +17,29 @@ class Summary extends Component {
     blogger: {
         blogs: []
     },
-    blog: {
+    blogs: {
         comments: []
     }
   };
 
   componentDidMount() {
-    this.loadBlogger();
-    this.loadBlogsByBlogger();
+    const currentUserEmail = sessionStorage.getItem("userEmail");
+    this.loadBlogger(currentUserEmail);
+    this.loadBlogsByBlogger(this.state.blogger._id);
   }
 
-  loadBlogger = () => {
+  // load both blogger and blogs that belong to the blogger
+  loadBlogger = (currentUserEmail) => {
     bloggerApi
-      .getBlogger()
+      .getBloggers(currentUserEmail)
       .then(res => this.setState({blogger: res.data}))
       .catch(err => console.log(err));
   };
 
-  loadBlogsByBlogger = () => {
+  // load blogs for the given blogger and comments for each blogs
+  loadBlogsByBlogger = (bloggerId) => {
     blogApi
-      .getBlogs()
+      .getBlogs(bloggerId)
       .then(res => this.setState({blogs: res.data}))
       .catch(err => console.log(err));
   };

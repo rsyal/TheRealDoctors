@@ -6,6 +6,10 @@ router.route("/")
   .get(blogsController.findAll)
   .post(blogsController.create);
 
+// routes for "/api/blogs/query"
+router.route("/:query")
+  .get(blogsController.findAll)
+
 // routes for "/api/blogs/:id"
 router.route("/:id")
   .get(blogsController.findById)

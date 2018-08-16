@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import config from './config.json';
+import './Login.css';
 // import { fromPrefixLen } from "ip";
 
 class Login extends Component {
@@ -35,34 +36,42 @@ class Login extends Component {
       r.json().then(user => {
         if (token) {
           this.setState({ isAuthenticated: true, user, token });
+          this.setUserInfo(user);
         }
-
         this.props.history.push("/Summary");
       });
     });
   };
 
+  setUserInfo = (user) => {
+    window.sessionStorage.setItem("userName", user.display_name);
+    window.sessionStorage.setItem("userEmail", user.email);
+    window.sessionStorage.setItem("userId", user.id);
+  }
+
+  getUserInfo = () => {
+    window.sessionStorage.getItem("userName");
+    window.sessionStorage.getItem("userEmail");
+    window.sessionStorage.getItem("userId");
+  }
+
   render() {
     let content = !!this.state.isAuthenticated ? (
-      <div>
-        <span className="text-light">
-          Welcome {this.state.user.email}
+        <span className="text-light paddingRight-20">
+          Welcome {this.state.user.email} 
           <GoogleLogout
             className="google-logout"
             buttonText="Logout"
             onLogoutSuccess={this.logout}
           />
         </span>
-      </div>
     ) : (
-      <div>
         <GoogleLogin
           clientId={config.GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={this.googleResponse}
           onFailure={this.onFailure}
         />
-      </div>
     );
 
 	return (

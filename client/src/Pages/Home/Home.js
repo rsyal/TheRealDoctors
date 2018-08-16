@@ -56,7 +56,7 @@ class Home extends Component {
             <Col size="xs-12">
               <div className="card-deck d-flex justify-content-center align-items-stretch">
                 {!this.state.blogs.length ? (
-                  <h1 className="text-center">No recent blogs</h1>
+                  <h1 className="text-center">  No recent blogs</h1>
                 ) : (
                   this.state.blogs.map(blog => {
                     console.log(blog);

@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
   // Gets all Bloggers
-  getBloggers: function() {
-    return axios.get("/api/bloggers");
+  getBloggers: function(query) {
+    return axios.get("/api/bloggers/" + query);
   },
   // Gets the Blogger with the given id
   getBlogger: function(id) {

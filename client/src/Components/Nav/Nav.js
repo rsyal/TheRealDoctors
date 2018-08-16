@@ -39,8 +39,8 @@ const Nav = () => (
     </button>
 
     <div className="collapse navbar-collapse" id="navbarColor02">
-      <div className="row">
-        <div className="col-md-10">
+
+
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/DoctorPost">
@@ -58,11 +58,10 @@ const Nav = () => (
               </NavLink>
             </li>
           </ul>
-        </div>
-        <div className="col-md-2 nav-login">
+
           <Login />
-        </div>
-      </div>
+
+
     </div>
   </nav>
 );
