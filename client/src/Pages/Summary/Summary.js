@@ -56,7 +56,10 @@ class Summary extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="xs-12">
+          <Col size="md-3">
+          </Col>
+          <Col size="md-7">
+
             {!this.state.blogs.length ? (
               <h1 className="text-center">You haven't posted and blogs</h1>
             ) : (
@@ -74,6 +77,10 @@ class Summary extends Component {
                 );
               })
             )}
+          </Col>
+          <Col size="md-2">
+            <button>Edit</button><br />
+            <button>Delete</button>
           </Col>
         </Row>
       </Container>
