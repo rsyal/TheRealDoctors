@@ -10,7 +10,7 @@ import bloggerApi from "../../Utils/bloggerApi";
 // import  Card  from "../../Components/Card";
 import { Col, Row, Container } from "../../Components/Grid";
 import Card from "../../Components/Card";
-import Modal from "../../Components/Modal";
+import BlogModal from "./BlogModal";
 
 class Summary extends Component {
   state = {
@@ -69,10 +69,14 @@ class Summary extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h2>Welcome Dr. {this.state.currentUser.displayName}</h2>
-            <Modal />
+            <h2>{this.state.currentUser.displayName}'s Dashboard</h2>
           </Col>
         </Row>
+        <Row>
+          <Col size="md-12">
+            <BlogModal />
+          </Col>
+          </Row>
         <Row>
           <Col size="md-3">
           </Col>

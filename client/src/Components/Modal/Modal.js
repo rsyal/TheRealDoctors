@@ -1,33 +1,26 @@
 import React from "react";
 import ReactModal from 'react-modal';
 
-class Modal extends React.Component {
-
-    state = {
-      showModal: false
-    };
-    
-  handleOpenModal = () => {
-    this.setState({ showModal: true });
-  };
-  
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
-  };
-  
-  render () {
-    return (
-      <div>
-        <button onClick={this.handleOpenModal}>Trigger Modal</button>
-        <ReactModal 
-           isOpen={this.state.showModal}
+const Modal = ({ handleClose, show, children, btnText }) => {
+  const showHideClassName = show ? "modal display-block" : "modal display-none";
+  return (
+    <div className={showHideClassName}>
+      <ReactModal 
+           isOpen={show}
            contentLabel="Minimal Modal Example"
-        >
-        <button onClick={this.handleCloseModal}>Close Modal</button>
+        > {children}
+        <button onClick={handleClose}>{btnText}</button>
         </ReactModal>
       </div>
-    );
-  }
-};
+
+     /* { <div className={showHideClassName}>
+      <section className="modal-main">
+        {children}
+        <button onClick={handleClose}>Close</button>
+      </section>
+    </div>} */
+
+  );
+}
 
 export default Modal;
