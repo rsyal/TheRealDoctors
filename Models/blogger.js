@@ -32,46 +32,46 @@ const bloggerSchema = new Schema({
   ]
 });
 
-bloggerSchema.set('toJSON', {getters: true, virtuals: true});
+// bloggerSchema.set('toJSON', {getters: true, virtuals: true});
 
-bloggerSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
-  const that = this;  
-  return this.findOne({
-      'googleProvider.id': profile.id
-  }, function(err, blogger) { 
-    if (blogger && blogger.fullName) {
-      console.log("You should be all good.");
-      return cb(err, blogger);
-    }
-    else if (blogger && !blogger.fullName) {
-      console.log("Your google token needs to be inserted");
-      const updated = {
-        fullName: profile.displayName,
-        //email: profile.emails[0].value,
-        googleProvider: {
-            id: profile.id,
-            token: accessToken
-        }
-      };
-      return this.findOneAndUpdate({
-        'googleProvider': null,
-        'email': profile.emails[0].value
-      }, updated, function(error, updatedBlogger) {
-          if (error) {
-            console.log(error);
-          }
-          return cb(error, updatedBlogger);
-          })
-    }
-    else if (!blogger) {
-      console.log("You should signup first");
-      return cb(err, blogger);
-    }
-    else {
-      return cb(err, blogger);
-    }
-});
-};
+// bloggerSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
+//   const that = this;  
+//   return this.findOne({
+//       'googleProvider.id': profile.id
+//   }, function(err, blogger) { 
+//     if (blogger && blogger.fullName) {
+//       console.log("You should be all good.");
+//       return cb(err, blogger);
+//     }
+//     else if (blogger && !blogger.fullName) {
+//       console.log("Your google token needs to be inserted");
+//       const updated = {
+//         fullName: profile.displayName,
+//         //email: profile.emails[0].value,
+//         googleProvider: {
+//             id: profile.id,
+//             token: accessToken
+//         }
+//       };
+//       return this.findOneAndUpdate({
+//         'googleProvider': null,
+//         'email': profile.emails[0].value
+//       }, updated, function(error, updatedBlogger) {
+//           if (error) {
+//             console.log(error);
+//           }
+//           return cb(error, updatedBlogger);
+//           })
+//     }
+//     else if (!blogger) {
+//       console.log("You should signup first");
+//       return cb(err, blogger);
+//     }
+//     else {
+//       return cb(err, blogger);
+//     }
+// });
+// };
 
 const Blogger = mongoose.models.Blogger || mongoose.model("Blogger", bloggerSchema);
 

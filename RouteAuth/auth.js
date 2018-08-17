@@ -18,5 +18,5 @@ router.route('/auth/google')
 
         next();
     }, generateToken, sendToken);
-    
+
 module.exports = router;

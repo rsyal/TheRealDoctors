@@ -10,7 +10,7 @@ import bloggerApi from "../../Utils/bloggerApi";
 // import  Card  from "../../Components/Card";
 import { Col, Row, Container } from "../../Components/Grid";
 import Card from "../../Components/Card";
-import Modal from "../../Components/Modal";
+import BlogModal from "./BlogModal";
 
 class Summary extends Component {
   state = {
@@ -19,19 +19,39 @@ class Summary extends Component {
     },
     blogs: {
         comments: []
+    },
+    currentUser: {
+      _id: '',
+      displayName: '',
+      email: '',
+      googleId: '',
+      accessToken: ''
     }
   };
 
   componentDidMount() {
-    const currentUserEmail = sessionStorage.getItem("userEmail");
-    this.loadBlogger(currentUserEmail);
-    this.loadBlogsByBlogger(this.state.blogger._id);
+      this.setCurrentUser();
+      this.loadBlogger();
+    //this.loadBlogsByBlogger(this.state.blogger._id);
+  }
+
+  setCurrentUser = () => {
+    const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
+    const currentUser = {
+      _id: sessionValues._id,
+      displayName: sessionValues.displayName,
+      email: sessionValues.email,
+      googleId: sessionValues.googleId,
+      accessToken: sessionValues.accessToken
+    };
+    console.log('currentUser: ', currentUser);
+     this.setState({currentUser: currentUser});
   }
 
   // load both blogger and blogs that belong to the blogger
-  loadBlogger = (currentUserEmail) => {
+  loadBlogger = () => {
     bloggerApi
-      .getBloggers(currentUserEmail)
+      .getBloggers(this.state.currentUser.email)
       .then(res => this.setState({blogger: res.data}))
       .catch(err => console.log(err));
   };
@@ -49,14 +69,21 @@ class Summary extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h2>Welcome, Dr. {this.state.blogger.fullName}</h2>
-            <Modal />
+            <h2>{this.state.currentUser.displayName}'s Dashboard</h2>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
-            {!this.state.blogger.blogs.length ? (
-              <h1 className="text-center">You haven't posted any blogs yet</h1>
+            <BlogModal />
+          </Col>
+          </Row>
+        <Row>
+          <Col size="md-3">
+          </Col>
+          <Col size="md-7">
+
+            {!this.state.blogs.length ? (
+              <h1 className="text-center">You haven't posted and blogs</h1>
             ) : (
               this.state.blogger.blogs.map(blog => {
                 console.log(blog);
@@ -85,6 +112,10 @@ class Summary extends Component {
                 );
               })
             )}
+          </Col>
+          <Col size="md-2">
+            <button>Edit</button><br />
+            <button>Delete</button>
           </Col>
         </Row>
       </Container>
