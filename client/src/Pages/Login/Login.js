@@ -9,10 +9,15 @@ import './Login.css';
 // import { fromPrefixLen } from "ip";
 
 class Login extends Component {
-  state = { isAuthenticated: false, user: null, token: "" };
+  state = { 
+    isAuthenticated: false, 
+    user: null, 
+    token: "",
+    currentUser: {}
+     };
 
   logout = () => {
-		this.setState({isAuthenticated: false, token: '', user: null});
+		this.setState({isAuthenticated: false, token: '', currentUser: null});
 		this.props.history.push('/')
   };
 
@@ -37,38 +42,40 @@ class Login extends Component {
     fetch("http://localhost:3002/api/v1/auth/google", options)
     .then(r => {
       console.log("r ", r)
-
       const token = r.headers.get("x-auth-token");
       console.log('token ', token);
-
-      if (r.status !== 401) {
-        r.json().then(user => {
-          if (token) {
-            this.setState({ isAuthenticated: true, user, token });
-            this.setUserInfo(user);
-          }
-          this.props.history.push("/Summary");
-        });
-      }
+      r.json().then(currentUser => {
+        if (token) {
+          this.setState({ isAuthenticated: true, currentUser, token });
+          this.setUserInfo(currentUser);
+        }
+        this.props.history.push("/Summary");
+      });
     });
   };
 
   setUserInfo = (user) => {
-    window.sessionStorage.setItem("userName", user.display_name);
-    window.sessionStorage.setItem("userEmail", user.email);
-    window.sessionStorage.setItem("userId", user.id);
+    // window.sessionStorage.setItem("userDisplayName", user.displayName);
+    // window.sessionStorage.setItem("userEmail", user.email);
+    // window.sessionStorage.setItem("userId", user.id);
+    // window.sessionStorage.setItem("googleId", googleProvider.id);
+    // window.sessionStorage.setItem("accessToken", googleProvider.token);
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
   }
 
   getUserInfo = () => {
-    window.sessionStorage.getItem("userName");
-    window.sessionStorage.getItem("userEmail");
-    window.sessionStorage.getItem("userId");
-  }
+    // window.sessionStorage.getItem("userDisplayName");
+    // window.sessionStorage.getItem("userEmail");
+    // window.sessionStorage.getItem("userId");
+    // window.sessionStorage.getItem("googleId");
+    // window.sessionStorage.getItem("accessToken");
+    JSON.parse(sessionStorage.getItem('currentUser'))}
+  
 
   render() {
     let content = !!this.state.isAuthenticated ? (
         <span className="text-light paddingRight-20">
-          Welcome {this.state.user.email} 
+          Welcome {this.state.currentUser.email} 
           <GoogleLogout
             className="google-logout"
             buttonText="Logout"

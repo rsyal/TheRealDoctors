@@ -19,19 +19,39 @@ class Summary extends Component {
     },
     blogs: {
         comments: []
+    },
+    currentUser: {
+      _id: '',
+      displayName: '',
+      email: '',
+      googleId: '',
+      accessToken: ''
     }
   };
 
   componentDidMount() {
-    const currentUserEmail = sessionStorage.getItem("userEmail");
-    this.loadBlogger(currentUserEmail);
-    this.loadBlogsByBlogger(this.state.blogger._id);
+      this.setCurrentUser();
+      this.loadBlogger();
+    //this.loadBlogsByBlogger(this.state.blogger._id);
+  }
+
+  setCurrentUser = () => {
+    const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
+    const currentUser = {
+      _id: sessionValues._id,
+      displayName: sessionValues.displayName,
+      email: sessionValues.email,
+      googleId: sessionValues.googleId,
+      accessToken: sessionValues.accessToken
+    };
+    console.log('currentUser: ', currentUser);
+     this.setState({currentUser: currentUser});
   }
 
   // load both blogger and blogs that belong to the blogger
-  loadBlogger = (currentUserEmail) => {
+  loadBlogger = () => {
     bloggerApi
-      .getBloggers(currentUserEmail)
+      .getBloggers(this.state.currentUser.email)
       .then(res => this.setState({blogger: res.data}))
       .catch(err => console.log(err));
   };
@@ -49,7 +69,7 @@ class Summary extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h2>Welcome, Dr. {this.state.blogger.fullName}</h2>
+            <h2>Welcome Dr. {this.state.currentUser.displayName}</h2>
             <Modal />
           </Col>
         </Row>
