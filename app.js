@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const auth = require('./Routes/auth');
+//const auth = require('./Routes/auth');
 
 const app = express();
 
@@ -31,6 +31,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1/', auth);
+//app.use('/api/v1/', auth);
 
 module.exports = app;

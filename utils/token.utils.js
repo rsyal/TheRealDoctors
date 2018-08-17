@@ -1,6 +1,6 @@
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-var createToken = function(auth) {
+const createToken = function(auth) {
     return jwt.sign({
             id: auth.id
         }, 'my-secret',

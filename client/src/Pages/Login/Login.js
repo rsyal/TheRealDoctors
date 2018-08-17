@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import authApi from "../../Utils/authApi";
 // import blogApi from "../../Utils/blogApi";
 import { withRouter } from "react-router-dom";
 // import { Col, Row, Container } from "../../Components/Grid";
@@ -21,10 +23,12 @@ class Login extends Component {
   };
 
   googleResponse = response => {
+    console.log('response ', response);
     const tokenBlob = new Blob(
       [JSON.stringify({ access_token: response.accessToken }, null, 2)],
       { type: "application/json" }
     );
+    console.log('tokenBlob ', tokenBlob);
     const options = {
       method: "POST",
       body: tokenBlob,
@@ -42,6 +46,24 @@ class Login extends Component {
       });
     });
   };
+
+  // googleResponse = response => {
+  //   console.log('response ', response);
+  //   const data = response.accessToken;
+
+  //   const options = {
+  //     method: "POST",
+  //     url: '/api/v1/auth/google',
+  //     data: response.accessToken
+  //   };
+  //   authApi.postAuth({
+  //     data: response.accessToken 
+  //   }).then(r => {
+  //     console.log(r);
+  //   })
+
+  // }
+
 
   setUserInfo = (user) => {
     window.sessionStorage.setItem("userName", user.display_name);
