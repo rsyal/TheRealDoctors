@@ -93,7 +93,6 @@ class Detail extends Component {
         // })
 
         .updateBlog(this.state.blog._id, {
-          //     {
           title: this.state.newCommentTitle,
           content: this.state.newCommentBody
         })
@@ -196,12 +195,19 @@ class Detail extends Component {
                 this.state.blog.comments.map(comment => {
                   console.log(comment);
                   return (
-                    <Comment
-                      key={comment._id}
-                      title={comment.title}
-                      content={comment.content}
-                      date={comment.created_dt}
-                    />
+                    <Row>
+                      <Col size="md-2" />
+                      <Col size="md-8">
+                        <Comment
+                          className="comment-card"
+                          key={comment._id}
+                          title={comment.title}
+                          content={comment.content}
+                          date={comment.created_dt}
+                        />
+                      </Col>
+                      <Col size="md-2" />
+                    </Row>
                   );
                 })
               )}

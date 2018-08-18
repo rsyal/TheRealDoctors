@@ -8,5 +8,10 @@
 }
 
 .image-style {
-  width: 680px;
+  width: 463px;
+}
+
+.comment-card {
+  margin: 15px;
+  color: red;
 }
