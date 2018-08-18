@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import blogApi from "../../Utils/blogApi";
 import { withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import { Col, Row, Container } from "../../Components/Grid";
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
@@ -74,25 +75,52 @@ class Login extends Component {
 
   render() {
     let content = !!this.state.isAuthenticated ? (
-        <span className="text-light paddingRight-20">
-          Welcome {this.state.currentUser.email} 
-          <GoogleLogout
-            className="google-logout"
-            buttonText="Logout"
-            onLogoutSuccess={this.logout}
-          />
-        </span>
+        <ul className="navbar-nav ml-auto">
+          {/* Welcome {this.state.currentUser.email}  */}
+          <li className="nav-item">
+              <NavLink className="nav-link" to="/About">
+                About
+              </NavLink>
+          </li>
+          <li className="nav-item">
+              <NavLink className="nav-link" to="/Summary">
+                Blogger Summary
+              </NavLink>
+          </li>
+          <li className="nav-item login-wrapper">
+            <GoogleLogout
+              className="google-logout logout-button"
+              buttonText="Logout"
+              onLogoutSuccess={this.logout}
+            />
+          </li>
+        </ul>
     ) : (
-        <GoogleLogin
-          clientId={config.GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={this.googleResponse}
-          onFailure={this.onFailure}
-        />
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+              <NavLink className="nav-link" to="/About">
+                About
+              </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/Signup">
+                    Sign Up to Write
+            </NavLink>
+          </li>
+          <li className="nav-item login-wrapper">
+            <GoogleLogin
+              className="login-button"
+              clientId={config.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={this.googleResponse}
+              onFailure={this.onFailure}
+            />
+          </li>
+        </ul>
     );
 
 	return (
-		<div>
+		<div className="collapse navbar-collapse" id="navbarColor02">
 			{content}
 		</div>);
   }
