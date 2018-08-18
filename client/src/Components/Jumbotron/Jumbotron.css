@@ -1,0 +1,35 @@
+.jumbotron {
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0;
+  position: relative;
+}
+
+video {
+  position: relative;
+  z-index: 0;
+}
+
+.text-box {
+  position: absolute;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.452);
+  color: rgb(37, 37, 37);
+  width: 40%;
+  top: 60%;
+  left: 30%;
+  z-index: 1;
+}
+
+@media screen and (max-width: 903px) {
+  .text-box {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 763px) {
+  .text-box {
+    visibility: hidden;
+  }
+}

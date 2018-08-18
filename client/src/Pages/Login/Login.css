@@ -1,4 +1,23 @@
-button.google-login {
+.login-wrapper {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.login-button {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  background: red;
+  color: white;
+}
+.logout-button {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  background: white;
+  color: black;
+}
+/* button.google-login {
   font-size: 10pt;
 }
 
@@ -6,4 +25,4 @@ button.google-logout {
   font-size: 9pt;
   padding: 4pt;
   margin-left: 20px;
-}
+} */
