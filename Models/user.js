@@ -56,6 +56,7 @@ userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
                 if (error) {
                     console.log(error);
                 }
+
                 return cb(error, savedUser);
             });
         } else {

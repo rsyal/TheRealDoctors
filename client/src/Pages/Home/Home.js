@@ -61,7 +61,7 @@ class Home extends Component {
                   this.state.blogs.map(blog => {
                     console.log(blog);
                     return (
-                      <Link to={"/blogs/" + blog._id}>
+                      <Link to={"/blogs/" + blog._id} key={blog._id}>
                         <Card
                           key={blog._id}
                           topic={blog.topic}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
-import authApi from "../../Utils/authApi";
-// import blogApi from "../../Utils/blogApi";
-//import { withRouter } from "react-router-dom";
+import bloggerApi from "../../Utils/bloggerApi";
+import { withRouter } from "react-router-dom";
 // import { Col, Row, Container } from "../../Components/Grid";
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
@@ -47,6 +45,14 @@ class Login extends Component {
       const token = r.headers.get("x-auth-token");
       console.log('token ', token);
       r.json().then(currentUser => {
+        // update blogger with user info
+        bloggerApi.getBlogger({
+          query: {
+            email: currentUser.email
+          }
+        }).then(blogger => bloggerApi.updateBlogger(blogger._id, currentUser)
+          .then(res => console.log(res._id)));
+
         if (token) {
           this.setState({ isAuthenticated: true, currentUser, token });
           this.setUserInfo(currentUser);
@@ -55,24 +61,6 @@ class Login extends Component {
       });
     });
   };
-
-  // googleResponse = response => {
-  //   console.log('response ', response);
-  //   const data = response.accessToken;
-
-  //   const options = {
-  //     method: "POST",
-  //     url: '/api/v1/auth/google',
-  //     data: response.accessToken
-  //   };
-  //   authApi.postAuth({
-  //     data: response.accessToken 
-  //   }).then(r => {
-  //     console.log(r);
-  //   })
-
-  // }
-
 
   setUserInfo = (user) => {
     // window.sessionStorage.setItem("userDisplayName", user.displayName);
@@ -118,5 +106,5 @@ class Login extends Component {
   }
 }
 
-// export default withRouter(Login);
-export default Login;
+export default withRouter(Login);
+// export default Login;

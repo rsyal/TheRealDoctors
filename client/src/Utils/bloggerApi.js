@@ -13,6 +13,10 @@ export default {
   getBlogger: function(id) {
     return axios.get("/api/bloggers/" + id);
   },
+  // update the Blogger with the given user._id 
+  updateBlogger: function(id, userData) {
+    return axios.put("/api/bloggers/" + id, userData);
+  },
   // Deletes the Blogger with the given id
   deleteBlogger: function(id) {
     return axios.delete("/api/bloggers/" + id);

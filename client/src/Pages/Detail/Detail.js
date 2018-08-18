@@ -12,8 +12,11 @@ import "./Detail.css";
 
 class Detail extends Component {
   state = {
+    currentUser: {},
     blog: {
-      blogger: {},
+      blogger: {
+        user: {}
+      },
       comments: [
         {
           title: "",
@@ -27,6 +30,7 @@ class Detail extends Component {
 
   // Retrieve a blog with all comments
   componentDidMount() {
+    this.getCurrentUser();
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
@@ -34,6 +38,19 @@ class Detail extends Component {
         return this.setState({ blog: res.data });
       })
       .catch(err => console.log(err));
+  }
+
+  getCurrentUser = () => {
+    const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
+    const currentUser = {
+      _id: sessionValues._id,
+      displayName: sessionValues.displayName,
+      email: sessionValues.email,
+      googleId: sessionValues.googleId,
+      accessToken: sessionValues.accessToken
+    };
+    console.log('currentUser: ', currentUser);
+     this.setState({currentUser: currentUser});
   }
 
   handleInputChange = event => {
@@ -81,7 +98,7 @@ class Detail extends Component {
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
             <h5 className="author-style">Written by: </h5>
-            <h2>By {this.state.blog.blogger.fullName}</h2>
+            <h2>By {this.state.currentUser.displayName}</h2>
           </Col>
         </Row>
         <Row>
@@ -136,7 +153,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <div className="comment-deck">
-              {!this.state.blog.comments.length ? (
+              {!this.state.blog.comments ||!this.state.blog.comments.length ? (
                 <h1 className="text-center">
                   There are no comments to this post yet.
                 </h1>

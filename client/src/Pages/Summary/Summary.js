@@ -1,25 +1,21 @@
 import React, { Component } from "react";
-import blogApi from "../../Utils/blogApi";
+// import blogApi from "../../Utils/blogApi";
 import bloggerApi from "../../Utils/bloggerApi";
-// import bloggerApi from "../../Utils/bloggerApi";
-//import Link from "react-router-dom";
-// import { Input, FormBtn } from "../../Components/Form";
-//import { List, ListItem } from "../../Components/List";
-// import  SaveBtn  from "../../Components/SaveBtn";
-//import Jumbotron from "../../Components/Jumbotron/Jumbotron";
-// import  Card  from "../../Components/Card";
+import { List, ListItem } from "../../Components/List";
 import { Col, Row, Container } from "../../Components/Grid";
-import Card from "../../Components/Card";
 import BlogModal from "./BlogModal";
+import { BlogViewEditModal } from "./BlogViewEditModal";
+import './Summary.css';
+const dateformat = require('dateformat');
 
 class Summary extends Component {
   state = {
     blogger: {
-        blogs: []
+        blogs: [{}]
     },
-    blogs: {
+    blogs: [{
         comments: []
-    },
+    }],
     currentUser: {
       _id: '',
       displayName: '',
@@ -30,12 +26,12 @@ class Summary extends Component {
   };
 
   componentDidMount() {
-      this.setCurrentUser();
-      this.loadBlogger();
-    //this.loadBlogsByBlogger(this.state.blogger._id);
+      this.getCurrentUser();
+      this.loadBlogger(this.state.currentUser.email);
+      this.loadBlogs(this.state.blogger._id);
   }
 
-  setCurrentUser = () => {
+  getCurrentUser = () => {
     const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
     const currentUser = {
       _id: sessionValues._id,
@@ -49,17 +45,21 @@ class Summary extends Component {
   }
 
   // load both blogger and blogs that belong to the blogger
-  loadBlogger = () => {
+  loadBlogger = (email) => {
     bloggerApi
-      .getBloggers(this.state.currentUser.email)
-      .then(res => this.setState({blogger: res.data}))
+      .getBloggers({email: email})
+      .then(res => {
+        const blogs = res.data[0].blogs;
+        this.setState({blogs: blogs});
+        this.setState({blogger: res.data[0]});
+      })
       .catch(err => console.log(err));
   };
 
   // load blogs for the given blogger and comments for each blogs
-  loadBlogsByBlogger = (bloggerId) => {
-    blogApi
-      .getBlogs(bloggerId)
+  loadBlogs = (bloggerId) => {
+    bloggerApi
+      .getBlogger(bloggerId)
       .then(res => this.setState({blogs: res.data}))
       .catch(err => console.log(err));
   };
@@ -67,56 +67,49 @@ class Summary extends Component {
   render() {
     return (
       <Container>
-        <Row>
-          <Col size="md-12">
-            <h2>{this.state.currentUser.displayName}'s Dashboard</h2>
+        <Row >
+          <Col size="sm-12">
+            <h2 className='header'>{this.state.currentUser.displayName}'s Dashboard</h2>
+          </Col>
+        </Row>
+        <Row >
+          <Col size="sm-12">
+            <BlogModal text="Add blog"/>
           </Col>
         </Row>
         <Row>
-          <Col size="md-12">
-            <BlogModal />
-          </Col>
-          </Row>
-        <Row>
-          <Col size="md-3">
-          </Col>
-          <Col size="md-7">
-
-            {!this.state.blogs.length ? (
-              <h1 className="text-center">You haven't posted and blogs</h1>
+          
+            {!this.state.blogs || !this.state.blogs.length ? (
+              <h3 className="textCenter">You haven't posted any blogs</h3>
             ) : (
-              this.state.blogger.blogs.map(blog => {
+              <List>
+              {this.state.blogger.blogs.map(blog => {
                 console.log(blog);
                 return (
-                  <Row>
-                    <Col size="md-3">
-                      <Card
-                        key={blog._id}
-                        topic={blog.topic}
-                        content={blog.content}
-                        src={blog.imageSrc}
-                        alt={blog.topic}
-                        created_dt={blog.created_dt}
-                      />
-                    </Col>
-                    <Col size="md-7">
-                      <label>{this.state.blog.topic}</label>
-                      <textarea>{this.state.blog.content} </textarea>
-                    </Col>
-                    <Col size="md-2">
-                      <label>{this.state.blog.date}</label>
-                      <button>Edit </button>
-                      <button>Delete</button>
-                    </Col>
-                  </Row>
-                );
-              })
+                  <div>
+                    <ListItem key={blog._id}>
+                    <Row>
+                      <Col size="sm-3">
+                        <img src={blog.imageSrc} alt={blog.topic} />
+                      </Col>
+                      <Col size="sm-9">
+                        <label><strong>{blog.topic}</strong> {dateformat(blog.created_dt, "mmmm dS, yyyy")}</label>                     
+                        <label style={{float:"right"}}>
+                          <button>View/Edit</button>
+                          {/* <BlogViewEditModal blogContext={blog} /> */}
+                          <button>Delete</button>
+                        </label>
+                        <div><p style={{width:"100%"}} >{blog.content}</p></div>
+                      </Col>
+                    </Row>
+                    </ListItem>
+                  </div>
+                )
+              })}
+               </List>
             )}
-          </Col>
-          <Col size="md-2">
-            <button>Edit</button><br />
-            <button>Delete</button>
-          </Col>
+
+           
         </Row>
       </Container>
     );

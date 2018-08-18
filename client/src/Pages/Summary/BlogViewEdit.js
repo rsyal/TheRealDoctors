@@ -4,15 +4,25 @@ import blogApi from "../../Utils/blogApi";
 import { Col, Row, Container } from "../../Components/Grid";
 import { Input, TextArea, FormBtn } from "../../Components/Form";
 
-class BlogPost extends Component {
+class BlogViewEdit extends Component {
 
-  state = {
-    topic: '',
-    content: '',
-    imageSrc: '',
-    created_dt: '',
-    comments: []
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      topic: props.blogContextDown.topic,
+      content: props.blogContextDown.content,
+      imageSrc: props.blogContextDown.imageSrc,
+      created_dt: props.blogContextDown.created_dt,
+      comments: []
+    }
+  };
+
+  // componentDidMount(props) {
+  //   this.state.topic = {...props.topic};
+  //   this.state.content = {...props.content};
+  //   this.state.imageSrc = {...props.imageSrc};
+  //   this.state.created_dt = {...props.created_dt};
+  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -87,4 +97,4 @@ class BlogPost extends Component {
   }
 }
 
-export default withRouter(BlogPost);
+export default withRouter(BlogViewEdit);

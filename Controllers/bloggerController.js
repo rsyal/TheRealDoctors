@@ -4,6 +4,7 @@ const db = require("../Models");
 module.exports = {
   findAll: (req, res) => {
     db.Blogger.find(req.query)
+      .populate('blogs')
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.Status(422).json(err));

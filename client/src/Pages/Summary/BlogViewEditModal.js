@@ -2,14 +2,24 @@ import React from "react";
 import Modal from '../../Components/Modal';
 import BlogPost from './BlogPost';
 import Button from '../../Components/Button';
+import BlogViewEdit from './BlogViewEdit';
 import './Summary.css';
+import { checkPropTypes } from "../../../node_modules/@types/prop-types";
 
-class BlogModal extends React.Component {
+class BlogViewEditModal extends React.Component {
 
-    state = {
-      show: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      blogContext: props.blogContext
     };
-    
+  }
+
+  // state = {
+  //   show: false
+  // }
+
   handleOpenModal = () => {
     this.setState({ show: true });
   };
@@ -22,13 +32,13 @@ class BlogModal extends React.Component {
     return (
       <div>
         <Modal show={this.state.show} handleClose={this.handleCloseModal} btnText="Close">
-         <BlogPost/>
+         <BlogViewEdit blogContextDown={this.state.blogContext} />
         </Modal>
         {/* <button onClick={this.handleOpenModal} className="btn btn-success subHeader">Add blog</button> */}
-        <Button onClick={this.handleOpenModal} className="btn btn-success subHeader" btnText="Add blog" />
+        <Button onClick={this.handleOpenModal} className="btn subHeader" btnText="View/Edit" />
       </div>
     );
   }
 };
 
-export default BlogModal;
+export default BlogViewEditModal;
