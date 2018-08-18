@@ -39,29 +39,25 @@ const Nav = () => (
     </button>
 
     <div className="collapse navbar-collapse" id="navbarColor02">
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/DoctorPost">
+            Blog
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/About">
+            About
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/Signup">
+            Signup
+          </NavLink>
+        </li>
+      </ul>
 
-
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/DoctorPost">
-                Blog
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/About">
-                About
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/Signup">
-                Signup
-              </NavLink>
-            </li>
-          </ul>
-
-          <Login />
-
-
+      <Login />
     </div>
   </nav>
 );

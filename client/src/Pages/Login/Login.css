@@ -1,5 +1,7 @@
 button.google-login {
-  font-size: 10pt;
+  font-size: 9pt;
+  padding: 4pt;
+  margin-left: 20px;
 }
 
 button.google-logout {
