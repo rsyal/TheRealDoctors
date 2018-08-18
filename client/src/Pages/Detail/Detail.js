@@ -157,31 +157,50 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-12">
-            <h3>Comment below:</h3>
+            <br />
           </Col>
         </Row>
+        {/* Collapsible comment form */}
         <Row>
           <Col size="md-12">
-            <form>
-              <Input
-                value={this.state.blog.comments.title}
-                onChange={this.handleTitleInputChange}
-                name="title"
-                placeholder="Subject (required)"
-              />
-              <TextArea
-                value={this.state.blog.comments.content}
-                onChange={this.handleContentInputChange}
-                name="content"
-                placeholder="Comment (required)"
-              />
-              <FormBtn
-                // disabled={!(this.state.title && this.state.content)}
-                onClick={this.handleFormSubmit}
-              >
-                Post Comment
-              </FormBtn>
-            </form>
+            <div className="panel panel-default" id="panel2">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a
+                    data-toggle="collapse"
+                    data-target="#collapseComment"
+                    href="#collapseComment"
+                    className="collapsed"
+                  >
+                    Add a comment
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseComment" className="panel-collapse collapse">
+                <div class="panel-body">
+                  <form>
+                    <Input
+                      value={this.state.blog.comments.title}
+                      onChange={this.handleTitleInputChange}
+                      name="title"
+                      placeholder="Subject (required)"
+                    />
+                    <TextArea
+                      value={this.state.blog.comments.content}
+                      onChange={this.handleContentInputChange}
+                      name="content"
+                      placeholder="Comment (required)"
+                    />
+                    <FormBtn
+                      // disabled={!(this.state.title && this.state.content)}
+                      onClick={this.handleFormSubmit}
+                    >
+                      Post Comment
+                    </FormBtn>
+                  </form>
+                </div>
+              </div>
+            </div>
           </Col>
         </Row>
         <Row>
