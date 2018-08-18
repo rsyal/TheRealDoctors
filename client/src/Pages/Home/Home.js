@@ -54,9 +54,12 @@ class Home extends Component {
         <Container>
           <Row>
             <Col size="xs-12">
-              <div className="card-deck d-flex justify-content-center align-items-stretch">
+              <div
+                id="blogs"
+                className="card-deck d-flex justify-content-center align-items-stretch"
+              >
                 {!this.state.blogs.length ? (
-                  <h1 className="text-center">  No recent blogs</h1>
+                  <h1 className="text-center"> No recent blogs</h1>
                 ) : (
                   this.state.blogs.map(blog => {
                     console.log(blog);
@@ -68,7 +71,7 @@ class Home extends Component {
                           content={blog.content}
                           src={blog.imageSrc}
                           alt={blog.topic}
-                          created_dt={blog.created_dt}
+                          date={blog.created_dt}
                         />
                       </Link>
                     );

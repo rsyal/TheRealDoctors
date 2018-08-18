@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 // import { Col, Row, Container } from "../../Components/Grid";
 
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import config from './config.json';
-import './Login.css';
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import config from "./config.json";
+import "./Login.css";
 // import { fromPrefixLen } from "ip";
 
 class Login extends Component {
@@ -18,8 +18,13 @@ class Login extends Component {
      };
 
   logout = () => {
+<<<<<<< HEAD
 		this.setState({isAuthenticated: false, token: '', currentUser: null});
 		this.props.history.push('/')
+=======
+    this.setState({ isAuthenticated: false, token: "", user: null });
+    this.props.history.push("/");
+>>>>>>> barbey0817
   };
 
   onFailure = error => {
@@ -55,6 +60,7 @@ class Login extends Component {
     });
   };
 
+<<<<<<< HEAD
   setUserInfo = (user) => {
     // window.sessionStorage.setItem("userDisplayName", user.displayName);
     // window.sessionStorage.setItem("userEmail", user.email);
@@ -123,6 +129,41 @@ class Login extends Component {
 		<div className="collapse navbar-collapse" id="navbarColor02">
 			{content}
 		</div>);
+=======
+  setUserInfo = user => {
+    window.sessionStorage.setItem("userName", user.display_name);
+    window.sessionStorage.setItem("userEmail", user.email);
+    window.sessionStorage.setItem("userId", user.id);
+  };
+
+  getUserInfo = () => {
+    window.sessionStorage.getItem("userName");
+    window.sessionStorage.getItem("userEmail");
+    window.sessionStorage.getItem("userId");
+  };
+
+  render() {
+    let content = !!this.state.isAuthenticated ? (
+      <span className="text-light paddingRight-20">
+        Welcome {this.state.user.email}
+        <GoogleLogout
+          className="google-logout"
+          buttonText="Logout"
+          onLogoutSuccess={this.logout}
+        />
+      </span>
+    ) : (
+      <GoogleLogin
+        className="google-login"
+        clientId={config.GOOGLE_CLIENT_ID}
+        buttonText="Login"
+        onSuccess={this.googleResponse}
+        onFailure={this.onFailure}
+      />
+    );
+
+    return <div>{content}</div>;
+>>>>>>> barbey0817
   }
 }
 
