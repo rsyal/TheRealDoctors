@@ -23,7 +23,7 @@ class Detail extends Component {
           content: "",
           created_dt: ""
         }
-      ] 
+      ]
     },
     newComment: {}
   };
@@ -41,7 +41,7 @@ class Detail extends Component {
   }
 
   getCurrentUser = () => {
-    const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
+    const sessionValues = JSON.parse(sessionStorage.getItem("currentUser"));
     const currentUser = {
       _id: sessionValues._id,
       displayName: sessionValues.displayName,
@@ -49,9 +49,9 @@ class Detail extends Component {
       googleId: sessionValues.googleId,
       accessToken: sessionValues.accessToken
     };
-    console.log('currentUser: ', currentUser);
-     this.setState({currentUser: currentUser});
-  }
+    console.log("currentUser: ", currentUser);
+    this.setState({ currentUser: currentUser });
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -75,8 +75,8 @@ class Detail extends Component {
         .then(dbComments => {
           console.log(dbComments.data);
           // update Blog with Blogger._id
-          const commentId =   
-          dbComments.data.blogs.comments[
+          const commentId =
+            dbComments.data.blogs.comments[
               dbComments.data.blogs.comments.length - 1
             ];
           console.log("comment id ", commentId);
@@ -92,6 +92,8 @@ class Detail extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <Container>
         <Row>
@@ -153,7 +155,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <div className="comment-deck">
-              {!this.state.blog.comments ||!this.state.blog.comments.length ? (
+              {!this.state.blog.comments || !this.state.blog.comments.length ? (
                 <h1 className="text-center">
                   There are no comments to this post yet.
                 </h1>

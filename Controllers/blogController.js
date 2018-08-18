@@ -4,7 +4,7 @@ const db = require("../Models");
 module.exports = {
   findAll: (req, res) => {
     db.Blog.find(req.query)
-      .populate('blogger')
+      .populate("blogger")
       .populate("comments")
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
@@ -12,14 +12,20 @@ module.exports = {
   },
   findById: function(req, res) {
     db.Blog.findById(req.params.id)
-      .populate('blogger')
+      .populate("blogger")
       .populate("comments")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.Blog.create(req.body)
-      .then(dbBlog => db.Blogger.findOneAndUpdate({}, { $push: {blogs: dbBlog._id} }, { new: true }))
+      .then(dbBlog =>
+        db.Blogger.findOneAndUpdate(
+          {},
+          { $push: { blogs: dbBlog._id } },
+          { new: true }
+        )
+      )
       // .then(dbBlogger => db.Blog.findOneAndUpdate({ _id: dbBlogger.blogs.sort(created_dt)}))
       .then(dbBlogger => res.json(dbBlogger))
       .catch(err => res.status(422).json(err));
