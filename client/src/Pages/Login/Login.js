@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import authApi from "../../Utils/authApi";
 // import blogApi from "../../Utils/blogApi";
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 // import { Col, Row, Container } from "../../Components/Grid";
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
@@ -118,4 +118,5 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+// export default withRouter(Login);
+export default Login;
