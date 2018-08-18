@@ -25,7 +25,8 @@ class Detail extends Component {
         }
       ]
     },
-    newComment: {}
+    newCommentTitle: "",
+    newCommentBody: ""
   };
 
   // Retrieve a blog with all comments
@@ -53,16 +54,60 @@ class Detail extends Component {
     this.setState({ currentUser: currentUser });
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+  handleTitleInputChange = event => {
+    const title = event.target.value;
+
+    this.setState({ newCommentTitle: title });
+  };
+
+  handleContentInputChange = event => {
+    const content = event.target.value;
+
+    this.setState({ newCommentBody: content });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.newComment.title && this.state.newComment.content) {
+    console.log(this.state);
+
+    if (this.state.newCommentTitle && this.state.newCommentBody) {
+      this.setState({
+        comments: this.state.blog.comments.concat([
+          {
+            title: this.state.newCommentTitle,
+            content: this.state.newCommentBody
+          }
+        ])
+      });
+
+      // console.log(this.state);
+
+      blogApi
+        // .updateBlog({
+        //   comments: [
+        //     {
+        //       title: this.state.blog.comments.title,
+        //       content: this.state.blog.comments.content
+        //     }
+        //   ]
+        // })
+
+        .updateBlog(this.state.blog._id, {
+          //     {
+          title: this.state.newCommentTitle,
+          content: this.state.newCommentBody
+        })
+        .then(dbComments => {
+          console.log(dbComments.data);
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
+  handleTitleChange = event => {
+    event.preventDefault();
+    console.log(this.state);
+    if (this.state.blog.comments.title && this.state.blog.comments.content) {
       blogApi
         .updateBlog({
           comments: [
@@ -74,18 +119,6 @@ class Detail extends Component {
         })
         .then(dbComments => {
           console.log(dbComments.data);
-          // update Blog with Blogger._id
-          const commentId =
-            dbComments.data.blogs.comments[
-              dbComments.data.blogs.comments.length - 1
-            ];
-          console.log("comment id ", commentId);
-          blogApi
-            .updateBlog(commentId, { comments: dbComments.data._id })
-            .then(dbComments => console.log(dbComments))
-            .catch(err => console.log(err));
-
-          this.props.history.push("/");
         })
         .catch(err => console.log(err));
     }
@@ -99,15 +132,15 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
-            <h5 className="author-style">Written by: </h5>
             <h2>By {this.state.currentUser.displayName}</h2>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
             <img
-              className="float-left mr-3 mb-3 image-style"
+              className="float-left mr-3 mb-3"
               src={this.state.blog.imageSrc}
+              width="463px"
               alt={this.state.blog.topic}
             />
             <p>{this.state.blog.content}</p>
@@ -132,14 +165,14 @@ class Detail extends Component {
           <Col size="md-12">
             <form>
               <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
+                value={this.state.blog.comments.title}
+                onChange={this.handleTitleInputChange}
                 name="title"
                 placeholder="Subject (required)"
               />
               <TextArea
-                value={this.state.content}
-                onChange={this.handleInputChange}
+                value={this.state.blog.comments.content}
+                onChange={this.handleContentInputChange}
                 name="content"
                 placeholder="Comment (required)"
               />
