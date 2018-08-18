@@ -4,7 +4,7 @@ import bloggerApi from "../../Utils/bloggerApi";
 import { List, ListItem } from "../../Components/List";
 import { Col, Row, Container } from "../../Components/Grid";
 import BlogModal from "./BlogModal";
-import { BlogViewEditModal } from "./BlogViewEditModal";
+//import { BlogViewEditModal } from "./BlogViewEditModal";
 import './Summary.css';
 const dateformat = require('dateformat');
 
