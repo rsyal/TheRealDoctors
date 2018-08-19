@@ -131,7 +131,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
-            <h2>By {this.state.currentUser.displayName}</h2>
+            <h2>By Dr. {this.state.currentUser.displayName}</h2>
           </Col>
         </Row>
         <Row>
@@ -142,7 +142,7 @@ class Detail extends Component {
               width="463px"
               alt={this.state.blog.topic}
             />
-            <p>{this.state.blog.content}</p>
+            <p className="blog-content">{this.state.blog.content}</p>
           </Col>
         </Row>
         {/* <Row>
