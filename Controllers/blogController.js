@@ -30,9 +30,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Blog.findById({ _id: req.params.id })
+    db.Blog.findById(req.params.id)
+      .populate('blogger')
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.json(err));
   }
+  // remove: function(req, res) {
+  //   db.Blog.findById(req.params.id)
+  //     .then(dbBlog => dbBlog.remove())
+  //     .then(dbBlog => {
+  //       dbBlogger.findById(dbBlog._id, function(err, blogger) {
+  //         if(err) {
+  //           return console.log(err);
+  //         }
+  //         blogger.blogs.pull(req.params.id);  //  blogger.blogs.id(req.params.id).remove();
+  //         blogger.save();
+  //       })
+  //     })
+  //     .then(dbBlogger => res.json(dbBlogger))
+  //     .catch(err => res.status(422).json(err));
+  // }
 };

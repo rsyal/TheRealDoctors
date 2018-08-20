@@ -1,17 +1,24 @@
 import axios from "axios";
 
 export default {
-  // Gets all Bloggers
-  getBloggers: function(currentUserEmail) {
-    return axios.get("/api/bloggers/", {
-      query: {
-        email: currentUserEmail
-      }
-    });
-  },
+  // Gets all Bloggers for a given email
+  // getBloggers: function(currentUserEmail) {
+  //   return axios.get("/api/bloggers/", {
+  //     query: {
+  //       email: currentUserEmail
+  //     }
+  //   });
+  // },
   // Gets the Blogger with the given id
-  getBlogger: function(id) {
-    return axios.get("/api/bloggers/" + id);
+  // getBlogger: function(id) {
+  //   return axios.get("/api/bloggers/" + id);
+  // },
+
+  // Gets the Blogger with the given id
+  getBlogger: function(queryParam) {
+    return axios.get("/api/bloggers/", {
+      query: queryParam
+    });
   },
   // update the Blogger with the given user._id 
   updateBlogger: function(id, userData) {

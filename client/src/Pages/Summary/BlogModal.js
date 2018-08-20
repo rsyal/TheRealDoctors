@@ -21,11 +21,11 @@ class BlogModal extends React.Component {
   render () {
     return (
       <div>
-        <Modal show={this.state.show} handleClose={this.handleCloseModal} btnText="Close">
-         <BlogPost/>
+        <Modal show={this.state.show} handleClose={this.handleCloseModal} btntext="Close">
+         <BlogPost />
         </Modal>
         {/* <button onClick={this.handleOpenModal} className="btn btn-success subHeader">Add blog</button> */}
-        <Button onClick={this.handleOpenModal} className="btn btn-success subHeader" btnText="Add blog" />
+        <Button onClick={this.handleOpenModal} className="btn btn-success subHeader" btntext="Add blog" />
       </div>
     );
   }

@@ -7,23 +7,64 @@ import { NavLink } from "react-router-dom";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import config from "./config.json";
 import "./Login.css";
-// import { fromPrefixLen } from "ip";
 
 class Login extends Component {
   state = {
     isAuthenticated: false,
-    user: null,
-    token: "",
-    currentUser: {}
+    //user: undefined,
+    token: undefined,
+    currentUser: undefined
   };
+
+  componentWillMount() {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.setState({currentUser: userInfo});  
+      this.setState({isAuthenticated: true});
+    } else {
+      this.setState({isAuthenticated: false});
+    }
+  }
+
+  // componentDidMount() {
+  //   if (this.state.currentUser) {
+  //     this.loadBlogger(this.state.currentUser.email);
+  //     this.loadBlogs(this.state.blogger._id);
+  //   }
+  // }
+
+  setUserInfo = user => {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
+
+  // getCurrentUser = () => {
+  //   const sessionValues = this.getUserInfo();;
+  //   //let currentUser = null;
+  //   if (sessionValues) {
+  //     // currentUser = {
+  //     //   _id: sessionValues._id,
+  //     //   displayName: sessionValues.displayName,
+  //     //   email: sessionValues.email,
+  //     //   googleId: sessionValues.googleId,
+  //     //   accessToken: sessionValues.accessToken
+  //     // };
+  //     this.setState({currentUser: sessionValues});
+  //   }
+  //   console.log('currentUser: ', currentUser); 
+  // }
 
   logout = () => {
     this.setState({ isAuthenticated: false, token: "", currentUser: null });
+    sessionStorage.clear();
     this.props.history.push("/");
   };
 
   onFailure = error => {
-    alert(error);
+    console.log(error);
   };
 
   googleResponse = response => {
@@ -46,13 +87,17 @@ class Login extends Component {
       const token = r.headers.get("x-auth-token");
       console.log("token ", token);
       r.json().then(currentUser => {
+        console.log('Login.js currentUser ', currentUser);
         // update blogger with user info
         bloggerApi.getBlogger({
           query: {
             email: currentUser.email
           }
-        }).then(blogger => bloggerApi.updateBlogger(blogger._id, currentUser)
-          .then(res => console.log(res._id)));
+        }).then(blogger => bloggerApi.updateBlogger(blogger.data[0]._id, {user: currentUser._id}))
+          .then(res => {
+            console.log(res.data._id);
+            currentUser.bloggerId = res.data._id;
+            })
 
         if (token) {
           this.setState({ isAuthenticated: true, currentUser, token });
@@ -61,24 +106,6 @@ class Login extends Component {
         this.props.history.push("/Summary");
       });
     });
-  };
-
-  setUserInfo = user => {
-    // window.sessionStorage.setItem("userDisplayName", user.displayName);
-    // window.sessionStorage.setItem("userEmail", user.email);
-    // window.sessionStorage.setItem("userId", user.id);
-    // window.sessionStorage.setItem("googleId", googleProvider.id);
-    // window.sessionStorage.setItem("accessToken", googleProvider.token);
-    sessionStorage.setItem("currentUser", JSON.stringify(user));
-  };
-
-  getUserInfo = () => {
-    // window.sessionStorage.getItem("userDisplayName");
-    // window.sessionStorage.getItem("userEmail");
-    // window.sessionStorage.getItem("userId");
-    // window.sessionStorage.getItem("googleId");
-    // window.sessionStorage.getItem("accessToken");
-    JSON.parse(sessionStorage.getItem("currentUser"));
   };
 
   render() {
@@ -136,4 +163,3 @@ class Login extends Component {
 }
 
 export default withRouter(Login);
-// export default Login;

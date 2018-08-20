@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-// import blogApi from "../../Utils/blogApi";
+import blogApi from "../../Utils/blogApi";
 import bloggerApi from "../../Utils/bloggerApi";
+import { withRouter } from "react-router-dom";
 import { List, ListItem } from "../../Components/List";
 import { Col, Row, Container } from "../../Components/Grid";
+import Button from '../../Components/Button';
 import BlogModal from "./BlogModal";
-//import { BlogViewEditModal } from "./BlogViewEditModal";
+import BlogViewEditModal from "./BlogViewEditModal";
 import './Summary.css';
 const dateformat = require('dateformat');
 
@@ -16,42 +18,46 @@ class Summary extends Component {
     blogs: [{
         comments: []
     }],
-    currentUser: {
-      _id: '',
-      displayName: '',
-      email: '',
-      googleId: '',
-      accessToken: ''
-    }
+    isAuthenticated: false,
+    currentUser: undefined
   };
 
-  componentDidMount() {
-      this.getCurrentUser();
-      this.loadBlogger(this.state.currentUser.email);
-      this.loadBlogs(this.state.blogger._id);
+  componentWillMount() {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.setState({currentUser: userInfo});  
+      this.setState({isAuthenticated: true});
+      this.loadBlogger(userInfo.bloggerId);
+    } else {
+      this.setState({isAuthenticated: false});
+      this.loadBlogger(userInfo.bloggerId);
+    }
   }
 
-  getCurrentUser = () => {
-    const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
-    const currentUser = {
-      _id: sessionValues._id,
-      displayName: sessionValues.displayName,
-      email: sessionValues.email,
-      googleId: sessionValues.googleId,
-      accessToken: sessionValues.accessToken
-    };
-    console.log('currentUser: ', currentUser);
-     this.setState({currentUser: currentUser});
-  }
+  componentDidMount() {
+    if (this.state.currentUser) {
+      this.loadBlogger(this.state.currentUser.bloggerId);
+      //this.loadBlogs(this.state.blogger._id);
+    }
+  }  
+  
+  setUserInfo = user => {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
 
   // load both blogger and blogs that belong to the blogger
-  loadBlogger = (email) => {
+  loadBlogger = (bloggerId) => {
     bloggerApi
-      .getBloggers({email: email})
+      .getBlogger({query: {_id: bloggerId}})
       .then(res => {
-        const blogs = res.data[0].blogs;
+        const blogs = res.data[0].blogs;       
         this.setState({blogs: blogs});
         this.setState({blogger: res.data[0]});
+        console.log("blogs in Summary ", blogs);
       })
       .catch(err => console.log(err));
   };
@@ -62,6 +68,23 @@ class Summary extends Component {
       .getBlogger(bloggerId)
       .then(res => this.setState({blogs: res.data}))
       .catch(err => console.log(err));
+  };
+
+  hardReload = (blogEditContext) => {
+    this.setState({blogContext: blogEditContext});   
+  }
+
+  handleDeleteBlog = (id) => {
+    if (this.state.blogs) {
+      blogApi
+        .deleteBlog(id)
+        // .then(blogDeleted => {
+        //   this.setState({blogger: blogDeleted.data});})
+        .then(res => this.loadBlogger())
+        .catch(err => console.log(err));
+    }
+
+    this.props.history.push("/Summary");
   };
 
   render() {
@@ -84,21 +107,26 @@ class Summary extends Component {
             ) : (
               <List>
               {this.state.blogger.blogs.map(blog => {
-                console.log(blog);
+                //console.log(blog);
                 return (
-                  <div>
+                  <div key={blog._id}>
                     <ListItem key={blog._id}>
                     <Row>
                       <Col size="sm-3">
-                        <img src={blog.imageSrc} alt={blog.topic} />
+                        {/* <img src={blog.imageSrc} alt={blog.topic} /> */}
+                        <img
+                          className="card-img-top"
+                          src={blog.imageSrc}
+                          alt={blog.topic}
+                          height="190px"
+                        />
                       </Col>
                       <Col size="sm-9">
-                        <label><strong>{blog.topic}</strong> {dateformat(blog.created_dt, "mmmm dS, yyyy")}</label>                     
-                        <label style={{float:"right"}}>
-                          <button>View/Edit</button>
-                          {/* <BlogViewEditModal blogContext={blog} /> */}
-                          <button>Delete</button>
-                        </label>
+                        <span><label><strong>{blog.topic}</strong> {dateformat(blog.created_dt, "mmmm dS, yyyy")}</label>                     
+                        <label style={{float:"right", dispaly:"in-line"}}>
+                          <BlogViewEditModal blogContext={blog} callbackFromSummary= {this.hardReload} />
+                          <Button onClick={() => this.handleDeleteBlog(blog._id)} className="btn btn-sm btn-secondary" btntext="Delete"></Button>
+                        </label></span>
                         <div><p style={{width:"100%"}} >{blog.content}</p></div>
                       </Col>
                     </Row>
@@ -107,13 +135,11 @@ class Summary extends Component {
                 )
               })}
                </List>
-            )}
-
-           
+            )}   
         </Row>
       </Container>
     );
   }
 }
 
-export default Summary;
+export default withRouter(Summary);

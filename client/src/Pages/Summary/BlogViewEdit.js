@@ -4,15 +4,19 @@ import blogApi from "../../Utils/blogApi";
 import { Col, Row, Container } from "../../Components/Grid";
 import { Input, TextArea, FormBtn } from "../../Components/Form";
 
-class BlogPost extends Component {
+class BlogViewEdit extends Component {
 
-  state = {
-    topic: '',
-    content: '',
-    imageSrc: '',
-    created_dt: '',
-    comments: []
-  }
+  constructor(props) {
+    super(props);
+    this.state = {     
+      _id: props.blogContextDown._id,
+        topic: props.blogContextDown.topic,
+        content: props.blogContextDown.content,
+        imageSrc: props.blogContextDown.imageSrc,
+        created_dt: props.blogContextDown.created_dt,
+        comments: []
+    }
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -25,35 +29,36 @@ class BlogPost extends Component {
     event.preventDefault();
     if (this.state.topic && this.state.content) {
       blogApi
-        .saveBlog({
+        .updateBlog(this.state._id, {
           topic: this.state.topic,
           content: this.state.content,
-          imageSrc: this.state.imageSrc,
+          imageSrc: this.state.mageSrc,
           created_at: this.state.created_at,
-          comments: []
-        })
-        .then(dbBlogger => {
-          console.log(dbBlogger.data);
-          // update Blog with Blogger._id
-          const blogId = dbBlogger.data.blogs[dbBlogger.data.blogs.length - 1];
-          console.log("blog id ", blogId);
-          blogApi
-            .updateBlog(blogId, { blogger: dbBlogger.data._id })
-            .then(dbBlog => console.log(dbBlog))
-            .catch(err => console.log(err));
-
-          this.props.history.push("/");
         })
         .catch(err => console.log(err));
     }
+
+    this.transferEdit();
+    this.props.history.push("/");
   };
+
+  transferEdit = () => {
+    this.props.transferStateEdit({blogEditContext: {
+      _id: this.state._id,
+      topic: this.state.topic,
+      content: this.state.content,
+      imageSrc: this.state.imageSrc,
+      created_dt: this.state.created_dt,
+      comments: []
+    }})
+  }
 
   render() {
     return (
       <Container>
         <Row>
           <Col size="md-12">
-            <h2 className="mt-3">Write your blog post below</h2>
+            <h2 className="mt-3">Edit and save</h2>
             <form>
               <Input
                 value={this.state.topic}
@@ -87,4 +92,4 @@ class BlogPost extends Component {
   }
 }
 
-export default withRouter(BlogPost);
+export default withRouter(BlogViewEdit);

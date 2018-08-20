@@ -1,5 +1,3 @@
-'use strict';
-
 const db = require('./Models');
 const User = require('mongoose').model('User');
 //const Blogger = require('mongoose').model('Blogger');
@@ -16,7 +14,11 @@ module.exports = function () {
         },
         function (accessToken, refreshToken, profile, done) {
             User.upsertGoogleUser(accessToken, refreshToken, profile, function(err, user) {
+                db.Blogger.findOneAndUpdate({email: user.email}, {user: user._id})
+                    .then(blogger => console.log('blogger updated with user._id \n', blogger))
+                    .catch(err => console.log('User model ', err));
                 return done(err, user);
             });
-        }));
+        })
+    );
 };

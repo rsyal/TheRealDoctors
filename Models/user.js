@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bloggerSchema = require('mongoose').model('Blogger').schema;
+const blogger = require('./blogger').Blogger;
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -23,13 +25,6 @@ const userSchema = new Schema({
         type: Date, 
         default: Date.now()
     }
-    // googleProvider: {
-    //     type: {
-    //         id: String,
-    //         token: String
-    //     },
-    //     select: false
-    // }
 });
 
 userSchema.set('toJSON', {getters: true, virtuals: true});
@@ -46,10 +41,6 @@ userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
                 email: profile.emails[0].value,
                 googleId: profile.id,
                 accessToken: accessToken
-                // googleProvider: {
-                //     id: profile.id,
-                //     token: accessToken
-                // }
             });
 
             newUser.save(function(error, savedUser) {
@@ -65,7 +56,17 @@ userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
     });
   };
 
-    const User = mongoose.models.User || mongoose.model("User", userSchema);
+// userSchema.post('save', function(userSaved, next){
 
-    module.exports = User;
+//     blogger
+//         .findOne({email: userSaved.email})
+//         .update( {$set: {user: userSaved._id}} )
+//         .next()
+//         .catch(err, () => console.log(err));
     
+// });
+
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+
+module.exports = User;
+

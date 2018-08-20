@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
 // import bloggerApi from "../../Utils/bloggerApi";
 import { Link } from "react-router-dom";
+//import Login from "../Login";
+
 // import { Input, FormBtn } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
@@ -12,16 +14,49 @@ import "./Home.css";
 
 class Home extends Component {
   state = {
+    isAuthenticated: false,
     blogs: [],
     topic: "",
     content: "",
     imageSrc: "",
-    created_dt: ""
+    created_dt: "",
+    currentUser: undefined
   };
+
+  componentWillMount() {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.setState({currentUser: userInfo});  
+      this.setState({isAuthenticated: true});
+    } else {
+      this.setState({isAuthenticated: false});
+    }
+  }
 
   componentDidMount() {
     this.loadBlogs();
   }
+
+  setUserInfo = user => {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
+
+  // getCurrentUser = () => {
+  //   const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
+  //   const currentUser = {
+  //     _id: sessionValues._id,
+  //     displayName: sessionValues.displayName,
+  //     email: sessionValues.email,
+  //     googleId: sessionValues.googleId,
+  //     accessToken: sessionValues.accessToken
+  //   };
+  //   console.log('currentUser: ', currentUser);
+  //    this.setState({currentUser: currentUser});
+  // }
 
   loadBlogs = () => {
     blogApi
@@ -37,15 +72,6 @@ class Home extends Component {
       )
       .catch(err => console.log(err));
   };
-
-  // DO THIS ONCE WE HAVE BLOGGERS FIGURED OUT
-  // loadBloggers = () => {
-  //   bloggerApi.getBloggers()
-  //   .then( res =>
-  //   this.setState({
-
-  //   }))
-  // }
 
   render() {
     return (
