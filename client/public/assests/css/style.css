@@ -2,6 +2,7 @@
 -------------------------------------------------- */
 html, body {
   box-sizing: border-box;
+  font-family: 'Questrial', sans-serif;
 }
 img {
   display: block;
