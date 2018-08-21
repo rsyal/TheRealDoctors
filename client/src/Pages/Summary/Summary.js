@@ -27,10 +27,8 @@ class Summary extends Component {
     if (userInfo) {
       this.setState({currentUser: userInfo});  
       this.setState({isAuthenticated: true});
-      this.loadBlogger(userInfo.bloggerId);
     } else {
       this.setState({isAuthenticated: false});
-      this.loadBlogger(userInfo.bloggerId);
     }
   }
 
@@ -78,8 +76,6 @@ class Summary extends Component {
     if (this.state.blogs) {
       blogApi
         .deleteBlog(id)
-        // .then(blogDeleted => {
-        //   this.setState({blogger: blogDeleted.data});})
         .then(res => this.loadBlogger())
         .catch(err => console.log(err));
     }
@@ -100,20 +96,17 @@ class Summary extends Component {
             <BlogModal text="Add blog"/>
           </Col>
         </Row>
-        <Row>
-          
+        <Row>          
             {!this.state.blogs || !this.state.blogs.length ? (
               <h3 className="textCenter">You haven't posted any blogs</h3>
             ) : (
               <List>
               {this.state.blogger.blogs.map(blog => {
-                //console.log(blog);
                 return (
                   <div key={blog._id}>
                     <ListItem key={blog._id}>
                     <Row>
                       <Col size="sm-3">
-                        {/* <img src={blog.imageSrc} alt={blog.topic} /> */}
                         <img
                           className="card-img-top"
                           src={blog.imageSrc}
