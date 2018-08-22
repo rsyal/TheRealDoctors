@@ -130,19 +130,22 @@ class Detail extends Component {
         {/* Collapsible comment form */}
         <Row>
           <Col size="md-12">
-            <div className="panel panel-default" id="panel2">
-              <div className="panel-heading">
-                <h4 className="panel-title">
-                  <a
-                    data-toggle="collapse"
-                    data-target="#collapseComment"
-                    href="#collapseComment"
-                    className="collapsed"
-                  >
-                    Add a comment
-                  </a>
-                </h4>
-              </div>
+            <div
+              className="panel panel-default text-center"
+              href="#collapseComment"
+              id="panel2"
+            >
+              <Link
+                to="#collapseComment"
+                data-toggle="collapse"
+                data-target="#collapseComment"
+                href="#collapseComment"
+                className="collapsed"
+              >
+                <div className="panel-heading">
+                  <h4 className="panel-title">Add a comment</h4>
+                </div>
+              </Link>
               <div id="collapseComment" className="panel-collapse collapse">
                 <div class="panel-body">
                   <form>

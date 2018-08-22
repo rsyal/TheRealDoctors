@@ -1,15 +1,15 @@
 import React from "react";
+import "./Comment.css";
 const dateformat = require("dateformat");
 
 const Comment = props => (
-  <div className="card" style={{ width: "75%" }}>
-    <div className="card-body">
-      <h5 className="card-title">{props.title}</h5>
-      <h6 className="card-subtitle mb-2 text-muted">Name?</h6>
-      <p className="card-text text-muted">
-        {dateformat(props.date, "mmmm dS, yyyy, h:MM:ss TT")}
+  <div className="comment">
+    <div className="comment-body">
+      <h5 className="comment-title">{props.title}</h5>
+      <p className="comment-text">{props.content}</p>
+      <p className="comment-text text-muted">
+        commented on: {dateformat(props.date, "mmmm dS, yyyy, h:MM:ss TT")}
       </p>
-      <p className="card-text">{props.content}</p>
     </div>
   </div>
 );
