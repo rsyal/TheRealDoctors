@@ -31,7 +31,6 @@ class Detail extends Component {
 
   // Retrieve a blog with all comments
   componentDidMount() {
-    this.getCurrentUser();
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
@@ -40,19 +39,6 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
-
-  getCurrentUser = () => {
-    const sessionValues = JSON.parse(sessionStorage.getItem("currentUser"));
-    const currentUser = {
-      _id: sessionValues._id,
-      displayName: sessionValues.displayName,
-      email: sessionValues.email,
-      googleId: sessionValues.googleId,
-      accessToken: sessionValues.accessToken
-    };
-    console.log("currentUser: ", currentUser);
-    this.setState({ currentUser: currentUser });
-  };
 
   handleTitleInputChange = event => {
     const title = event.target.value;
@@ -80,18 +66,7 @@ class Detail extends Component {
         ])
       });
 
-      // console.log(this.state);
-
       blogApi
-        // .updateBlog({
-        //   comments: [
-        //     {
-        //       title: this.state.blog.comments.title,
-        //       content: this.state.blog.comments.content
-        //     }
-        //   ]
-        // })
-
         .updateBlog(this.state.blog._id, {
           title: this.state.newCommentTitle,
           content: this.state.newCommentBody
@@ -105,7 +80,6 @@ class Detail extends Component {
 
   handleTitleChange = event => {
     event.preventDefault();
-    console.log(this.state);
     if (this.state.blog.comments.title && this.state.blog.comments.content) {
       blogApi
         .updateBlog({
@@ -124,8 +98,6 @@ class Detail extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <Container>
         <Row>
@@ -145,11 +117,6 @@ class Detail extends Component {
             <p className="blog-content">{this.state.blog.content}</p>
           </Col>
         </Row>
-        {/* <Row>
-          <Col size="xs-12">
-            <p>{this.state.blog.content}</p>
-          </Col>
-        </Row> */}
         <Row>
           <Col size="md-12">
             <Link to="/">← Back to Blogs</Link>
