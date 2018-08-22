@@ -10,11 +10,11 @@ The Real Doctors was created to bridge this gap between people and medical docto
 
 ## Technologies Used
 
-*React For UI
-*Bootstrap 4 for UI
-*Node.js
-*Express for routing
-*Third party API Authentication of doctor credentials
-*MongoDB
-*Heroku for Deployment
-*Google Auth
+- React For UI
+- Bootstrap 4 for UI
+- Node.js
+- Express for routing
+- Third party API Authentication of doctor credentials
+- MongoDB
+- Heroku for Deployment
+- Google Auth
