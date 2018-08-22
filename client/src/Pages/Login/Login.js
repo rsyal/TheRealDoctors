@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import bloggerApi from "../../Utils/bloggerApi";
 import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-// import { Col, Row, Container } from "../../Components/Grid";
-
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import config from "./config.json";
 import "./Login.css";
@@ -11,16 +9,15 @@ import "./Login.css";
 class Login extends Component {
   state = {
     isAuthenticated: false,
-    //user: undefined,
     token: undefined,
     currentUser: undefined
   };
 
   callbackURL = () => {
     let callbackURL = undefined;
-    if (process.env.NODE_ENV === "heroku_production") {
-      callbackURL = process.env.HEROKU_PRODUCTION_SERVER;
-    } else if (process.env.NODE_ENV === "development") {
+    if (config.ENVIRONMENT === "heroku_production") {
+      callbackURL = config.HEROKU_PRODUCTION_SERVER;
+    } else if (config.ENVIRONMENT === "development") {
       callbackURL = "http://localhost:3002/api/v1/auth/google";
     }
     return callbackURL;
@@ -69,7 +66,6 @@ class Login extends Component {
       cache: "default"
     };
 
-    // fetch("http://localhost:3002/api/v1/auth/google", options).then(r => {
     fetch(this.callbackURL(),options).then(r => {
     console.log("r ", r);
       const token = r.headers.get("x-auth-token");
