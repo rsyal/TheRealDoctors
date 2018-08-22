@@ -1,5 +1,6 @@
-#The Real Doctors
-###A React app
+# The Real Doctors
+
+### A React app
 
 Check out our deployed version [here](https://the-real-doctors.herokuapp.com/).
 
@@ -7,7 +8,8 @@ A google search for a medical condition brings up the most popular instead of th
 
 The Real Doctors was created to bridge this gap between people and medical doctors. All of the articles are written by board certified physicians. Whether it's an opinion piece or comments about a medical study, all the material is guaranteed to be written by doctors.
 
-##Technologies Used
+## Technologies Used
+
 React For UI
 Bootstrap 4 for UI
 Node.js
