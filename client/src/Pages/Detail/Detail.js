@@ -14,9 +14,7 @@ class Detail extends Component {
   state = {
     currentUser: {},
     blog: {
-      blogger: {
-        // user: {}
-      },
+      blogger: {},
       comments: [
         {
           title: "",
@@ -39,19 +37,6 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
-
-  // getCurrentUser = () => {
-  //   const sessionValues = JSON.parse(sessionStorage.getItem("currentUser"));
-  //   const currentUser = {
-  //     _id: sessionValues._id,
-  //     displayName: sessionValues.displayName,
-  //     email: sessionValues.email,
-  //     googleId: sessionValues.googleId,
-  //     accessToken: sessionValues.accessToken
-  //   };
-  //   console.log("currentUser: ", currentUser);
-  //   this.setState({ currentUser: currentUser });
-  // };
 
   handleTitleInputChange = event => {
     const title = event.target.value;
@@ -79,17 +64,6 @@ class Detail extends Component {
         ])
       });
 
-      // console.log(this.state);
-
-
-        // .updateBlog({
-        //   comments: [
-        //     {
-        //       title: this.state.blog.comments.title,
-        //       content: this.state.blog.comments.content
-        //     }
-        //   ]
-        // })
       commentApi
         .saveComment({
           blogId: this.state.blog._id,

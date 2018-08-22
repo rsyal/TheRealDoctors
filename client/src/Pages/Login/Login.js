@@ -26,7 +26,7 @@ class Login extends Component {
     return callbackURL;
   };
   
-  componentWillMount() {
+  componentDidMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
       this.setState({currentUser: userInfo});  
@@ -91,7 +91,7 @@ class Login extends Component {
           this.setState({ isAuthenticated: true, currentUser, token });
           this.setUserInfo(currentUser);
         }
-        this.props.history.push("/Summary");
+        this.props.history.push("/");
       });
     });
   };
