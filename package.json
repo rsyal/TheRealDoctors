@@ -19,6 +19,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@fortawesome/react-fontawesome": "^0.1.2",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
@@ -28,13 +31,16 @@
     "express-jwt": "^5.3.1",
     "express-server": "^0.7.0",
     "express-server-utils": "^1.1.0",
+    "i": "^0.3.6",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.6",
     "morgan": "^1.9.0",
-    "npm": "^6.3.0",
+    "npm": "^6.4.0",
     "passport": "^0.4.0",
     "passport-google-token": "^0.1.2",
     "path": "^0.12.7",
+    "react-social-icons": "^3.0.0",
+    "react-social-media-icons": "^1.0.3",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
     "utils": "^0.3.1"
