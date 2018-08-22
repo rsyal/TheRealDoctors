@@ -1,13 +1,13 @@
 require("dotenv").config();
 const app = require('./app');
-//const express = require("express");
+const express = require("express");
 //const path = require("path");
 //const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./Routes");
 const PORT = process.env.PORT || 3002;
-const http = require('http');
 app.set('port', PORT);
+const http = require('http');
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

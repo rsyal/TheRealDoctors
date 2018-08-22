@@ -29,8 +29,7 @@ class BlogPost extends Component {
           topic: this.state.topic,
           content: this.state.content,
           imageSrc: this.state.imageSrc,
-          created_at: this.state.created_at,
-          comments: []
+          created_at: this.state.created_at
         })
         .then(dbBlogger => {
           console.log(dbBlogger.data);

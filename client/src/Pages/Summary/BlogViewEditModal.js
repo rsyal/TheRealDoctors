@@ -35,8 +35,7 @@ class BlogViewEditModal extends React.Component {
         <Modal show={this.state.show} handleClose={this.handleCloseModal} btntext="Close"  >
          <BlogViewEdit blogContextDown={this.state.blogContext} transferStateEdit={this.transferStateValues}  />
         </Modal>
-        <Button onClick={this.handleOpenModal} className="btn btn-warning btn-sm mr-1" btntext="Edit" />
-        {/* <Button onClick={this.handleDeleteBlog} className="btn btn-sm btn-danger" btntext="Delete"></Button> */}
+        <Button onClick={this.handleOpenModal} className="btn btn-secondary btn-sm mr-1 mb-1" btntext="Edit blog" />
       </div>
     );
   }

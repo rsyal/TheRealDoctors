@@ -16,6 +16,16 @@ class Login extends Component {
     currentUser: undefined
   };
 
+  callbackURL = () => {
+    let callbackURL = undefined;
+    if (process.env.NODE_ENV === "heroku_production") {
+      callbackURL = process.env.HEROKU_PRODUCTION_SERVER;
+    } else if (process.env.NODE_ENV === "development") {
+      callbackURL = "http://localhost:3002/api/v1/auth/google";
+    }
+    return callbackURL;
+  };
+  
   componentWillMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
@@ -26,13 +36,6 @@ class Login extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   if (this.state.currentUser) {
-  //     this.loadBlogger(this.state.currentUser.email);
-  //     this.loadBlogs(this.state.blogger._id);
-  //   }
-  // }
-
   setUserInfo = user => {
     sessionStorage.setItem("currentUser", JSON.stringify(user));
   };
@@ -40,22 +43,6 @@ class Login extends Component {
   getUserInfo = () => {
     return JSON.parse(sessionStorage.getItem("currentUser"));
   };
-
-  // getCurrentUser = () => {
-  //   const sessionValues = this.getUserInfo();;
-  //   //let currentUser = null;
-  //   if (sessionValues) {
-  //     // currentUser = {
-  //     //   _id: sessionValues._id,
-  //     //   displayName: sessionValues.displayName,
-  //     //   email: sessionValues.email,
-  //     //   googleId: sessionValues.googleId,
-  //     //   accessToken: sessionValues.accessToken
-  //     // };
-  //     this.setState({currentUser: sessionValues});
-  //   }
-  //   console.log('currentUser: ', currentUser); 
-  // }
 
   logout = () => {
     this.setState({ isAuthenticated: false, token: "", currentUser: null });
@@ -82,8 +69,9 @@ class Login extends Component {
       cache: "default"
     };
 
-    fetch("http://localhost:3002/api/v1/auth/google", options).then(r => {
-      console.log("r ", r);
+    // fetch("http://localhost:3002/api/v1/auth/google", options).then(r => {
+    fetch(this.callbackURL(),options).then(r => {
+    console.log("r ", r);
       const token = r.headers.get("x-auth-token");
       console.log("token ", token);
       r.json().then(currentUser => {

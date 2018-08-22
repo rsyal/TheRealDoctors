@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-// import commentApi from "../../Utils/commentApi";
+import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
 import { Input, FormBtn, TextArea } from "../../Components/Form";
 // import { List, ListItem } from "../../Components/List";
@@ -15,7 +15,7 @@ class Detail extends Component {
     currentUser: {},
     blog: {
       blogger: {
-        user: {}
+        // user: {}
       },
       comments: [
         {
@@ -31,7 +31,6 @@ class Detail extends Component {
 
   // Retrieve a blog with all comments
   componentDidMount() {
-    this.getCurrentUser();
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
@@ -41,18 +40,18 @@ class Detail extends Component {
       .catch(err => console.log(err));
   }
 
-  getCurrentUser = () => {
-    const sessionValues = JSON.parse(sessionStorage.getItem("currentUser"));
-    const currentUser = {
-      _id: sessionValues._id,
-      displayName: sessionValues.displayName,
-      email: sessionValues.email,
-      googleId: sessionValues.googleId,
-      accessToken: sessionValues.accessToken
-    };
-    console.log("currentUser: ", currentUser);
-    this.setState({ currentUser: currentUser });
-  };
+  // getCurrentUser = () => {
+  //   const sessionValues = JSON.parse(sessionStorage.getItem("currentUser"));
+  //   const currentUser = {
+  //     _id: sessionValues._id,
+  //     displayName: sessionValues.displayName,
+  //     email: sessionValues.email,
+  //     googleId: sessionValues.googleId,
+  //     accessToken: sessionValues.accessToken
+  //   };
+  //   console.log("currentUser: ", currentUser);
+  //   this.setState({ currentUser: currentUser });
+  // };
 
   handleTitleInputChange = event => {
     const title = event.target.value;
@@ -82,7 +81,7 @@ class Detail extends Component {
 
       // console.log(this.state);
 
-      blogApi
+
         // .updateBlog({
         //   comments: [
         //     {
@@ -91,8 +90,9 @@ class Detail extends Component {
         //     }
         //   ]
         // })
-
-        .updateBlog(this.state.blog._id, {
+      commentApi
+        .saveComment({
+          blogId: this.state.blog._id,
           title: this.state.newCommentTitle,
           content: this.state.newCommentBody
         })
