@@ -15,7 +15,15 @@ class Login extends Component {
     token: undefined,
     currentUser: undefined
   };
-
+  callbackURL = () => {
+    let callbackURL = undefined;
+    if (process.env.NODE_ENV === "heroku_production") {
+      callbackURL = process.env.HEROKU_PRODUCTION_SERVER;
+    } else if (process.env.NODE_ENV === "development") {
+      callbackURL = "http://localhost:3002/api/v1/auth/google";
+    }
+    return callbackURL;
+  };
   componentWillMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
@@ -82,8 +90,9 @@ class Login extends Component {
       cache: "default"
     };
 
-    fetch("http://localhost:3002/api/v1/auth/google", options).then(r => {
-      console.log("r ", r);
+    // fetch("http://localhost:3002/api/v1/auth/google", options).then(r => {
+    fetch(this.callbackURL(),options).then(r => {
+    console.log("r ", r);
       const token = r.headers.get("x-auth-token");
       console.log("token ", token);
       r.json().then(currentUser => {
