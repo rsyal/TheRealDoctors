@@ -3,6 +3,7 @@ import blogApi from "../../Utils/blogApi";
 // import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
 import { Input, FormBtn, TextArea } from "../../Components/Form";
+import bloggerApi from "../../Utils/bloggerApi";
 // import { List, ListItem } from "../../Components/List";
 // import  SaveBtn  from "../../Components/SaveBtn";
 // import  Jumbotron  from "../../Components/Jumbotron";
@@ -31,6 +32,11 @@ class Detail extends Component {
 
   // Retrieve a blog with all comments
   componentDidMount() {
+    this.loadBlog();
+    this.loadBlogger();
+  }
+
+  loadBlog = () => {
     blogApi
       .getBlog(this.props.match.params.id)
       .then(res => {
@@ -38,7 +44,18 @@ class Detail extends Component {
         return this.setState({ blog: res.data });
       })
       .catch(err => console.log(err));
-  }
+  };
+
+  loadBlogger = bloggerQuery => {
+    bloggerApi
+      .getBlogger({ query: { _id: bloggerQuery } })
+      .then(res => {
+        const author = res.data[0].firstName + " " + res.data[0].lastName;
+        // console.log(author);
+        return this.setState({ blogger: author });
+      })
+      .catch(err => console.log(err));
+  };
 
   handleTitleInputChange = event => {
     const title = event.target.value;
@@ -103,7 +120,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
-            <h2>By Dr. {this.state.currentUser.displayName}</h2>
+            <h2>By Dr. {this.state.blogger}</h2>
           </Col>
         </Row>
         <Row>
