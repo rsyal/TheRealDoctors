@@ -6,7 +6,8 @@ import { List, ListItem } from "../../Components/List";
 import { Col, Row, Container } from "../../Components/Grid";
 import Button from '../../Components/Button';
 import BlogModal from "./BlogModal";
-import BlogViewEditModal from "./BlogViewEditModal";
+import PanelEdit from "../Components/PanelEdit";
+import SummaryBlog from "../../Components/SummaryBlog";
 import CommentReadModal from "./CommentReadModal";
 import './Summary.css';
 const dateformat = require('dateformat');
@@ -78,15 +79,35 @@ class Summary extends Component {
       .catch(err => console.log(err));
   };
 
-  hardReload = (blogEditContext) => {
-    this.setState({blogContext: blogEditContext});   
-  }
+   // load blogs for the given blogger and comments for each blogs
+   refreshBlogs = () => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  refreshBlogById = id => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
 
   handleDeleteBlog = (id) => {
     if (this.state.blogs) {
       blogApi
         .deleteBlog(id)
-        .then(res => this.loadBlogger())
+        .then(res => this.refreshBlogs())
         .catch(err => console.log(err));
     }
 
@@ -133,10 +154,41 @@ class Summary extends Component {
                     <span>
                     <label style={{float:"right", dispaly:"in-line"}}>
                         <CommentReadModal blogContext={blog}/>
-                        <BlogViewEditModal blogContext={blog} callbackFromSummary= {this.hardReload} />
-                        <Button onClick={() => this.handleDeleteBlog(blog._id)} className="btn btn-sm btn-secondary" btntext="Delete blog"></Button>
+                        {/* <BlogViewEditModal blogContext={blog} /> */}
+
+                        {/* <div className="panel panel-default" id="panel2">
+                        <div className="panel-heading">
+                          <h4 className="panel-title"> */}
+                          <span blogContext={blog} >
+                            <Button 
+                              key={blog._id}
+                              data-toggle="collapse"
+                              // data-target="#('collapsable' + '_' + blog._id)"
+                              // href="#('collapsable' + '_' + blog._id)"
+                              data-target="#collapsable"
+                              href="#collapsable"
+                              collapsableId={'collapsable'+'_'+blog._id}
+                              className="collapsed btn btn-secondary btn-sm" 
+                              btntext="Edit blog" />
+                          </span>
+                          {/* </h4>
+                        </div> */}
+                        <PanelEdit />
+                        <Button onClick={() => this.handleDeleteBlog(blog._id)} className="btn btn-sm btn-secondary mt-1" btntext="Delete blog"></Button>
                       </label></span>
                     </Col>
+                  </Row>
+                  <Row>
+                    <Col size="sm-3">
+
+                    </Col>
+                    <Col size="sm-9">
+                        <SummaryBlog blogContext={blog}/>
+                    </Col>
+                    {/* <Col size="sm-2">
+                        <Button btntext="Save" />
+                        <Button btntext="Cancel" />
+                    </Col> */}
                   </Row>
                   </ListItem>
                 </div>

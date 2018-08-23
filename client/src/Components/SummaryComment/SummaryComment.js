@@ -1,6 +1,7 @@
 import React from "react";
 const dateformat = require("dateformat");
 
+// component called on reading blog
 const SummaryComment = props => (
   <div className="card" style={{border: "0", width: "100%"}} >
     <div className="card-body">

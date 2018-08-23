@@ -9,7 +9,9 @@ blogsRouter
   .post(blogsController.create);
 
 // routes for "/api/blogs/query"
-blogsRouter.route("/query/:query").get(blogsController.findAll);
+// blogsRouter
+//   .route("/query/:query")
+//   .get(blogsController.findAll);
 
 // routes for "/api/blogs/:id"
 blogsRouter
@@ -18,6 +20,8 @@ blogsRouter
   .put(blogsController.update)
   .delete(blogsController.remove);
 
-blogsRouter.route("/comment/:id").post(commentController.create);
+blogsRouter
+  .route("/comment/:id")
+  .post(commentController.create);
 
 module.exports = blogsRouter;

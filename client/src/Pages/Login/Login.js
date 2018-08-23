@@ -79,8 +79,8 @@ class Login extends Component {
           }
         }).then(blogger => bloggerApi.updateBlogger(blogger.data[0]._id, {user: currentUser._id}))
           .then(res => {
-            console.log(res.data._id);
             currentUser.bloggerId = res.data._id;
+            console.log('Login fetch bloggerId in currentUser ', currentUser.bloggerId);         
             })
 
         if (token) {

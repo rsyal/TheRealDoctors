@@ -4,7 +4,7 @@ import Modal from '../../Components/Modal';
 import { withRouter } from "react-router-dom";
 //import BlogPost from './BlogPost';
 import Button from '../../Components/Button';
-import BlogViewEdit from './BlogViewEdit';
+import BlogEdit from './BlogEdit';
 import './Summary.css';
 
 class BlogViewEditModal extends React.Component {
@@ -33,7 +33,7 @@ class BlogViewEditModal extends React.Component {
     return (
       <div>
         <Modal show={this.state.show} handleClose={this.handleCloseModal} btntext="Close"  >
-         <BlogViewEdit blogContextDown={this.state.blogContext} transferStateEdit={this.transferStateValues}  />
+         <BlogEdit blogContextDown={this.state.blogContext} transferStateEdit={this.transferStateValues}  />
         </Modal>
         <Button onClick={this.handleOpenModal} className="btn btn-secondary btn-sm mr-1 mb-1" btntext="Edit blog" />
       </div>

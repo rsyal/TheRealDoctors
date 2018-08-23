@@ -14,6 +14,10 @@ class BlogPost extends Component {
     comments: []
   }
 
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -26,6 +30,7 @@ class BlogPost extends Component {
     if (this.state.topic && this.state.content) {
       blogApi
         .saveBlog({
+          bloggerId: this.getUserInfo().currentUser.bloggerId,
           topic: this.state.topic,
           content: this.state.content,
           imageSrc: this.state.imageSrc,

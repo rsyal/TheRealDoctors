@@ -22,7 +22,10 @@ module.exports = {
     db.Comment
       .create(req.body)
       .then(dbComment => {
-        return db.Blog.findOneAndUpdate({_id:req.body.blogId}, { $push: { comments: dbComment._id }},  { new: true } );
+        return db.Blog.findOneAndUpdate(
+          {_id:req.body.blogId}, 
+          { $push: { comments: dbComment._id }},  
+          { new: true } );
        })
       .then(dbBlog => res.json(dbBlog))
       .catch(err => res.status(422).json(err));

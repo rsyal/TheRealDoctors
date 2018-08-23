@@ -4,7 +4,7 @@ import blogApi from "../../Utils/blogApi";
 import { Col, Row, Container } from "../../Components/Grid";
 import { Input, TextArea, FormBtn } from "../../Components/Form";
 
-class BlogViewEdit extends Component {
+class BlogEdit extends Component {
 
   constructor(props) {
     super(props);
@@ -38,20 +38,8 @@ class BlogViewEdit extends Component {
         .catch(err => console.log(err));
     }
 
-    this.transferEdit();
     this.props.history.push("/");
   };
-
-  transferEdit = () => {
-    this.props.transferStateEdit({blogEditContext: {
-      _id: this.state._id,
-      topic: this.state.topic,
-      content: this.state.content,
-      imageSrc: this.state.imageSrc,
-      created_dt: this.state.created_dt,
-      comments: []
-    }})
-  }
 
   render() {
     return (
@@ -92,4 +80,4 @@ class BlogViewEdit extends Component {
   }
 }
 
-export default withRouter(BlogViewEdit);
+export default withRouter(BlogEdit);

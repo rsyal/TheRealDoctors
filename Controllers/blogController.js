@@ -6,7 +6,7 @@ module.exports = {
     db.Blog.find(req.query)
       .populate("blogger")
       .populate("comments")
-      .sort({ date: -1 })
+      .sort({ created_dt: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.Status(422).json(err));
   },
@@ -21,7 +21,7 @@ module.exports = {
     db.Blog.create(req.body)
       .then(dbBlog =>
         db.Blogger.findOneAndUpdate(
-          {},
+          {_id:req.body.bloggerId},
           { $push: { blogs: dbBlog._id } },
           { new: true }
         )
