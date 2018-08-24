@@ -8,5 +8,6 @@
 }
 
 .card-body {
-  background-color: #dbe2eb;
+  background-color: #fff;
+  border-radius: 5px;
 }
