@@ -23,19 +23,19 @@ const Footer = () => (
         <div className="col-md-4 col-xs-12 social-icons">
           <SocialIcon
             url="mailto:therealdoctors1@gmail.com"
-            color="#fff"
+            color="#33bbff"
             className="email-icon"
           />
           &nbsp;&nbsp;&nbsp;
           <SocialIcon
             url="https://m.facebook.com/The-Real-Doctors-2128813360720648/"
-            color="#fff"
+            color="#ff4d4d"
             className="fb-icon"
           />
           &nbsp;&nbsp;&nbsp;
           <SocialIcon
             url="https://twitter.com/doctors_real"
-            color="#fff"
+            color="#4d94ff"
             className="twitter-icon"
           />
         </div>
