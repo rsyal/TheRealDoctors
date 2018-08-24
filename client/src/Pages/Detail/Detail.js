@@ -92,6 +92,8 @@ class Detail extends Component {
           console.log(dbComments.data);
         })
         .catch(err => console.log(err));
+      console.log(this.state.blog._id);
+      this.props.history.push("/blogs/" + this.state.blog._id);
     }
   };
 
