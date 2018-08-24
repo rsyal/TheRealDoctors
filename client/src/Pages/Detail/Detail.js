@@ -270,8 +270,9 @@ class Detail extends Component {
                   console.log(comment);
                   return (
                     <Row>
-                      <Col size="md-2" />
-                      <Col size="md-8">
+                      {/* <Col size="md-2" />
+                      <Col size="md-8"> */}
+                      <Col size="md-12">
                         <Comment
                           className="comment-card"
                           key={comment._id}
@@ -279,8 +280,9 @@ class Detail extends Component {
                           content={comment.content}
                           date={comment.created_dt}
                         />
-                      </Col>
-                      <Col size="md-2" />
+                        </Col>
+                      {/* </Col>
+                      <Col size="md-2" /> */}
                     </Row>
                   );
                 })
