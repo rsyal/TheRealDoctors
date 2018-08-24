@@ -5,6 +5,13 @@
 .topic-style {
   padding-top: 35px;
   padding-bottom: 5px;
+  line-height: 2em;
+  letter-spacing: 0.05em;
+}
+
+.blog-content {
+  background-color: #fff;
+  padding: 130px;
 }
 
 .author-style {

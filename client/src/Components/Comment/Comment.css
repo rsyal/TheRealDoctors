@@ -1,9 +1,8 @@
 .comment {
   position: relative;
-  /* left: 12.5%; */
   /* margin-top: 15px; */
   margin-bottom: 15px;
-  /* width: 75%; */
+  width: 100%;
   border: 1px solid rgb(216, 216, 216);
   border-radius: 5px;
 }
