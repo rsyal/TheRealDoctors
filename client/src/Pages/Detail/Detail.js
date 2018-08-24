@@ -194,7 +194,7 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-12">
-            <div className="comment-deck">
+            {/* <div className="comment-deck"> */}
               {!this.state.blog.comments || !this.state.blog.comments.length ? (
                 <h1 className="text-center">
                   There are no comments to this post yet.
@@ -204,8 +204,8 @@ class Detail extends Component {
                   console.log(comment);
                   return (
                     <Row>
-                      <Col size="md-2" />
-                      <Col size="md-8">
+                      {/* <Col size="md-2" /> */}
+                      <Col size="md-12">
                         <Comment
                           className="comment-card"
                           key={comment._id}
@@ -214,12 +214,12 @@ class Detail extends Component {
                           date={comment.created_dt}
                         />
                       </Col>
-                      <Col size="md-2" />
+                      {/* <Col size="md-2" /> */}
                     </Row>
                   );
                 })
               )}
-            </div>
+            {/* </div> */}
           </Col>
         </Row>
       </Container>
