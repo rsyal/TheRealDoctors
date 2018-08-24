@@ -30,10 +30,10 @@ class Detail extends Component {
   componentWillMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
-      this.setState({currentUser: userInfo});  
-      this.setState({isAuthenticated: true});
+      this.setState({ currentUser: userInfo });
+      this.setState({ isAuthenticated: true });
     } else {
-      this.setState({isAuthenticated: false});
+      this.setState({ isAuthenticated: false });
     }
   }
 
@@ -56,14 +56,14 @@ class Detail extends Component {
     return JSON.parse(sessionStorage.getItem("currentUser"));
   };
 
-   // load both blogger and blogs that belong to the blogger
-   loadBlogger = (bloggerId) => {
+  // load both blogger and blogs that belong to the blogger
+  loadBlogger = bloggerId => {
     bloggerApi
-      .getBlogger({query: {_id: bloggerId}})
+      .getBlogger({ query: { _id: bloggerId } })
       .then(res => {
-        const blogger = res.data[0];   
-        const blogs = res.data[0].blogs;   
-        this.setState({blogger: res.data[0]});
+        const blogger = res.data[0];
+        const blogs = res.data[0].blogs;
+        this.setState({ blogger: res.data[0] });
         console.log("blogs in Summary ", blogs);
         console.log("blogger in Summary ", blogger);
       })
@@ -71,12 +71,12 @@ class Detail extends Component {
   };
 
   // load blogs for the given blogger and comments for each blogs
-  loadBlogs = (bloggerId) => {
+  loadBlogs = bloggerId => {
     blogApi
       .getBlogs(bloggerId)
       .then(res => {
-        const blogs = res.data;  
-        this.setState({blogs: res.data});
+        const blogs = res.data;
+        this.setState({ blogs: res.data });
         console.log("blogs by loadBlogs in Summary ", blogs);
       })
       .catch(err => console.log(err));
@@ -87,18 +87,18 @@ class Detail extends Component {
     blogApi
       .getBlogs()
       .then(res => {
-        const blogs = res.data;  
-        this.setState({blogs: res.data});
+        const blogs = res.data;
+        this.setState({ blogs: res.data });
         console.log("blogs by refreshBlogs in Summary ", blogs);
       })
       .catch(err => console.log(err));
   };
-  refreshBlog = (id) => {
+  refreshBlog = id => {
     blogApi
       .getBlogById(id)
       .then(res => {
-        const blog = res.data;  
-        this.setState({blog: res.data});
+        const blog = res.data;
+        this.setState({ blog: res.data });
         console.log("blog by refreshBlog in Detail ", blog);
       })
       .catch(err => console.log(err));
@@ -109,8 +109,8 @@ class Detail extends Component {
     blogApi
       .getBlogs()
       .then(res => {
-        const blogs = res.data;  
-        this.setState({blogs: res.data});
+        const blogs = res.data;
+        this.setState({ blogs: res.data });
         console.log("blogs by refreshBlogs in Summary ", blogs);
       })
       .catch(err => console.log(err));
@@ -184,16 +184,17 @@ class Detail extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <h1 className="topic-style">{this.state.blog.topic}</h1>
+            <h1 className="topic-style text-uppercase text-center">
+              {this.state.blog.topic}
+            </h1>
             {/* <h2>By {this.state.currentUser.displayName}</h2> */}
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
             <img
-              className="float-left mr-3 mb-3"
+              className="mr-3 mb-3"
               src={this.state.blog.imageSrc}
-              width="463px"
               alt={this.state.blog.topic}
             />
             <p className="blog-content">{this.state.blog.content}</p>
@@ -217,7 +218,7 @@ class Detail extends Component {
         {/* Collapsible comment form */}
         <Row>
           <Col size="md-12">
-            <div className="panel panel-default" id="panel2">
+            <div className="panel panel-default text-center" id="panel2">
               <div className="panel-heading">
                 <h4 className="panel-title">
                   <a

@@ -4,18 +4,32 @@
   display: flex;
 }
 .login-button {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  background: red;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  background: #353a3f;
   color: white;
+  padding: 5px 10px;
 }
+
+.login-button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
 .logout-button {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
   background: white;
   color: black;
+  padding: 5px 10px;
+}
+
+.nav-item {
+  padding: 8px;
+  margin-left: 15px;
 }
 /* button.google-login {
   font-size: 10pt;
