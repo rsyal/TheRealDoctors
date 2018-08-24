@@ -15,6 +15,18 @@ body {
   padding: 130px;
 }
 
+@media screen and (max-width: 972px) {
+  .about-body {
+    padding: 100px;
+  }
+}
+
+@media screen and (max-width: 783px) {
+  .about-body {
+    padding: 35px;
+  }
+}
+
 .about-text {
   font-size: 19px;
   line-height: 1.368em;

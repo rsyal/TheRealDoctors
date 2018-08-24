@@ -14,6 +14,18 @@
   padding: 130px;
 }
 
+@media screen and (max-width: 972px) {
+  .blog-content {
+    padding: 100px;
+  }
+}
+
+@media screen and (max-width: 783px) {
+  .blog-content {
+    padding: 35px;
+  }
+}
+
 .author-style {
   padding-bottom: 15px;
 }

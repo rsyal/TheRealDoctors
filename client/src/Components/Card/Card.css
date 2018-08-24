@@ -1,6 +1,7 @@
 .card {
   width: 18rem;
   height: 19rem;
+  padding: 0;
 }
 
 .card-img-top {

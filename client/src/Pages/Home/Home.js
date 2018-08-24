@@ -6,13 +6,16 @@ import Jumbotron from "../../Components/Jumbotron/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Card from "../../Components/Card";
 import "./Home.css";
+const dateformat = require("dateformat");
 
 class Home extends Component {
   state = {
     isAuthenticated: false,
-    blogs: [{
-      comments:[{}]
-    }],
+    blogs: [
+      {
+        comments: [{}]
+      }
+    ],
     topic: "",
     content: "",
     imageSrc: "",
@@ -66,7 +69,7 @@ class Home extends Component {
             <Col size="md-12">
               <div
                 id="blogs"
-                className="mx-auto card-deck d-flex justify-content-between align-items-stretch"
+                className="mx-auto card-deck d-flex justify-content-center align-items-stretch"
               >
                 {!this.state.blogs.length ? (
                   <h1 className="text-center"> No recent blogs</h1>
@@ -75,14 +78,29 @@ class Home extends Component {
                     console.log(blog);
                     return (
                       <Link to={"/blogs/" + blog._id} key={blog._id}>
-                        <Card
-                          key={blog._id}
-                          topic={blog.topic}
-                          content={blog.content}
-                          src={blog.imageSrc}
-                          alt={blog.topic}
-                          date={blog.created_dt}
-                        />
+                        <div className="hovereffect">
+                          <Card
+                            key={blog._id}
+                            topic={blog.topic}
+                            content={blog.content}
+                            src={blog.imageSrc}
+                            alt={blog.topic}
+                            date={blog.created_dt}
+                          />
+                          <div className="overlay">
+                            <h3>
+                              Posted on:{" "}
+                              {dateformat(blog.created_dt, "mmmm dS, yyyy")}
+                            </h3>
+                            <Link
+                              to={"./blogs/" + blog._id}
+                              key={blog._id}
+                              className="info"
+                            >
+                              Read
+                            </Link>
+                          </div>
+                        </div>
                       </Link>
                     );
                   })
