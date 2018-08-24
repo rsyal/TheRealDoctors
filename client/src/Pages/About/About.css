@@ -1,0 +1,25 @@
+body {
+  background-color: #dce2ea;
+}
+
+.about-description {
+  font-family: "Montserrat";
+}
+
+.about-title {
+  font-family: "Montserrat";
+  line-height: 2em;
+  letter-spacing: 0.05em;
+}
+
+.about-body {
+  background-color: #fff;
+  padding: 130px;
+}
+
+.about-text {
+  font-size: 19px;
+  line-height: 1.368em;
+  letter-spacing: 0.05em;
+  font-family: "Montserrat";
+}

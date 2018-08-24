@@ -23,10 +23,10 @@ class Home extends Component {
   componentWillMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
-      this.setState({currentUser: userInfo});  
-      this.setState({isAuthenticated: true});
+      this.setState({ currentUser: userInfo });
+      this.setState({ isAuthenticated: true });
     } else {
-      this.setState({isAuthenticated: false});
+      this.setState({ isAuthenticated: false });
     }
   }
 
@@ -66,7 +66,7 @@ class Home extends Component {
             <Col size="md-12">
               <div
                 id="blogs"
-                className="card-deck d-flex justify-content-center align-items-stretch"
+                className="mx-auto card-deck d-flex justify-content-between align-items-stretch"
               >
                 {!this.state.blogs.length ? (
                   <h1 className="text-center"> No recent blogs</h1>
