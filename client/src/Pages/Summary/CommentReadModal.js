@@ -6,15 +6,15 @@ import { withRouter } from "react-router-dom";
 
 const readStyles = {
   content : {
-    top           : '50%',
-    left          : '50%',
-    right         : 'auto',
-    bottom        : 'auto',
-    marginRight   : '-50%',
-    transform     : 'translate(-50%, -50%)',
-    overlay       : {
-      backgroundColor: 'gray'
-    }
+    // top           : '30%',
+    // left          : '30%',
+    // right         : 'auto',
+    // bottom        : 'auto',
+    // marginRight   : '-30%',
+    // transform     : 'translate(-30%, -30%)',
+    // overlay       : {
+    //   backgroundColor: 'gray'
+    // }
   }
 };
 

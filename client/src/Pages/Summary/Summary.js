@@ -7,8 +7,6 @@ import { Col, Row, Container } from "../../Components/Grid";
 import Button from '../../Components/Button';
 import BlogModal from "./BlogModal";
 import BlogEditModal from "./BlogEditModal";
-import PanelEdit from "../../Components/SummaryBlog"
-import SummaryBlog from "../../Components/SummaryBlog";
 import CommentReadModal from "./CommentReadModal";
 import './Summary.css';
 const dateformat = require('dateformat');

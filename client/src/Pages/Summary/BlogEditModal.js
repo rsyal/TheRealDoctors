@@ -1,7 +1,5 @@
 import React from "react";
 import ReactModal from 'react-modal';
-import Modal from '../../Components/Modal';
-//import blogApi from "../../Utils/blogApi";
 import { withRouter } from "react-router-dom";
 //import BlogPost from './BlogPost';
 import Button from '../../Components/Button';
