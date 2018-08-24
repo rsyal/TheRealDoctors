@@ -10,7 +10,7 @@ const Jumbotron = ({ children }) => (
       <h3 className="header">The Real Doctors</h3>
       <p className="lead">A blog written by board-certified doctors.</p>
       <a href="#blogs">
-        <button type="button" className="btn btn-dark">
+        <button type="button" className="read-button btn btn-dark">
           Read now
         </button>
       </a>

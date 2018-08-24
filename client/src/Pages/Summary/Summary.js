@@ -6,7 +6,8 @@ import { List, ListItem } from "../../Components/List";
 import { Col, Row, Container } from "../../Components/Grid";
 import Button from '../../Components/Button';
 import BlogModal from "./BlogModal";
-import PanelEdit from "../Components/PanelEdit";
+import BlogEditModal from "./BlogEditModal";
+import PanelEdit from "../../Components/SummaryBlog"
 import SummaryBlog from "../../Components/SummaryBlog";
 import CommentReadModal from "./CommentReadModal";
 import './Summary.css';
@@ -20,6 +21,7 @@ class Summary extends Component {
         }]
     },
     blogs: [{
+        blogger: '',
         comments: [{}]
     }],
     isAuthenticated: false,
@@ -40,6 +42,7 @@ class Summary extends Component {
     if (this.state.currentUser) {
       this.loadBlogger(this.state.currentUser.bloggerId);
       this.loadBlogs(this.state.blogger._id);
+      this.state.blogs.forEach(blog => blog.blogger = this.state.currentUser.bloggerId );
       console.log(this.state.blogger);
       console.log(this.state.blogs);
     }
@@ -124,7 +127,7 @@ class Summary extends Component {
         </Row>
         <Row >
           <Col size="sm-12">
-            <BlogModal text="Add blog"/>
+            <BlogModal blogsContext= {this.state.blogs} text="Add blog"/>
           </Col>
         </Row>
         <Row>          
@@ -146,49 +149,18 @@ class Summary extends Component {
                       />
                     </Col>
                     <Col size="sm-7">
-                      <label><strong>{blog.topic}</strong> {dateformat(blog.created_dt, "mmmm dS, yyyy")}</label>                     
-                      
+                      <label><strong>{blog.topic}</strong> {dateformat(blog.created_dt, "mmmm dS, yyyy")}</label>                                       
                       <div><p style={{width:"100%"}} >{blog.content}</p></div>
                     </Col>
                     <Col size="sm-2">
                     <span>
                     <label style={{float:"right", dispaly:"in-line"}}>
                         <CommentReadModal blogContext={blog}/>
-                        {/* <BlogViewEditModal blogContext={blog} /> */}
-
-                        {/* <div className="panel panel-default" id="panel2">
-                        <div className="panel-heading">
-                          <h4 className="panel-title"> */}
-                          <span blogContext={blog} >
-                            <Button 
-                              key={blog._id}
-                              data-toggle="collapse"
-                              // data-target="#('collapsable' + '_' + blog._id)"
-                              // href="#('collapsable' + '_' + blog._id)"
-                              data-target="#collapsable"
-                              href="#collapsable"
-                              collapsableId={'collapsable'+'_'+blog._id}
-                              className="collapsed btn btn-secondary btn-sm" 
-                              btntext="Edit blog" />
-                          </span>
-                          {/* </h4>
-                        </div> */}
-                        <PanelEdit />
-                        <Button onClick={() => this.handleDeleteBlog(blog._id)} className="btn btn-sm btn-secondary mt-1" btntext="Delete blog"></Button>
+                        <BlogEditModal blogContext={blog} />                    
+                        <Button onClick={() => this.handleDeleteBlog(blog._id)} className="btn btn-sm btn-secondary" btntext="Delete blog"></Button>
                       </label></span>
+                      {/* <div><p style={{width:"100%"}} >{blog.content}</p></div> */}
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col size="sm-3">
-
-                    </Col>
-                    <Col size="sm-9">
-                        <SummaryBlog blogContext={blog}/>
-                    </Col>
-                    {/* <Col size="sm-2">
-                        <Button btntext="Save" />
-                        <Button btntext="Cancel" />
-                    </Col> */}
                   </Row>
                   </ListItem>
                 </div>

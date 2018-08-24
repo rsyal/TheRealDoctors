@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
+import bloggerApi from "../../Utils/bloggerApi";
 import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
 import { Input, FormBtn, TextArea } from "../../Components/Form";
-// import { List, ListItem } from "../../Components/List";
-// import  SaveBtn  from "../../Components/SaveBtn";
-// import  Jumbotron  from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Comment from "../../Components/Comment/Comment";
 import "./Detail.css";
 
 class Detail extends Component {
   state = {
-    currentUser: {},
     blog: {
       blogger: {},
       comments: [
         {
+          _id: "",
           title: "",
           content: "",
           created_dt: ""
@@ -24,19 +22,99 @@ class Detail extends Component {
       ]
     },
     newCommentTitle: "",
-    newCommentBody: ""
+    newCommentBody: "",
+    isAuthenticated: false,
+    currentUser: undefined
   };
+
+  componentWillMount() {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.setState({currentUser: userInfo});  
+      this.setState({isAuthenticated: true});
+    } else {
+      this.setState({isAuthenticated: false});
+    }
+  }
 
   // Retrieve a blog with all comments
   componentDidMount() {
     blogApi
-      .getBlog(this.props.match.params.id)
+      .getBlogById(this.props.match.params.id)
       .then(res => {
         console.log(res.data);
         return this.setState({ blog: res.data });
       })
       .catch(err => console.log(err));
   }
+
+  setUserInfo = user => {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
+
+   // load both blogger and blogs that belong to the blogger
+   loadBlogger = (bloggerId) => {
+    bloggerApi
+      .getBlogger({query: {_id: bloggerId}})
+      .then(res => {
+        const blogger = res.data[0];   
+        const blogs = res.data[0].blogs;   
+        this.setState({blogger: res.data[0]});
+        console.log("blogs in Summary ", blogs);
+        console.log("blogger in Summary ", blogger);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  loadBlogs = (bloggerId) => {
+    blogApi
+      .getBlogs(bloggerId)
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by loadBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  refreshBlogs = () => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
+  refreshBlog = (id) => {
+    blogApi
+      .getBlogById(id)
+      .then(res => {
+        const blog = res.data;  
+        this.setState({blog: res.data});
+        console.log("blog by refreshBlog in Detail ", blog);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  refreshBlogById = id => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
 
   handleTitleInputChange = event => {
     const title = event.target.value;
@@ -70,9 +148,11 @@ class Detail extends Component {
           title: this.state.newCommentTitle,
           content: this.state.newCommentBody
         })
-        .then(dbComments => {
-          console.log(dbComments.data);
+        .then(dbComment => {
+          console.log(dbComment.data);
+          this.refreshBlog(this.state.blog._id);
         })
+        // .then(dbComment => this.refreshBlog(dbComment.blog))
         .catch(err => console.log(err));
     }
   };
@@ -105,7 +185,7 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
-            <h2>By Dr. {this.state.currentUser.displayName}</h2>
+            {/* <h2>By {this.state.currentUser.displayName}</h2> */}
           </Col>
         </Row>
         <Row>

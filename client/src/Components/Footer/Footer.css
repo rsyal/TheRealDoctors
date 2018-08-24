@@ -4,5 +4,31 @@
 
 .logo {
   position: relative;
-  top: 50px;
+  top: 35px;
+}
+
+.created-by {
+  padding-top: 15px;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.team-names {
+  font-size: 14px;
+}
+
+.social-icons {
+  margin-top: 35px;
+}
+
+.email-icon,
+.fb-icon,
+.twitter-icon {
+  opacity: 0.5;
+}
+
+.email-icon:hover,
+.fb-icon:hover,
+.twitter-icon:hover {
+  opacity: 0.8;
 }

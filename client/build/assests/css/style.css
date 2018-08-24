@@ -1,0 +1,62 @@
+/* Generic CSS
+-------------------------------------------------- */
+html, body {
+  box-sizing: border-box;
+  font-family: 'Questrial', sans-serif;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+/* CLEAR FIX */
+/* ::  more widely adopted for pseudo elements because it provides support for IE8 */
+.clear-fix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Nav
+-------------------------------------------------- */
+.blog-name {
+  display: flex;
+  align-items: center;
+}
+.logo-nav {
+  height: 1.25rem;
+  margin:0 .5rem 0 0;
+  width: auto;
+}
+
+/* Jumbotron
+-------------------------------------------------- */
+.jumbotron {
+  /* replace url below with local url if group likes this image. I would like to get an image with a female doctor.*/ 
+  /* background-image: url("http://thedoctorsgonzalez.com/wp-content/uploads/2015/06/Dollarphotoclub_69013197.jpg");
+  background-size: cover; */
+
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    
+    margin-top: 56px; /* space for fixed nav */
+    padding-bottom: 2rem; /* space between footer and content */
+    margin-bottom: 60px; /* Margin bottom by footer height */
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+  }
+  
+

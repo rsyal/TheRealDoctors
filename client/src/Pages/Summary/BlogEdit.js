@@ -8,15 +8,27 @@ class BlogEdit extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {     
-      _id: props.blogContextDown._id,
-        topic: props.blogContextDown.topic,
-        content: props.blogContextDown.content,
-        imageSrc: props.blogContextDown.imageSrc,
-        created_dt: props.blogContextDown.created_dt,
-        comments: []
+    this.state = {   
+      blog: props.blogContext,  
+      _id: props.blogContext._id,
+        topic: props.blogContext.topic,
+        content: props.blogContext.content,
+        imageSrc: props.blogContext.imageSrc,
+        created_dt: props.blogContext.created_dt
     }
   };
+
+    // load blogs for the given blogger and comments for each blogs
+    refreshBlogs = (bloggerId) => {
+      blogApi
+        .getBlogs(bloggerId)
+        .then(res => {
+          const blogs = res.data;  
+          this.setState({blogs: res.data});
+          console.log("blogs by refreshBlogs in BlogEdit ", blogs);
+        })
+        .catch(err => console.log(err));
+    };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -26,7 +38,8 @@ class BlogEdit extends Component {
   };
 
   handleFormSubmit = event => {
-    event.preventDefault();
+    //event.preventDefault();
+    let bloggerId = this.state.blog.blogger;
     if (this.state.topic && this.state.content) {
       blogApi
         .updateBlog(this.state._id, {
@@ -35,10 +48,11 @@ class BlogEdit extends Component {
           imageSrc: this.state.mageSrc,
           created_at: this.state.created_at,
         })
+        .then(res => this.refreshBlogs(bloggerId))
         .catch(err => console.log(err));
     }
 
-    this.props.history.push("/");
+    //this.props.history.push("/");
   };
 
   render() {
