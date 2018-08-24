@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
-// import commentApi from "../../Utils/commentApi";
+import bloggerApi from "../../Utils/bloggerApi";
+import commentApi from "../../Utils/commentApi";
 import { Link } from "react-router-dom";
 import { Input, FormBtn, TextArea } from "../../Components/Form";
-import bloggerApi from "../../Utils/bloggerApi";
-// import { List, ListItem } from "../../Components/List";
-// import  SaveBtn  from "../../Components/SaveBtn";
-// import  Jumbotron  from "../../Components/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Comment from "../../Components/Comment/Comment";
 import "./Detail.css";
 
 class Detail extends Component {
   state = {
-    currentUser: {},
     blog: {
-      blogger: {
-        user: {}
-      },
+      blogger: {},
       comments: [
         {
+          _id: "",
           title: "",
           content: "",
           created_dt: ""
@@ -27,32 +22,96 @@ class Detail extends Component {
       ]
     },
     newCommentTitle: "",
-    newCommentBody: ""
+    newCommentBody: "",
+    isAuthenticated: false,
+    currentUser: undefined
   };
+
+  componentWillMount() {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      this.setState({currentUser: userInfo});  
+      this.setState({isAuthenticated: true});
+    } else {
+      this.setState({isAuthenticated: false});
+    }
+  }
 
   // Retrieve a blog with all comments
   componentDidMount() {
-    this.loadBlog();
-    this.loadBlogger();
-  }
-
-  loadBlog = () => {
     blogApi
-      .getBlog(this.props.match.params.id)
+      .getBlogById(this.props.match.params.id)
       .then(res => {
         console.log(res.data);
         return this.setState({ blog: res.data });
       })
       .catch(err => console.log(err));
+  }
+
+  setUserInfo = user => {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
   };
 
-  loadBlogger = bloggerQuery => {
+  getUserInfo = () => {
+    return JSON.parse(sessionStorage.getItem("currentUser"));
+  };
+
+   // load both blogger and blogs that belong to the blogger
+   loadBlogger = (bloggerId) => {
     bloggerApi
-      .getBlogger({ query: { _id: bloggerQuery } })
+      .getBlogger({query: {_id: bloggerId}})
       .then(res => {
-        const author = res.data[0].firstName + " " + res.data[0].lastName;
-        // console.log(author);
-        return this.setState({ blogger: author });
+        const blogger = res.data[0];   
+        const blogs = res.data[0].blogs;   
+        this.setState({blogger: res.data[0]});
+        console.log("blogs in Summary ", blogs);
+        console.log("blogger in Summary ", blogger);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  loadBlogs = (bloggerId) => {
+    blogApi
+      .getBlogs(bloggerId)
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by loadBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  refreshBlogs = () => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
+      })
+      .catch(err => console.log(err));
+  };
+  refreshBlog = (id) => {
+    blogApi
+      .getBlogById(id)
+      .then(res => {
+        const blog = res.data;  
+        this.setState({blog: res.data});
+        console.log("blog by refreshBlog in Detail ", blog);
+      })
+      .catch(err => console.log(err));
+  };
+
+  // load blogs for the given blogger and comments for each blogs
+  refreshBlogById = id => {
+    blogApi
+      .getBlogs()
+      .then(res => {
+        const blogs = res.data;  
+        this.setState({blogs: res.data});
+        console.log("blogs by refreshBlogs in Summary ", blogs);
       })
       .catch(err => console.log(err));
   };
@@ -83,22 +142,24 @@ class Detail extends Component {
         ])
       });
 
-      blogApi
-        .updateBlog(this.state.blog._id, {
+      commentApi
+        .saveComment({
+          blogId: this.state.blog._id,
           title: this.state.newCommentTitle,
           content: this.state.newCommentBody
         })
-        .then(dbComments => {
-          console.log(dbComments.data);
+        .then(dbComment => {
+          console.log(dbComment.data);
+          this.refreshBlog(this.state.blog._id);
         })
+        // .then(dbComment => this.refreshBlog(dbComment.blog))
         .catch(err => console.log(err));
-      console.log(this.state.blog._id);
-      this.props.history.push("/blogs/" + this.state.blog._id);
     }
   };
 
   handleTitleChange = event => {
     event.preventDefault();
+    console.log(this.state);
     if (this.state.blog.comments.title && this.state.blog.comments.content) {
       blogApi
         .updateBlog({
@@ -117,12 +178,14 @@ class Detail extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <Container>
         <Row>
           <Col size="md-12">
             <h1 className="topic-style">{this.state.blog.topic}</h1>
-            <h2>By Dr. {this.state.blogger}</h2>
+            {/* <h2>By {this.state.currentUser.displayName}</h2> */}
           </Col>
         </Row>
         <Row>
@@ -136,6 +199,11 @@ class Detail extends Component {
             <p className="blog-content">{this.state.blog.content}</p>
           </Col>
         </Row>
+        {/* <Row>
+          <Col size="xs-12">
+            <p>{this.state.blog.content}</p>
+          </Col>
+        </Row> */}
         <Row>
           <Col size="md-12">
             <Link to="/">← Back to Blogs</Link>
@@ -149,22 +217,19 @@ class Detail extends Component {
         {/* Collapsible comment form */}
         <Row>
           <Col size="md-12">
-            <div
-              className="panel panel-default text-center"
-              href="#collapseComment"
-              id="panel2"
-            >
-              <Link
-                to="#collapseComment"
-                data-toggle="collapse"
-                data-target="#collapseComment"
-                href="#collapseComment"
-                className="collapsed"
-              >
-                <div className="panel-heading">
-                  <h4 className="panel-title">Add a comment</h4>
-                </div>
-              </Link>
+            <div className="panel panel-default" id="panel2">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a
+                    data-toggle="collapse"
+                    data-target="#collapseComment"
+                    href="#collapseComment"
+                    className="collapsed"
+                  >
+                    Add a comment
+                  </a>
+                </h4>
+              </div>
               <div id="collapseComment" className="panel-collapse collapse">
                 <div class="panel-body">
                   <form>
@@ -194,7 +259,7 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-12">
-            {/* <div className="comment-deck"> */}
+            <div className="comment-deck">
               {!this.state.blog.comments || !this.state.blog.comments.length ? (
                 <h1 className="text-center">
                   There are no comments to this post yet.
@@ -204,8 +269,8 @@ class Detail extends Component {
                   console.log(comment);
                   return (
                     <Row>
-                      {/* <Col size="md-2" /> */}
-                      <Col size="md-12">
+                      <Col size="md-2" />
+                      <Col size="md-8">
                         <Comment
                           className="comment-card"
                           key={comment._id}
@@ -214,12 +279,12 @@ class Detail extends Component {
                           date={comment.created_dt}
                         />
                       </Col>
-                      {/* <Col size="md-2" /> */}
+                      <Col size="md-2" />
                     </Row>
                   );
                 })
               )}
-            {/* </div> */}
+            </div>
           </Col>
         </Row>
       </Container>

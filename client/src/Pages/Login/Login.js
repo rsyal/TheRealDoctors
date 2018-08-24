@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import bloggerApi from "../../Utils/bloggerApi";
 import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-// import { Col, Row, Container } from "../../Components/Grid";
-
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import config from "./config.json";
 import "./Login.css";
@@ -11,7 +9,6 @@ import "./Login.css";
 class Login extends Component {
   state = {
     isAuthenticated: false,
-    //user: undefined,
     token: undefined,
     currentUser: undefined
   };
@@ -24,7 +21,8 @@ class Login extends Component {
     }
     return callbackURL;
   };
-  componentWillMount() {
+  
+  componentDidMount() {
     const userInfo = this.getUserInfo();
     if (userInfo) {
       this.setState({currentUser: userInfo});  
@@ -34,13 +32,6 @@ class Login extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   if (this.state.currentUser) {
-  //     this.loadBlogger(this.state.currentUser.email);
-  //     this.loadBlogs(this.state.blogger._id);
-  //   }
-  // }
-
   setUserInfo = user => {
     sessionStorage.setItem("currentUser", JSON.stringify(user));
   };
@@ -48,22 +39,6 @@ class Login extends Component {
   getUserInfo = () => {
     return JSON.parse(sessionStorage.getItem("currentUser"));
   };
-
-  // getCurrentUser = () => {
-  //   const sessionValues = this.getUserInfo();;
-  //   //let currentUser = null;
-  //   if (sessionValues) {
-  //     // currentUser = {
-  //     //   _id: sessionValues._id,
-  //     //   displayName: sessionValues.displayName,
-  //     //   email: sessionValues.email,
-  //     //   googleId: sessionValues.googleId,
-  //     //   accessToken: sessionValues.accessToken
-  //     // };
-  //     this.setState({currentUser: sessionValues});
-  //   }
-  //   console.log('currentUser: ', currentUser); 
-  // }
 
   logout = () => {
     this.setState({ isAuthenticated: false, token: "", currentUser: null });
@@ -104,15 +79,15 @@ class Login extends Component {
           }
         }).then(blogger => bloggerApi.updateBlogger(blogger.data[0]._id, {user: currentUser._id}))
           .then(res => {
-            console.log(res.data._id);
             currentUser.bloggerId = res.data._id;
+            console.log('Login fetch bloggerId in currentUser ', currentUser.bloggerId);         
             })
 
         if (token) {
           this.setState({ isAuthenticated: true, currentUser, token });
           this.setUserInfo(currentUser);
         }
-        this.props.history.push("/Summary");
+        this.props.history.push("/");
       });
     });
   };

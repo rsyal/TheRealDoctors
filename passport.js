@@ -1,6 +1,5 @@
 const db = require('./Models');
 const User = require('mongoose').model('User');
-//const Blogger = require('mongoose').model('Blogger');
 const passport = require('passport');
 //const TwitterTokenStrategy = require('passport-twitter-token');
 //const FacebookTokenStrategy = require('passport-facebook-token');
@@ -11,7 +10,6 @@ module.exports = function () {
     passport.use(new GoogleTokenStrategy({
             clientID: process.env.clientID,
             clientSecret: process.env.clientSecret
-            // callbackURL: "http://localhost:3002/auth/google/callback"
         },
         function (accessToken, refreshToken, profile, done) {
             User.upsertGoogleUser(accessToken, refreshToken, profile, function(err, user) {

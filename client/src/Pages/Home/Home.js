@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import blogApi from "../../Utils/blogApi";
 // import bloggerApi from "../../Utils/bloggerApi";
 import { Link } from "react-router-dom";
-//import Login from "../Login";
-
-// import { Input, FormBtn } from "../../Components/Form";
-// import { List, ListItem } from "../../Components/List";
-// import  SaveBtn  from "../../Components/SaveBtn";
 import Jumbotron from "../../Components/Jumbotron/Jumbotron";
 import { Col, Row, Container } from "../../Components/Grid";
 import Card from "../../Components/Card";
@@ -15,7 +10,9 @@ import "./Home.css";
 class Home extends Component {
   state = {
     isAuthenticated: false,
-    blogs: [],
+    blogs: [{
+      comments:[{}]
+    }],
     topic: "",
     content: "",
     imageSrc: "",
@@ -45,19 +42,6 @@ class Home extends Component {
     return JSON.parse(sessionStorage.getItem("currentUser"));
   };
 
-  // getCurrentUser = () => {
-  //   const sessionValues = JSON.parse(sessionStorage.getItem('currentUser'));
-  //   const currentUser = {
-  //     _id: sessionValues._id,
-  //     displayName: sessionValues.displayName,
-  //     email: sessionValues.email,
-  //     googleId: sessionValues.googleId,
-  //     accessToken: sessionValues.accessToken
-  //   };
-  //   console.log('currentUser: ', currentUser);
-  //    this.setState({currentUser: currentUser});
-  // }
-
   loadBlogs = () => {
     blogApi
       .getBlogs()
@@ -79,7 +63,7 @@ class Home extends Component {
         <Jumbotron />
         <Container>
           <Row>
-            <Col size="xs-12">
+            <Col size="md-12">
               <div
                 id="blogs"
                 className="card-deck d-flex justify-content-center align-items-stretch"
