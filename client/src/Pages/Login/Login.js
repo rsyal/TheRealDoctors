@@ -13,12 +13,17 @@ class Login extends Component {
     currentUser: undefined
   };
   callbackURL = () => {
-    let callbackURL = undefined;
-    if (process.env.NODE_ENV === "heroku_production") {
-      callbackURL = process.env.HEROKU_PRODUCTION_SERVER;
-    } else if (process.env.NODE_ENV === "development") {
-      callbackURL = "http://localhost:3002/api/v1/auth/google";
-    }
+    let callbackURL = '/api/v1/auth/google';
+    // if (window.location.hostname.includes('localhost')) {
+    //   callbackURL = "http://localhost:3002/api/v1/auth/google";
+    // } else {
+    //   callbackURL = 'https://the-real-doctors.herokuapp.com/auth/google/callback';
+    // }
+    // if (process.env.NODE_ENV === "heroku_production") {
+    //   callbackURL = process.env.HEROKU_PRODUCTION_SERVER;
+    // } else if (process.env.NODE_ENV === "development") {
+    //   callbackURL = "http://localhost:3002/api/v1/auth/google";
+    // }
     return callbackURL;
   };
   
