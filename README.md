@@ -18,3 +18,5 @@ The Real Doctors was created to bridge this gap between people and medical docto
 - MongoDB
 - Heroku for Deployment
 - Google Auth
+
+![alt text](readme-assets/therealdoctors-screenshot-01.png "The Real Doctors (homepage screenshot)")
